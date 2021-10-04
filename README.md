@@ -1,5 +1,9 @@
 # ConsoleAsksFor
+![](https://raw.githubusercontent.com/Pjotrtje/ConsoleAsksFor/main/docs/icon-128x128.png)
+
 ConsoleAsksFor is library for asking input in a console app easily.
+
+![Azure DevOps builds (branch)](https://img.shields.io/azure-devops/build/Pjotrtje/PvS/20/main?style=flat-square)
 
 ## Goal
 The aim of ConsoleAsksFor is removing the hassle of retrieving/parsing/retrying input in a console app.
