@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ConsoleAsksFor.NodaTime.ISO</name>
+    </assembly>
+    <members>
+        <member name="T:ConsoleAsksFor.NodaTime.ISO.AskForAppender">
+            <summary>
+            Extension methods for <see cref="T:ConsoleAsksFor.IConsole"/> related to NodaTime.ISO.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.NodaTime.ISO.AskForAppender.AskForAnnualDate(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{NodaTime.AnnualDate},System.Nullable{NodaTime.AnnualDate},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:NodaTime.AnnualDate"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.NodaTime.ISO.AskForAppender.AskForInstant(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{NodaTime.Instant},System.Nullable{NodaTime.Instant},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:NodaTime.Instant"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.NodaTime.ISO.AskForAppender.AskForLocalDate(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{NodaTime.LocalDate},System.Nullable{NodaTime.LocalDate},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:NodaTime.LocalDate"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.NodaTime.ISO.AskForAppender.AskForLocalDateTime(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{NodaTime.LocalDateTime},System.Nullable{NodaTime.LocalDateTime},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:NodaTime.LocalDateTime"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.NodaTime.ISO.AskForAppender.AskForLocalTime(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{NodaTime.LocalTime},System.Nullable{NodaTime.LocalTime},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:NodaTime.LocalTime"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.NodaTime.ISO.AskForAppender.AskForYearMonth(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{NodaTime.YearMonth},System.Nullable{NodaTime.YearMonth},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:NodaTime.YearMonth"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.NodaTime.ISO.AskForAppender.AskForZonedDateTime(ConsoleAsksFor.IConsole,System.String,NodaTime.DateTimeZone,ConsoleAsksFor.RangeConstraint{NodaTime.ZonedDateTime},System.Nullable{NodaTime.ZonedDateTime},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:NodaTime.ZonedDateTime"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="dateTimeZone"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

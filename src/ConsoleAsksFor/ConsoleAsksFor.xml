@@ -1,0 +1,1128 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ConsoleAsksFor</name>
+    </assembly>
+    <members>
+        <member name="T:ConsoleAsksFor.ConsoleColors">
+            <summary>
+            Colors used in <see cref="T:ConsoleAsksFor.IConsole"/>.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleColors.Logo">
+            <summary>
+            Default value: Foreground=<see cref="F:System.ConsoleColor.Yellow" />, Background=<see cref="F:System.ConsoleColor.Black" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleColors.Error">
+            <summary>
+            Default value: Foreground=<see cref="F:System.ConsoleColor.Red" />, Background=<see cref="F:System.ConsoleColor.Black" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleColors.Warning">
+            <summary>
+            Default value: Foreground=<see cref="F:System.ConsoleColor.DarkYellow" />, Background=<see cref="F:System.ConsoleColor.Black" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleColors.Info">
+            <summary>
+            Default value: Foreground=<see cref="F:System.ConsoleColor.Gray" />, Background=<see cref="F:System.ConsoleColor.Black" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleColors.Success">
+            <summary>
+            Default value: Foreground=<see cref="F:System.ConsoleColor.Green" />, Background=<see cref="F:System.ConsoleColor.Black" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleColors.Question">
+            <summary>
+            Default value: Foreground=<see cref="F:System.ConsoleColor.Yellow" />, Background=<see cref="F:System.ConsoleColor.Black" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleColors.QuestionHint">
+            <summary>
+            Default value: Foreground=<see cref="F:System.ConsoleColor.Gray" />, Background=<see cref="F:System.ConsoleColor.Black" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleColors.Answer">
+            <summary>
+            Default value: Foreground=<see cref="F:System.ConsoleColor.White" />, Background=<see cref="F:System.ConsoleColor.Black" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleColors.InvalidAnswer">
+            <summary>
+            Default value: Foreground=<see cref="F:System.ConsoleColor.DarkYellow" />, Background=<see cref="F:System.ConsoleColor.Black" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleColors.HelpText">
+            <summary>
+            Default value: Foreground=<see cref="F:System.ConsoleColor.Magenta" />, Background=<see cref="F:System.ConsoleColor.Black" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleColors.Default">
+            <summary>
+            Default <see cref="T:ConsoleAsksFor.ConsoleColors"/>.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.ConsoleFactory">
+            <summary>
+            Factory for creating <see cref="T:ConsoleAsksFor.IConsole"/>.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.ConsoleFactory.Create">
+            <summary>
+            Creates <see cref="T:ConsoleAsksFor.IConsole"/> with default options.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.ConsoleFactory.Create(ConsoleAsksFor.ConsoleOptions)">
+            <summary>
+            Creates <see cref="T:ConsoleAsksFor.IConsole"/> with options <see cref="P:ConsoleAsksFor.ConsoleOptions.Default" />.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ConsoleAsksFor.ConsoleOptions">
+            <summary>
+            Options for ConsoleAsksFor.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleOptions.Colors">
+            <summary>
+            Default value: <see cref="P:ConsoleAsksFor.ConsoleColors.Default" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleOptions.History">
+            <summary>
+            Default value: <see cref="P:ConsoleAsksFor.HistoryOptions.Default" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleOptions.Logging">
+            <summary>
+            Default value: <see cref="P:ConsoleAsksFor.LoggingOptions.Default" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleOptions.OnIdleKeyPressFlushOutEverySeconds">
+            <summary>
+            When asking question when input is idle for this amount of seconds all Console.Out in queue is flushed and printed to screen. <br/>
+            This can theoretically result in a minimal hick-up. So setting to 1 seconds is not optimal. <br/>
+            When value is lower than 1, 1 is still used.
+            Default value: 10.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.ConsoleOptions.Default">
+            <summary>
+            Default <see cref="T:ConsoleAsksFor.ConsoleOptions"/>.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.HistoryOptions">
+            <summary>
+            Options related to history.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.HistoryOptions.FilePath">
+            <summary>
+            '.console\history.json'
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.HistoryOptions.HasPersistedHistory">
+            <summary>
+            Whether or not history is persisted between sessions. <br/>
+            When enabled; file located at <inheritdoc cref="F:ConsoleAsksFor.HistoryOptions.FilePath"/>.<br/>
+            Default value: true.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.HistoryOptions.MaxSize">
+            <summary>
+            Amount of answers of questions which are stored in history. <br/>
+            Before an answer can be given history is determined vor question. If you notice delays lowering this value could be useful. <br/>
+            After each given answer data is persisted to file. If you notice delays lowering this value could be useful. <br/>
+            Default value: <see cref="F:System.Int32.MaxValue" />.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.HistoryOptions.Default">
+            <summary>
+            Default <see cref="T:ConsoleAsksFor.HistoryOptions"/>.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.HistoryOptions.NoPersistence">
+            <summary>
+            Disabled persistence of history.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.LineColor">
+            <summary>
+            Foreground and background colors for line.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.LineColor.Foreground">
+            <summary>
+            The foreground color of the line.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.LineColor.Background">
+            <summary>
+            The background color of the line.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.LineColor.#ctor(System.ConsoleColor,System.ConsoleColor)">
+            <summary>
+            Creates a new LineColor.
+            </summary>
+            <param name="foreground"></param>
+            <param name="background"></param>
+        </member>
+        <member name="T:ConsoleAsksFor.LineTypeId">
+            <summary>
+            Identifier for what kind of type line is.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.LineTypeId.Error">
+            <summary>
+            Id for <see cref="F:ConsoleAsksFor.LineTypeId.Error"/>.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.LineTypeId.Warning">
+            <summary>
+            Id for <see cref="F:ConsoleAsksFor.LineTypeId.Warning"/>.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.LineTypeId.Info">
+            <summary>
+            Id for <see cref="F:ConsoleAsksFor.LineTypeId.Info"/>.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.LineTypeId.Success">
+            <summary>
+            Id for <see cref="F:ConsoleAsksFor.LineTypeId.Success"/>.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.LineTypeId.Question">
+            <summary>
+            Id for <see cref="F:ConsoleAsksFor.LineTypeId.Question"/>.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.LineTypeId.QuestionHint">
+            <summary>
+            Id for <see cref="F:ConsoleAsksFor.LineTypeId.QuestionHint"/>.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.LineTypeId.Answer">
+            <summary>
+            Id for <see cref="F:ConsoleAsksFor.LineTypeId.Answer"/>.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.LineTypeId.InvalidAnswer">
+            <summary>
+            Id for <see cref="F:ConsoleAsksFor.LineTypeId.InvalidAnswer"/>.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.LineTypeId.HelpText">
+            <summary>
+            Id for <see cref="F:ConsoleAsksFor.LineTypeId.HelpText"/>.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.LoggingOptions">
+            <summary>
+            Options related to logging.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.LoggingOptions.DirectoryPath">
+            <summary>
+            '.console\logs'
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.LoggingOptions.HasLog">
+            <summary>
+            Whether or not log written items in <see cref="T:ConsoleAsksFor.IConsole"/>. <br/>
+            When enabled; File located in <inheritdoc cref="F:ConsoleAsksFor.LoggingOptions.DirectoryPath"/>
+            with file format 'yyyy-MM-dd_HH.mm.ss.log' (starting datetime of console app).<br/>
+            Default value: true.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.LoggingOptions.ToLogLineTypes">
+            <summary>
+            LineTypes which should be logged when <see cref="P:ConsoleAsksFor.LoggingOptions.HasLog"/>=true. <br/>
+            Default value: { <see cref="F:ConsoleAsksFor.LineTypeId.Question"/>, <see cref="F:ConsoleAsksFor.LineTypeId.Answer"/> }.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.LoggingOptions.Default">
+            <summary>
+            Default <see cref="T:ConsoleAsksFor.LoggingOptions"/>.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.LoggingOptions.None">
+            <summary>
+            Disabled logging.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.CannotValidateRangeException">
+            <summary>
+            An exception for when validity of range can not be determined.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.InvalidRangeException">
+            <summary>
+            An exception for when range is invalid.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.MissingItemsException">
+            <summary>
+            An exception for when no items are provided.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.NotUniqueDisplayNamesException">
+            <summary>
+            An exception that represents all the not unique display names.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.NotUniqueDisplayNamesException.NotUniqueDisplayName">
+            <summary>
+            Details for not unique display name.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.NotUniqueDisplayNamesException.NotUniqueDisplayName.#ctor(System.String,System.Collections.Generic.IReadOnlyCollection{System.Int32})">
+            <summary>
+            Details for not unique display name.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.NotUniqueDisplayNamesException.NotUniqueDisplayName.ToString">
+            <inheritdoc cref="M:System.Object.ToString"/>
+        </member>
+        <member name="P:ConsoleAsksFor.NotUniqueDisplayNamesException.NotUniqueDisplayNames">
+            <summary>
+            All the not unique display names.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.TaskCanceledByF12Exception">
+            <summary>
+            Represents an exception used to communicate task cancellation by pressing F12.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.IConsole">
+            <summary>
+            Main interface for using ConsoleAsksFor.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.Ask``1(ConsoleAsksFor.Sdk.IQuestion{``0},System.Threading.CancellationToken)">
+            <summary>
+            Ask a question an re-ask while answer is invalid.
+            </summary>
+            <typeparam name="TAnswer"></typeparam>
+            <param name="question"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteSuccessLine(System.String)">
+            <summary>
+            Write line in the color <see cref="P:ConsoleAsksFor.ConsoleColors.Success" />.
+            </summary>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteWarningLine(System.String)">
+            <summary>
+            Write line in the color <see cref="P:ConsoleAsksFor.ConsoleColors.Warning" />.
+            </summary>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteErrorLine(System.String)">
+            <summary>
+            Write line in the color <see cref="P:ConsoleAsksFor.ConsoleColors.Error" />.
+            </summary>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteInfoLine(System.String)">
+            <summary>
+            Write line in the color <see cref="P:ConsoleAsksFor.ConsoleColors.Info" />.
+            </summary>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteQuestionLine(System.String)">
+            <summary>
+            Write line in the color <see cref="P:ConsoleAsksFor.ConsoleColors.Question" />.
+            </summary>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteQuestionHintLine(System.String)">
+            <summary>
+            Write line in the color <see cref="P:ConsoleAsksFor.ConsoleColors.QuestionHint" />.
+            </summary>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteAnswerLine(System.String)">
+            <summary>
+            Write line in the color <see cref="P:ConsoleAsksFor.ConsoleColors.Answer" />.
+            </summary>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteInvalidAnswerLine(System.String)">
+            <summary>
+            Write line in the color <see cref="P:ConsoleAsksFor.ConsoleColors.InvalidAnswer" />.
+            </summary>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteHelpTextLines">
+            <summary>
+            Write all help texts so user can read all shortcuts etc.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.AskForAppender">
+            <summary>
+            Extension methods for <see cref="T:ConsoleAsksFor.IConsole"/>.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForBool(ConsoleAsksFor.IConsole,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.Boolean"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForDate(ConsoleAsksFor.IConsole,System.String,System.DateTimeKind,ConsoleAsksFor.RangeConstraint{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.DateTime"/> without time part.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="kind">When <see cref="F:System.DateTimeKind.Unspecified"/> then <see cref="F:System.DateTimeKind.Local"/> is assumed.</param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForDateTime(ConsoleAsksFor.IConsole,System.String,System.DateTimeKind,ConsoleAsksFor.RangeConstraint{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.DateTime"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="kind">When <see cref="F:System.DateTimeKind.Unspecified"/> then <see cref="F:System.DateTimeKind.Local"/> is assumed.</param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForDateTimeOffset(ConsoleAsksFor.IConsole,System.String,System.TimeZoneInfo,ConsoleAsksFor.RangeConstraint{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.DateTimeOffset"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="timeZone"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForDirectory(ConsoleAsksFor.IConsole,System.String,System.IO.DirectoryInfo,System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.IO.DirectoryInfo"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForExistingDirectory(ConsoleAsksFor.IConsole,System.String,System.IO.DirectoryInfo,System.Threading.CancellationToken)">
+            <summary>
+            Ask for existing <see cref="T:System.IO.DirectoryInfo"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForExistingFileName(ConsoleAsksFor.IConsole,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
+            <summary>
+            Ask for existing <see cref="T:System.IO.FileInfo"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForFileName(ConsoleAsksFor.IConsole,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.IO.FileInfo"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForNewDirectory(ConsoleAsksFor.IConsole,System.String,System.IO.DirectoryInfo,System.Threading.CancellationToken)">
+            <summary>
+            Ask for new <see cref="T:System.IO.DirectoryInfo"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForNewFileName(ConsoleAsksFor.IConsole,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
+            <summary>
+            Ask for new <see cref="T:System.IO.FileInfo"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForEnum``1(ConsoleAsksFor.IConsole,System.String,System.Nullable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.Enum"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForFlaggedEnum``1(ConsoleAsksFor.IConsole,System.String,System.Nullable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.Enum"/> which has <see cref="T:System.FlagsAttribute"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException"></exception>
+            <exception cref="T:ConsoleAsksFor.InvalidRangeException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForItem(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Ask for single item from <paramref name="items"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="items"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:ConsoleAsksFor.NotUniqueDisplayNamesException"></exception>
+            <exception cref="T:ConsoleAsksFor.MissingItemsException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForItem``1(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},``0,System.Threading.CancellationToken)">
+            <summary>
+            Ask for single item from <paramref name="items"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="items"></param>
+            <param name="itemNameGetter"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:ConsoleAsksFor.NotUniqueDisplayNamesException"></exception>
+            <exception cref="T:ConsoleAsksFor.MissingItemsException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForItem``1(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},System.Nullable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Ask for single item from <paramref name="items"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="items"></param>
+            <param name="itemNameGetter"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:ConsoleAsksFor.NotUniqueDisplayNamesException"></exception>
+            <exception cref="T:ConsoleAsksFor.MissingItemsException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForItem``1(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,``0},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Ask for single item from <paramref name="namedItems"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="namedItems"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:ConsoleAsksFor.NotUniqueDisplayNamesException"></exception>
+            <exception cref="T:ConsoleAsksFor.MissingItemsException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForItems(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IEnumerable{System.String},ConsoleAsksFor.RangeConstraint{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Ask for zero or more item from <paramref name="items"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="items"></param>
+            <param name="amountOfItemsToSelect"></param>
+            <param name="defaultValues"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:ConsoleAsksFor.NotUniqueDisplayNamesException"></exception>
+            <exception cref="T:ConsoleAsksFor.MissingItemsException"></exception>
+            <exception cref="T:ConsoleAsksFor.InvalidRangeException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForItems``1(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},ConsoleAsksFor.RangeConstraint{System.Int32},System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Ask for zero or more item from <paramref name="items"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="items"></param>
+            <param name="itemNameGetter"></param>
+            <param name="amountOfItemsToSelect"></param>
+            <param name="defaultValues"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:ConsoleAsksFor.NotUniqueDisplayNamesException"></exception>
+            <exception cref="T:ConsoleAsksFor.MissingItemsException"></exception>
+            <exception cref="T:ConsoleAsksFor.InvalidRangeException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForItems``1(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,``0},ConsoleAsksFor.RangeConstraint{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Ask for zero or more item from <paramref name="namedItems"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="namedItems"></param>
+            <param name="amountOfItemsToSelect"></param>
+            <param name="defaultValues"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:ConsoleAsksFor.NotUniqueDisplayNamesException"></exception>
+            <exception cref="T:ConsoleAsksFor.MissingItemsException"></exception>
+            <exception cref="T:ConsoleAsksFor.InvalidRangeException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForByte(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{System.Byte},System.Nullable{System.Byte},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.Byte"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForDecimal(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.Scale,ConsoleAsksFor.RangeConstraint{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.Decimal"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="scale"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <remarks>
+            The allowed min/max of decimal is lowered by factor 10^(2+scale) so Intellisense will work. In theory you can provide a <paramref name="range"/> which is fully out of range of the allowed range. <br/>
+            If so <see cref="T:ConsoleAsksFor.InvalidRangeException"/> is thrown.
+            </remarks>
+            <exception cref="T:ConsoleAsksFor.InvalidRangeException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForInt(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForLong(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.Int64"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForShort(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{System.Int16},System.Nullable{System.Int16},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.Int16"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForSignedByte(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{System.SByte},System.Nullable{System.SByte},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.SByte"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForUnsignedInt(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{System.UInt32},System.Nullable{System.UInt32},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.UInt32"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForUnsignedLong(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{System.UInt64},System.Nullable{System.UInt64},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.UInt64"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForUnsignedShort(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{System.UInt16},System.Nullable{System.UInt16},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.UInt16"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForPassword(ConsoleAsksFor.IConsole,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.String"/>, but obfuscate answer.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForString(ConsoleAsksFor.IConsole,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.String"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForString(ConsoleAsksFor.IConsole,System.String,System.Text.RegularExpressions.Regex,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.String"/> and validate answer with a <see cref="T:System.Text.RegularExpressions.Regex"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="regex"></param>
+            <param name="hint"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.DecimalFormat.GetAllowedRange">
+            Nobody wants the real min/max and edge cases are hard to fix. So for now fix it by being dumb
+        </member>
+        <member name="T:ConsoleAsksFor.Scale">
+            <summary>
+            The scale used in <see cref="T:ConsoleAsksFor.DecimalQuestion"/>.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.Scale.Zero">
+            <summary>
+            Creates <see cref="T:ConsoleAsksFor.Scale"/> with <see cref="P:ConsoleAsksFor.Scale.DigitsAfterDecimalPoint"/>=0.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.Scale.One">
+            <summary>
+            Creates <see cref="T:ConsoleAsksFor.Scale"/> with <see cref="P:ConsoleAsksFor.Scale.DigitsAfterDecimalPoint"/>=1.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.Scale.Two">
+            <summary>
+            Creates <see cref="T:ConsoleAsksFor.Scale"/> with <see cref="P:ConsoleAsksFor.Scale.DigitsAfterDecimalPoint"/>=2.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.Scale.DigitsAfterDecimalPoint">
+            <summary>
+            Amount of digits after decimal point.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Scale.Of(System.Int32)">
+            <summary>
+            Creates new <see cref="T:ConsoleAsksFor.Scale"/>.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+            <param name="digitsAfterDecimalPoint">Allowed between 0 and 20.</param>
+        </member>
+        <member name="T:ConsoleAsksFor.Sdk.Hint">
+            <summary>
+            Helper class to generate consistent hints for <see cref="T:ConsoleAsksFor.Sdk.IQuestion`1"/>.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.Hint.ForRange``1(ConsoleAsksFor.Sdk.Range{``0},System.Func{``0,System.String})">
+            <summary>
+            Creates range hint.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="range"></param>
+            <param name="formatter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.Hint.ForFormat(System.String)">
+            <summary>
+            Creates format hint.
+            </summary>
+            <param name="formatDescription"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ConsoleAsksFor.Sdk.IOnStartupHook">
+            <summary>
+            Hook to let ConsoleAsksFor libraries set static state during startup.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.IOnStartupHook.Initialize">
+            <summary>
+            Hook to let ConsoleAsksFor libraries set static state during startup.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.Sdk.KeyInput">
+            <summary>
+            Output of <see cref="M:ConsoleAsksFor.IConsoleInputGetter.ReadKeyWhileBlinkLine(ConsoleAsksFor.InProgressLine,System.Boolean,System.Threading.CancellationToken)" />.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.KeyInput.#ctor(ConsoleAsksFor.Sdk.KeyModifier,System.ConsoleKey,System.Char)">
+            <summary>
+            Output of <see cref="M:ConsoleAsksFor.IConsoleInputGetter.ReadKeyWhileBlinkLine(ConsoleAsksFor.InProgressLine,System.Boolean,System.Threading.CancellationToken)" />.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.KeyInput.ToString">
+            <inheritdoc cref="M:System.Object.ToString"/>
+        </member>
+        <member name="T:ConsoleAsksFor.Sdk.KeyModifier">
+            <summary>
+            Key Modifier for ReadKey.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.Sdk.KeyModifier.None">
+            <summary>
+            No <see cref="T:System.ConsoleModifiers"/>.
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.Sdk.KeyModifier.Shift">
+            <summary>
+            <inheritdoc cref="F:System.ConsoleModifiers.Shift"/>
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.Sdk.KeyModifier.Ctrl">
+            <summary>
+            <inheritdoc cref="F:System.ConsoleModifiers.Control"/>
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.Sdk.KeyModifier.CtrlShift">
+            <summary>
+            Combination of: <br/>
+            <inheritdoc cref="F:System.ConsoleModifiers.Control"/><br/>
+            <inheritdoc cref="F:System.ConsoleModifiers.Shift"/><br/>
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.Sdk.KeyModifier.IrrelevantCombination">
+            <summary>
+            Combination of <see cref="T:System.ConsoleModifiers"/> not listed above which are ignored.
+            </summary>
+        </member>
+        <member name="T:ConsoleAsksFor.Sdk.IIntellisense">
+            <summary>
+            Tab (with/without Ctrl/Shift) and Ctrl+Space behaviour for implementations of <see cref="T:ConsoleAsksFor.Sdk.IQuestion`1"/>.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.IIntellisense.CompleteValue(System.String)">
+            <summary>
+            Complete/reformat value if possible.
+            </summary>
+            <param name="value"></param>
+            <returns>Completed/reformated value when success; null when no success.</returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.IIntellisense.PreviousValue(System.String,System.String)">
+            <summary>
+            Complete or reformat value if possible. When already complete try to get previous value.
+            </summary>
+            <param name="value"></param>
+            <param name="hint"></param>
+            <returns>Completed/previous value when success; null when no success.</returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.IIntellisense.NextValue(System.String,System.String)">
+            <summary>
+            Complete or reformat value if possible. When already complete try to get next value.
+            </summary>
+            <param name="value"></param>
+            <param name="hint"></param>
+            <returns>Completed/next value when success; null when no success.</returns>
+        </member>
+        <member name="T:ConsoleAsksFor.Sdk.IQuestion`1">
+            <summary>
+            Interface for asking question with <see cref="T:ConsoleAsksFor.IConsole"/>.
+            </summary>
+            <typeparam name="TAnswer"></typeparam>
+        </member>
+        <member name="P:ConsoleAsksFor.Sdk.IQuestion`1.SubType">
+            <summary>
+            SubType Identifier for grouping answers in history.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.Sdk.IQuestion`1.MustObfuscateAnswer">
+            <summary>
+            Whether or not answer should be obfuscated. When obfuscated answers are not stored in history.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.Sdk.IQuestion`1.Intellisense">
+            <summary>
+            Tab (with/without Ctrl/Shift) and Ctrl+Space behaviour.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.Sdk.IQuestion`1.Text">
+            <summary>
+            Question text which is asked before getting answer for question.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.Sdk.IQuestion`1.PrefilledValue">
+            <summary>
+            Default value for question as string.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.IQuestion`1.GetHints">
+            <summary>
+            Hints/constraints to display before getting answer for question.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.IQuestion`1.TryParse(System.String,System.Collections.Generic.IEnumerable{System.String}@,`0@)">
+            <summary>
+            Converts <see cref="T:System.String"/> representation of <paramref name="answer"/> to <paramref name="answer"/>.
+            </summary>
+            <param name="answerAsString">The input as entered by user.</param>
+            <param name="errors">When <paramref name="answerAsString"/> cannot be parsed (can be empty).</param>
+            <param name="answer">The parsed answer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.IQuestion`1.FormatAnswer(`0)">
+            <summary>
+            Gets <see cref="T:System.String"/> representation of  <paramref name="answer"/>.
+            </summary>
+            <param name="answer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ConsoleAsksFor.Sdk.NoIntellisense">
+            <summary>
+            Dummy implementation of <see cref="T:ConsoleAsksFor.Sdk.IIntellisense"/> which never returns any new value.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.NoIntellisense.CompleteValue(System.String)">
+            <summary>
+            <inheritdoc cref="M:ConsoleAsksFor.Sdk.IIntellisense.CompleteValue(System.String)"/><br/>
+            Dummy implementation, will always return null.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.NoIntellisense.PreviousValue(System.String,System.String)">
+            <summary>
+            <inheritdoc cref="M:ConsoleAsksFor.Sdk.IIntellisense.PreviousValue(System.String,System.String)"/><br/>
+            Dummy implementation, will always return null.
+            </summary>
+            <param name="value"></param>
+            <param name="hint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.NoIntellisense.NextValue(System.String,System.String)">
+            <summary>
+            <inheritdoc cref="M:ConsoleAsksFor.Sdk.IIntellisense.NextValue(System.String,System.String)"/><br/>
+            Dummy implementation, will always return null.
+            </summary>
+            <param name="value"></param>
+            <param name="hint"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ConsoleAsksFor.Sdk.Range`1">
+            <summary>
+            Closed range; thus <see cref="P:ConsoleAsksFor.Sdk.Range`1.Min"/>/<see cref="P:ConsoleAsksFor.Sdk.Range`1.Max"/> are valid values of range
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:ConsoleAsksFor.Sdk.Range`1.Min">
+            <summary>
+            Min value of range.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.Sdk.Range`1.Max">
+            <summary>
+            Max value of range.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.Range`1.#ctor(`0,`0)">
+            <summary>
+            Constructs <see cref="T:ConsoleAsksFor.Sdk.Range`1"/>.
+            </summary>
+            <param name="min">Min valid value of range.</param>
+            <param name="max">Max valid value of range.</param>
+            <exception cref="T:ConsoleAsksFor.InvalidRangeException"></exception>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.Range`1.HasOverlap(ConsoleAsksFor.Sdk.Range{`0},ConsoleAsksFor.Sdk.Range{`0}@)">
+            <summary>
+            Determine whether range has overlap with other range.
+            </summary>
+            <param name="other"></param>
+            <param name="overlap">When overlap; the range of overlap.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.Range`1.Contains(`0)">
+            <summary>
+            Checks whether <paramref name="value"/> is in range.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ConsoleAsksFor.Sdk.RangeConstraintComparers">
+            <summary>
+            In NodaTime ZonedDateTime does not implement <see cref="T:System.IComparable`1"/> because it unclear how to compare. <br/>
+            It is comparable though, but how to compare depends on the use case. Here use case is clear. So this class we can register comparer.
+            (Maybe similar issues in other libraries?)
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.RangeConstraintComparers.RegisterComparer``1(System.Collections.Generic.IComparer{``0})">
+            <summary>
+            Register <see cref="T:System.IComparable`1"/>.
+            </summary>
+            <param name="comparer"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:ConsoleAsksFor.RangeConstraint">
+            <summary>
+            Represents "Empty" RangeConstraint. Also contains helper methods for creating readable <see cref="T:ConsoleAsksFor.RangeConstraint`1"/>
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.RangeConstraint.Between``1(``0,``0)">
+            <summary>
+            Create <see cref="T:ConsoleAsksFor.RangeConstraint`1"/> with both min and max.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="min"></param>
+            <param name="max"></param>
+            <exception cref="T:ConsoleAsksFor.InvalidRangeException"></exception>
+            <exception cref="T:ConsoleAsksFor.CannotValidateRangeException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.RangeConstraint.Exactly``1(``0)">
+            <summary>
+            Create <see cref="T:ConsoleAsksFor.RangeConstraint`1"/> where min/max is <paramref name="amount"/>.
+            </summary>
+            <param name="amount"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.RangeConstraint.AtLeast``1(``0)">
+            <summary>
+            Create <see cref="T:ConsoleAsksFor.RangeConstraint`1"/> with only min.
+            </summary>
+            <param name="min"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.RangeConstraint.AtMost``1(``0)">
+            <summary>
+            Create <see cref="T:ConsoleAsksFor.RangeConstraint`1"/> with only max.
+            </summary>
+            <param name="max"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="P:ConsoleAsksFor.RangeConstraint.None">
+            <summary>
+            Create <see cref="T:ConsoleAsksFor.RangeConstraint"/> which has an implicit operator to convert to <see cref="T:ConsoleAsksFor.RangeConstraint`1"/> without min and without max.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ConsoleAsksFor.RangeConstraint`1">
+            <summary>
+            Constraint for range.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:ConsoleAsksFor.RangeConstraint`1.Min">
+            <summary>
+            Min value of range.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.RangeConstraint`1.Max">
+            <summary>
+            Max value of range.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.RangeConstraint`1.#ctor(System.Nullable{`0},System.Nullable{`0})">
+            <summary>
+            Constructor for RangeConstraint.
+            </summary>
+            <remarks>
+            Easy-er is not to call this method directly but call <br/>
+            -<see cref="M:ConsoleAsksFor.RangeConstraint.Between``1(``0,``0)"/><br/>
+            -<see cref="M:ConsoleAsksFor.RangeConstraint.AtLeast``1(``0)"/><br/>
+            -<see cref="M:ConsoleAsksFor.RangeConstraint.AtMost``1(``0)"/><br/>
+            -<see cref="M:ConsoleAsksFor.RangeConstraint.Exactly``1(``0)"/><br/>
+            -<see cref="P:ConsoleAsksFor.RangeConstraint.None"/><br/>
+            i.c.w. <code>using static ConsoleAsksFor.RangeConstraint;</code>
+            </remarks>
+            <exception cref="T:ConsoleAsksFor.InvalidRangeException"></exception>
+            <exception cref="T:ConsoleAsksFor.CannotValidateRangeException"></exception>
+            <param name="min"></param>
+            <param name="max"></param>
+        </member>
+        <member name="M:ConsoleAsksFor.RangeConstraint`1.op_Implicit(ConsoleAsksFor.RangeConstraint)~ConsoleAsksFor.RangeConstraint{`0}">
+            <summary>
+            Implicit operator for converting <see cref="T:ConsoleAsksFor.RangeConstraint"/> to <see cref="T:ConsoleAsksFor.RangeConstraint`1"></see> without min and without max.
+            </summary>
+            <param name="_"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ConsoleAsksFor.TaskExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Threading.Tasks.Task`1"/> related to handling of <see cref="T:ConsoleAsksFor.TaskCanceledByF12Exception"/>.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.TaskExtensions.WithNullableWhenF12``1(System.Threading.Tasks.Task{``0})">
+            <summary>
+            When <see cref="T:ConsoleAsksFor.TaskCanceledByF12Exception"/> is thrown returns <see cref="T:System.Threading.Tasks.Task"/>&lt;<see cref="T:System.Nullable`1" />&gt; with result=null.
+            </summary>
+            <param name="task"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.TaskExtensions.WithNullWhenF12``1(System.Threading.Tasks.Task{``0})">
+            <summary>
+            When <see cref="T:ConsoleAsksFor.TaskCanceledByF12Exception"/> is thrown returns <see cref="T:System.Threading.Tasks.Task`1"/> with result null.
+            </summary>
+            <param name="task"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

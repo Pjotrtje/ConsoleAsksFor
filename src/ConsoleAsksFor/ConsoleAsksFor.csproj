@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>ConsoleAsksFor</PackageId>
+    <Description>Get typed input from Console.</Description>
+    <PackageTags>consoleasksfor console readline readkey writeline input question answer validation intellisense history</PackageTags>
+
+    <Version></Version>
+    <Authors>Pieter van Sambeek</Authors>
+    <PackageIcon>icon-128x128.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/Pjotrtje/ConsoleAsksFor</PackageProjectUrl>
+    <Copyright>Copyright Pieter van Sambeek</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReleaseNotes>https://github.com/Pjotrtje/ConsoleAsksFor/blob/main/docs/ConsoleAsksFor.releases.md</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <DocumentationFile>$(MSBuildProjectName).xml</DocumentationFile>
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!--<IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources> ToDo Enable this when net6 is available https://github.com/NuGet/Home/issues/10791 -->
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="$(MSBuildProjectName).xml" />
+    <AdditionalFiles Include="$(MSBuildProjectName).xml" Link="_\$(MSBuildProjectName).xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="$(MSBuildProjectDirectory)\$(MSBuildProjectName).csproj.DotSettings" />
+    <AdditionalFiles Include="$(MSBuildProjectDirectory)\$(MSBuildProjectName).csproj.DotSettings" Link="_\$(MSBuildProjectName).csproj.DotSettings" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\icon-128x128.png" Link="_\icon-128x128.png" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Link="_\README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="ConsoleAsksFor.TestUtils" />
+    <InternalsVisibleTo Include="ConsoleAsksFor.Tests" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
+
+</Project>

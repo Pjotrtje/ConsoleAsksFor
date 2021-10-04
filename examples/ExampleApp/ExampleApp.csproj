@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ConsoleAsksFor.Microsoft.DependencyInjection\ConsoleAsksFor.Microsoft.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\src\ConsoleAsksFor.NodaTime.ISO\ConsoleAsksFor.NodaTime.ISO.csproj" />
+    <ProjectReference Include="..\..\src\ConsoleAsksFor\ConsoleAsksFor.csproj" />
+  </ItemGroup>
+
+</Project>

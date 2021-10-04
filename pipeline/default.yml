@@ -1,0 +1,79 @@
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+variables:
+- name  : version
+  value : '1.0.0'
+
+steps:
+- task: PowerShell@2
+  displayName: 'Set version NuGet'
+  inputs:
+    targetType: 'inline'
+    script: |
+        $versionWithPostfix = If ($env:Build_SourceBranch -eq 'refs/heads/main') 
+                             { "$(version)" } 
+                             Else 
+                             { "$(version)" + "-prerelease-" + (Get-Date -Format yyyyMMddHHmmss) }
+
+
+        Write-Host "versionWithPostfix = $versionWithPostfix"
+
+        function Update-Version ([string] $fullName) 
+        {
+            $originalContent = Get-Content $fullName
+            $newContent = $originalContent.Replace("</Version>", $versionWithPostfix + "</Version>");
+            Set-Content -Path $fullName -Value $newContent
+        }
+     
+        Get-ChildItem -Path src\*.csproj -Recurse | Foreach-Object { Update-Version $_.FullName }
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Restore NuGet'
+  inputs:
+    command: 'restore'
+    projects: '**/*.sln'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    arguments: '--configuration Release --no-restore'
+    projects: '**/*.sln'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Unit test'
+  inputs:
+    command: 'test'
+    projects: '**/*.sln'
+    arguments: '--configuration Release --no-build --filter Category!=IgnoreInDevOps --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude=[ConsoleAsksFor.TestUtils]*'
+    nobuild: true
+
+- task: reportgenerator@4
+  displayName: 'Merge code coverage report'
+  inputs:
+    reports: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
+    targetdir: '$(Agent.TempDirectory)/CombinedCoverageReport'
+    reporttypes: 'Cobertura'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage report'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/CombinedCoverageReport/*.*'
+    failIfCoverageEmpty: true
+
+- task: CopyFiles@2
+  displayName: 'Copy NuGet to Publish folder'
+  inputs:
+    Contents: '**/*.nupkg'
+    TargetFolder: '$(Agent.TempDirectory)/NuGet'
+    flattenFolders: true
+    
+- publish: '$(Agent.TempDirectory)/NuGet'
+  displayName: 'Publishing Artifact - NuGet'
+  artifact: NuGet
