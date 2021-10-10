@@ -69,8 +69,7 @@ namespace ConsoleAsksFor
 
             return _items.Hints()
                 .Concat(_items.Warnings())
-                .Prepend($"Use {Splitter.Value} to separate items.")
-                .Prepend($"Select {AmountOfItemsToSelectAsString()} of the following ({casingHint}):");
+                .Prepend($"Select {AmountOfItemsToSelectAsString()} of the following ({casingHint}; use {Splitter.Value} to separate items):");
         }
 
         private string AmountOfItemsToSelectAsString()

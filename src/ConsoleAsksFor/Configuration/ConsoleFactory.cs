@@ -36,7 +36,7 @@ namespace ConsoleAsksFor
             {
                 if (existingConsole is not null)
                 {
-                    existingConsole.WriteWarningLine($"Console is singleton, please call {nameof(ConsoleFactory)}.{nameof(Create)} only once. Already created Console is returned.");
+                    existingConsole.WriteWarningLine($"Console is singleton, please call {nameof(ConsoleFactory)}.{nameof(Create)} only once. The already created Console is returned.");
                     if (options != existingOptions)
                     {
                         existingConsole.WriteWarningLine("Already created Console options differ from provided options.");
@@ -134,14 +134,14 @@ namespace ConsoleAsksFor
                 .ToList()
                 .ForEach(h => h.Initialize());
 
-        private static void WriteLogo(this DirectOut regularDirectOut, LineColor logoColor)
+        private static void WriteLogo(this IDirectOut regularDirectOut, LineColor logoColor)
         {
             regularDirectOut.WriteLine(logoColor.Colorize("                   _____         _______      ______ "));
             regularDirectOut.WriteLine(logoColor.Colorize("                  |   __|       |   _   |    |   ___|"));
             regularDirectOut.WriteLine(logoColor.Colorize("                  |  |          |  |_|  |    |   ___|"));
             regularDirectOut.WriteLine(logoColor.Colorize("                  |  |__        |   _   |    |  |    "));
             regularDirectOut.WriteLine(logoColor.Colorize("With the help of: |_____|onsole |__| |__|sks |__|or. "));
-            regularDirectOut.WriteLine(logoColor.Colorize("Press F1 fo help during answering question."));
+            regularDirectOut.WriteLine(logoColor.Colorize("Press F1 for help during answering question."));
         }
     }
 }

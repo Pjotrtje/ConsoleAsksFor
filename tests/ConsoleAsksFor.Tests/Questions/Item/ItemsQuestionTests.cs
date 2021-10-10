@@ -51,8 +51,7 @@ namespace ConsoleAsksFor.Tests
             var question = new ItemsQuestion(QuestionText, items, RangeConstraint.None, null);
             question.Text.Should().Be(QuestionText);
             question.GetHints().Should().BeEquivalentTo(
-                "Select 0 or more of the following (case insensitive):",
-                "Use | to separate items.",
+                "Select 0 or more of the following (case insensitive; use | to separate items):",
                 "-Item1",
                 "-Item2");
         }
@@ -64,8 +63,7 @@ namespace ConsoleAsksFor.Tests
             var question = new ItemsQuestion(QuestionText, items, RangeConstraint.None, null);
             question.Text.Should().Be(QuestionText);
             question.GetHints().Should().BeEquivalentTo(
-                "Select 0 or more of the following (case sensitive):",
-                "Use | to separate items.",
+                "Select 0 or more of the following (case sensitive; use | to separate items):",
                 "-item2",
                 "-ITEM2");
         }
@@ -77,8 +75,7 @@ namespace ConsoleAsksFor.Tests
             var question = new ItemsQuestion(QuestionText, items, RangeConstraint.None, null);
             question.Text.Should().Be(QuestionText);
             question.GetHints().Should().BeEquivalentTo(
-                "Select 0 or more of the following (case insensitive):",
-                "Use | to separate items.",
+                "Select 0 or more of the following (case insensitive; use | to separate items):",
                 "One or more items contained trailing/leading spaces, those items have been trimmed.",
                 "Listed above is applied to to display value, question result is not adjusted. So what you see is not what you get...",
                 "-Item1",
