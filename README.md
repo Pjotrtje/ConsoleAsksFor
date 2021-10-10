@@ -1,9 +1,9 @@
 # ConsoleAsksFor
-![](https://raw.githubusercontent.com/Pjotrtje/ConsoleAsksFor/main/docs/icon-128x128.png)
+![Icon](https://raw.githubusercontent.com/Pjotrtje/ConsoleAsksFor/main/docs/icon-128x128.png) 
 
 ConsoleAsksFor is library for asking input in a console app easily.
 
-![Azure DevOps builds (branch)](https://img.shields.io/azure-devops/build/Pjotrtje/PvS/20/main?style=flat-square)
+![Azure DevOps builds (branch)](https://img.shields.io/azure-devops/build/Pjotrtje/PvS/20/main)
 
 
 ## Goal
@@ -13,9 +13,12 @@ The aim of ConsoleAsksFor is removing the hassle of retrieving/parsing/retrying 
 ## Installation
 You can download the latest release / pre-release NuGet packages from nuget:
 
-* [ConsoleAsksFor](https://www.nuget.org/packages/ConsoleAsksFor) [![NuGet version (ConsoleAsksFor)](https://img.shields.io/nuget/v/ConsoleAsksFor.svg?style=flat-square)](https://www.nuget.org/packages/ConsoleAsksFor/)
-* [ConsoleAsksFor.Microsoft.DependencyInjection](https://www.nuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection) [![NuGet version (ConsoleAsksFor.Microsoft.DependencyInjection)](https://img.shields.io/nuget/v/ConsoleAsksFor.Microsoft.DependencyInjection.svg?style=flat-square)](https://www.nuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection/)
-* [ConsoleAsksFor.NodaTime.ISO](https://www.nuget.org/packages/ConsoleAsksFor.NodaTime.ISO) [![NuGet version (ConsoleAsksFor.NodaTime.ISO)](https://img.shields.io/nuget/v/ConsoleAsksFor.NodaTime.ISO.svg?style=flat-square)](https://www.nuget.org/packages/ConsoleAsksFor.NodaTime.ISO/)
+
+ Package|  |  | | 
+--- | --- | --- | --- 
+ConsoleAsksFor|[![ConsoleAsksFor on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.svg)](https://www.nuget.org/packages/ConsoleAsksFor)|[![ConsoleAsksFor downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.svg)](https://www.nuget.org/packages/ConsoleAsksFor) |[![ConsoleAsksFor on FuGet](https://www.fuget.org/packages/ConsoleAsksFor/badge.svg)](https://www.fuget.org/packages/ConsoleAsksFor)
+ConsoleAsksFor.Microsoft.DependencyInjection|[![ConsoleAsksFor.Microsoft.DependencyInjection on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection)|[![ConsoleAsksFor.Microsoft.DependencyInjection downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection) |[![ConsoleAsksFor.Microsoft.DependencyInjection on FuGet](https://www.fuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection/badge.svg)](https://www.fuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection)
+ConsoleAsksFor.NodaTime.ISO|[![ConsoleAsksFor.NodaTime.ISO on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.NodaTime.ISO.svg)](https://www.nuget.org/packages/ConsoleAsksFor.NodaTime.ISO)|[![ConsoleAsksFor.NodaTime.ISO downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.NodaTime.ISO.svg)](https://www.nuget.org/packages/ConsoleAsksFor.NodaTime.ISO) |[![ConsoleAsksFor.NodaTime.ISO on FuGet](https://www.fuget.org/packages/ConsoleAsksFor.NodaTime.ISO/badge.svg)](https://www.fuget.org/packages/ConsoleAsksFor.NodaTime.ISO)
 
 
 ## Setup
@@ -65,7 +68,7 @@ var wordOfTheDay = await console.AskForString("What is your word of the day?");
 console.WriteInfoLine("Tip: Use tab for intellisense.");
 var likableWords = await console.AskForItems("Which of these words do you like?", new[] { "Whale", "Yesterday", "Some", "Stereo", "Random" });
 ```
-![img](https://raw.githubusercontent.com/Pjotrtje/ConsoleAsksFor/main/docs/demo.gif)
+![Demo](https://raw.githubusercontent.com/Pjotrtje/ConsoleAsksFor/main/docs/demo.gif)
 
 
 ## Features
@@ -127,7 +130,7 @@ var likableWords = await console.AskForItems("Which of these words do you like?"
 
 
 ## Release notes
-See the [Releases page ConsoleAsksFor](https://raw.githubusercontent.com/Pjotrtje/ConsoleAsksFor/main/docs/ConsoleAsksFor.releases.md) for release history.
+See the [Releases page](https://github.com/Pjotrtje/ConsoleAsksFor/releases/).
 
 
 ## Versioning
