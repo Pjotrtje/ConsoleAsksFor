@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/Pjotrtje/ConsoleAsksFor</PackageProjectUrl>
     <Copyright>Copyright Pieter van Sambeek</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageReleaseNotes>https://github.com/Pjotrtje/ConsoleAsksFor/blob/main/docs/ConsoleAsksFor.releases.md</PackageReleaseNotes>
+	<PackageReleaseNotes>https://github.com/Pjotrtje/ConsoleAsksFor/releases/</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <DocumentationFile>$(MSBuildProjectName).xml</DocumentationFile>
