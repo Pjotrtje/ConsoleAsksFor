@@ -1,6 +1,6 @@
 ﻿namespace ConsoleAsksFor.Tests;
 
-public class AskForDateTests
+public class AskForDateOnlyTests
 {
     private const string Question = "What is your favorite date?";
 
@@ -14,21 +14,20 @@ public class AskForDateTests
             Enter,
         });
 
-        var defaultValue = 20.September(2021).AsUtc();
+        var defaultValue = new DateOnly(2021, 09, 20); ;
 
-        var answer = await _console.AskForDate(
+        var answer = await _console.AskForDateOnly(
             Question,
-            DateTimeKind.Utc,
             RangeConstraint.Between(
-                2.January(2020).AsUtc(),
-                31.December(2022).AsUtc()),
+                new DateOnly(2020, 01, 02),
+                new DateOnly(2022, 12, 31)),
             defaultValue);
 
-        answer.Should().Be(defaultValue).And.BeIn(DateTimeKind.Utc);
+        answer.Should().Be(defaultValue);
         _console.Output.Should().Equal(
             new(LineTypeId.Question, Question),
             new(LineTypeId.QuestionHint, "Range: [2020-01-02 ... 2022-12-31]"),
-            new(LineTypeId.QuestionHint, "Format: 'yyyy-MM-dd' (UTC)"),
+            new(LineTypeId.QuestionHint, "Format: 'yyyy-MM-dd' (Local)"),
             new(LineTypeId.Answer, "2021-09-20"));
     }
 }

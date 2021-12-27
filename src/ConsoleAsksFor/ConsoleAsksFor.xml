@@ -380,13 +380,12 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:ConsoleAsksFor.AskForAppender.AskForDate(ConsoleAsksFor.IConsole,System.String,System.DateTimeKind,ConsoleAsksFor.RangeConstraint{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForDateOnly(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{System.DateOnly},System.Nullable{System.DateOnly},System.Threading.CancellationToken)">
             <summary>
-            Ask for <see cref="T:System.DateTime"/> without time part.
+            Ask for <see cref="T:System.DateOnly"/>.
             </summary>
             <param name="console"></param>
             <param name="questionText"></param>
-            <param name="kind">When <see cref="F:System.DateTimeKind.Unspecified"/> then <see cref="F:System.DateTimeKind.Local"/> is assumed.</param>
             <param name="range"></param>
             <param name="defaultValue"></param>
             <param name="cancellationToken"></param>

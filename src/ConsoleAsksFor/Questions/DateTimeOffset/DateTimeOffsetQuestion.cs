@@ -2,7 +2,7 @@
 
 internal sealed class DateTimeOffsetQuestion : IQuestion<DateTimeOffset>
 {
-    public string SubType => $"{_parser.TimeZone.Id} - {_format.Pattern}";
+    public string SubType => $"{_parser.TimeZoneInfoDescription} - {_format.Pattern}";
 
     public bool MustObfuscateAnswer => false;
 
@@ -21,7 +21,7 @@ internal sealed class DateTimeOffsetQuestion : IQuestion<DateTimeOffset>
     public DateTimeOffsetQuestion(
         string text,
         DateTimeOffsetFormat format,
-        TimeZoneInfo timeZone,
+        TimeZoneInfo? timeZone,
         RangeConstraint<DateTimeOffset> range,
         DateTimeOffset? defaultValue)
     {
@@ -34,7 +34,7 @@ internal sealed class DateTimeOffsetQuestion : IQuestion<DateTimeOffset>
     public IEnumerable<string> GetHints()
     {
         yield return Hint.ForRange(_parser.Range, _format.FormatAnswer);
-        yield return Hint.ForFormat($"'{_format.Pattern}' ({_parser.TimeZone.Id})");
+        yield return Hint.ForFormat($"'{_format.Pattern}' ({_parser.TimeZoneInfoDescription})");
     }
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out DateTimeOffset answer)

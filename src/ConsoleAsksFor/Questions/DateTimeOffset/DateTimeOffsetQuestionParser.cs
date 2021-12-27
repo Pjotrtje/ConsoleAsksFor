@@ -2,21 +2,22 @@
 
 internal sealed class DateTimeOffsetQuestionParser
 {
+    private readonly TimeZoneInfo? _timeZone;
     private readonly DateTimeOffsetFormat _format;
+
+    public string TimeZoneInfoDescription => _timeZone?.Id ?? "Local";
 
     public Range<DateTimeOffset> Range { get; }
 
-    public TimeZoneInfo TimeZone { get; }
-
     public DateTimeOffsetQuestionParser(
         DateTimeOffsetFormat format,
-        TimeZoneInfo timeZone,
+        TimeZoneInfo? timeZone,
         RangeConstraint<DateTimeOffset> range)
     {
         _format = format;
-        TimeZone = timeZone;
+        _timeZone = timeZone;
 
-        Range = GetInputRange(range, timeZone, format);
+        Range = GetInputRange(range, timeZone ?? TimeZoneInfo.Utc, format);
     }
 
     private static Range<DateTimeOffset> GetInputRange(
@@ -60,10 +61,16 @@ internal sealed class DateTimeOffsetQuestionParser
     {
         var isCorrect = DateTime.TryParseExact(answerAsString.Trim(), _format.Pattern, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateTime);
 
+        if (_timeZone is null)
+        {
+            answer = dateTime;
+            return isCorrect;
+        }
+
         try
         {
             answer = isCorrect
-                ? dateTime.ToDateTimeOffset(TimeZone)
+                ? dateTime.ToDateTimeOffset(_timeZone)
                 : default;
             return isCorrect;
         }

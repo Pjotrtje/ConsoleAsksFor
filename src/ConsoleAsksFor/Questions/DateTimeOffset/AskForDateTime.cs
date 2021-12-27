@@ -28,14 +28,14 @@ public static partial class AskForAppender
             questionText,
             DateTimeOffsetFormat.DateTime,
             timeZoneInfo,
-            ToToDateTimeOffsetRangeConstraint(range, kind),
+            range.ToDateTimeOffsetRangeConstraint(kind),
             defaultValue?.ToKind(kind));
 
         var result = await console.Ask(question, cancellationToken);
         return DateTime.SpecifyKind(result.DateTime, kind);
     }
 
-    private static RangeConstraint<DateTimeOffset> ToToDateTimeOffsetRangeConstraint(RangeConstraint<DateTime>? range, DateTimeKind kind)
+    private static RangeConstraint<DateTimeOffset> ToDateTimeOffsetRangeConstraint(this RangeConstraint<DateTime>? range, DateTimeKind kind)
         => new(
             range?.Min?.ToKind(kind),
             range?.Max?.ToKind(kind));

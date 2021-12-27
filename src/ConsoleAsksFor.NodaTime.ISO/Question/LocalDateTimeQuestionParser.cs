@@ -3,8 +3,9 @@
 internal sealed class LocalDateTimeQuestionParser
 {
     private readonly DateTimeZone? _dateTimeZone;
-    public string DateTimeZoneDescription => _dateTimeZone?.Id ?? "Local";
     private readonly LocalDateTimeFormat _format;
+
+    public string DateTimeZoneDescription => _dateTimeZone?.Id ?? "Local";
 
     public Range<LocalDateTime> Range { get; }
 
