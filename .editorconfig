@@ -28,7 +28,7 @@ dotnet_diagnostic.IDE0046.severity = silent
 dotnet_diagnostic.IDE0130.severity = silent  
 dotnet_diagnostic.IDE0021.severity = silent  
 dotnet_diagnostic.CA1822.severity = suggestion  
-
+dotnet_diagnostic.CA1848.severity = suggestion  
 dotnet_analyzer_diagnostic.severity = error
 
 # Organize usings

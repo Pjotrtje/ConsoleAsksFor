@@ -29,12 +29,12 @@ namespace ExampleApp.Apps
             {
                 FireAndForget.RepeatWithDelay(
                     TimeSpan.FromMilliseconds(2000),
-                    () => _logger.LogInformation($"LogInformation! {DateTime.Now}"),
+                    () => _logger.LogInformation("LogInformation! {Time}", DateTime.Now),
                     cts.Token);
 
                 FireAndForget.RepeatWithDelay(
                     TimeSpan.FromMilliseconds(1000),
-                    () => _logger.LogError($"LogError! {DateTime.Now}"),
+                    () => _logger.LogError("LogError! {Time}", DateTime.Now),
                     cts.Token);
 
                 while (await _console.AskForBool("Another question?", cancellationToken: cts.Token))
