@@ -415,6 +415,17 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForTimeOnly(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.RangeConstraint{System.TimeOnly},System.Nullable{System.TimeOnly},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.TimeOnly"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="M:ConsoleAsksFor.AskForAppender.AskForDirectory(ConsoleAsksFor.IConsole,System.String,System.IO.DirectoryInfo,System.Threading.CancellationToken)">
             <summary>
             Ask for <see cref="T:System.IO.DirectoryInfo"/>.

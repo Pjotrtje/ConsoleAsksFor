@@ -2,10 +2,10 @@
 
 internal sealed class DateTimeOffsetQuestionParser
 {
-    private readonly TimeZoneInfo? _timeZone;
+    private readonly TimeZoneInfo _timeZone;
     private readonly DateTimeOffsetFormat _format;
 
-    public string TimeZoneInfoDescription => _timeZone?.Id ?? "Local";
+    public string TimeZoneInfoDescription { get; }
 
     public Range<DateTimeOffset> Range { get; }
 
@@ -15,9 +15,9 @@ internal sealed class DateTimeOffsetQuestionParser
         RangeConstraint<DateTimeOffset> range)
     {
         _format = format;
-        _timeZone = timeZone;
-
-        Range = GetInputRange(range, timeZone ?? TimeZoneInfo.Utc, format);
+        _timeZone = timeZone ?? TimeZoneInfo.Utc;
+        Range = GetInputRange(range, _timeZone, format);
+        TimeZoneInfoDescription = timeZone?.Id ?? "Local";
     }
 
     private static Range<DateTimeOffset> GetInputRange(
@@ -59,13 +59,8 @@ internal sealed class DateTimeOffsetQuestionParser
 
     public bool TryParseExact(string answerAsString, out DateTimeOffset answer)
     {
-        var isCorrect = DateTime.TryParseExact(answerAsString.Trim(), _format.Pattern, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateTime);
-
-        if (_timeZone is null)
-        {
-            answer = dateTime;
-            return isCorrect;
-        }
+        var fixedAnswerAsString = $"{_format.Prefix}{answerAsString.Trim()}";
+        var isCorrect = DateTime.TryParseExact(fixedAnswerAsString, _format.PatternIncludingPrefix, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateTime);
 
         try
         {

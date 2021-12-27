@@ -4,6 +4,10 @@ internal sealed class DateTimeOffsetFormat
 {
     public string Pattern { get; }
 
+    public string PatternIncludingPrefix { get; }
+
+    public string Prefix { get; }
+
     public IReadOnlyCollection<string> IntellisenseMinPatterns { get; }
 
     public IReadOnlyCollection<string> IntellisenseMaxPatterns { get; }
@@ -12,11 +16,15 @@ internal sealed class DateTimeOffsetFormat
 
     private DateTimeOffsetFormat(
         string pattern,
+        string patternIncludingPrefix,
+        string prefix,
         IReadOnlyCollection<string> intellisenseMinPatterns,
         IReadOnlyCollection<string> intellisenseMaxPatterns,
         long smallestIncrementInTicks)
     {
         Pattern = pattern;
+        PatternIncludingPrefix = patternIncludingPrefix;
+        Prefix = prefix;
         IntellisenseMinPatterns = intellisenseMinPatterns;
         IntellisenseMaxPatterns = intellisenseMaxPatterns;
         SmallestIncrementInTicks = smallestIncrementInTicks;
@@ -25,8 +33,24 @@ internal sealed class DateTimeOffsetFormat
     public string FormatAnswer(DateTimeOffset value)
         => value.ToString(Pattern, CultureInfo.InvariantCulture);
 
+    public static readonly DateTimeOffsetFormat Time = new(
+        "HH:mm:ss",
+        "yyyy-MM-dd HH:mm:ss",
+        "2000-01-01 ",
+        new[]
+        {
+            "00:00:00",
+        },
+        new[]
+        {
+            "23:59:59",
+        },
+        TimeSpan.TicksPerSecond);
+
     public static readonly DateTimeOffsetFormat DateTime = new(
         "yyyy-MM-dd HH:mm:ss",
+        "yyyy-MM-dd HH:mm:ss",
+        "",
         new[]
         {
             "XXXX-XX-X0 00:00:00",
@@ -46,6 +70,8 @@ internal sealed class DateTimeOffsetFormat
 
     public static readonly DateTimeOffsetFormat Date = new(
         "yyyy-MM-dd",
+        "yyyy-MM-dd",
+        "",
         new[]
         {
             "XXXX-XX-X0",
