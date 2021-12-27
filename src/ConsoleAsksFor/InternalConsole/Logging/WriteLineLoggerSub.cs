@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 
-namespace ConsoleAsksFor
+namespace ConsoleAsksFor;
+
+internal sealed class WriteLineLoggerSub : IWriteLineLogger
 {
-    internal sealed class WriteLineLoggerSub : IWriteLineLogger
-    {
-        public Task LogToFile(LineTypeId lineTypeId, string value)
-            => Task.CompletedTask;
-    }
+    public Task LogToFile(LineTypeId lineTypeId, string value)
+        => Task.CompletedTask;
 }

@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace ConsoleAsksFor
+namespace ConsoleAsksFor;
+
+internal interface IWriteLineLogger
 {
-    internal interface IWriteLineLogger
-    {
-        Task LogToFile(LineTypeId lineTypeId, string value);
-    }
+    Task LogToFile(LineTypeId lineTypeId, string value);
 }

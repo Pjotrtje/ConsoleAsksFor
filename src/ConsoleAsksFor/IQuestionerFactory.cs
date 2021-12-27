@@ -2,11 +2,10 @@
 
 using ConsoleAsksFor.Sdk;
 
-namespace ConsoleAsksFor
+namespace ConsoleAsksFor;
+
+internal interface IQuestionerFactory
 {
-    internal interface IQuestionerFactory
-    {
-        Task<Questioner<TAnswer>> Create<TAnswer>(IQuestion<TAnswer> question)
-            where TAnswer : notnull;
-    }
+    Task<Questioner<TAnswer>> Create<TAnswer>(IQuestion<TAnswer> question)
+        where TAnswer : notnull;
 }

@@ -1,8 +1,7 @@
-﻿namespace ConsoleAsksFor
+﻿namespace ConsoleAsksFor;
+
+internal interface IScopedHistory
 {
-    internal interface IScopedHistory
-    {
-        string? MoveToNextAndGet();
-        string? MoveToPreviousAndGet();
-    }
+    string? MoveToNextAndGet();
+    string? MoveToPreviousAndGet();
 }

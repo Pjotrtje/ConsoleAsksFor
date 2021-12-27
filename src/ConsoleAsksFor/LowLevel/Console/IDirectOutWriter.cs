@@ -1,7 +1,6 @@
-﻿namespace ConsoleAsksFor
+﻿namespace ConsoleAsksFor;
+
+internal interface IDirectOutWriter
 {
-    internal interface IDirectOutWriter
-    {
-        void Write(string? value);
-    }
+    void Write(string? value);
 }

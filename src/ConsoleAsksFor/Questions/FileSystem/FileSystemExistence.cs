@@ -1,9 +1,8 @@
-﻿namespace ConsoleAsksFor
+﻿namespace ConsoleAsksFor;
+
+internal enum FileSystemExistence
 {
-    internal enum FileSystemExistence
-    {
-        New = 1,
-        Existing = 2,
-        NewOrExisting = 3,
-    }
+    New = 1,
+    Existing = 2,
+    NewOrExisting = 3,
 }

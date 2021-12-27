@@ -3,13 +3,12 @@ using System.Threading.Tasks;
 
 using ConsoleAsksFor.Sdk;
 
-namespace ConsoleAsksFor
+namespace ConsoleAsksFor;
+
+internal interface IConsoleInputGetter
 {
-    internal interface IConsoleInputGetter
-    {
-        Task<KeyInput> ReadKeyWhileBlinkLine(
-            InProgressLine line,
-            bool currentLineIsValid,
-            CancellationToken cancellationToken);
-    }
+    Task<KeyInput> ReadKeyWhileBlinkLine(
+        InProgressLine line,
+        bool currentLineIsValid,
+        CancellationToken cancellationToken);
 }

@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace ExampleApp.Apps
+namespace ExampleApp.Apps;
+
+public interface IApp
 {
-    public interface IApp
-    {
-        Task Run();
-    }
+    Task Run();
 }

@@ -1,4 +1,3 @@
-﻿namespace ConsoleAsksFor
-{
-    internal sealed record IndexedItem<T>(T Item, int Index);
-}
+﻿namespace ConsoleAsksFor;
+
+internal sealed record IndexedItem<T>(T Item, int Index);

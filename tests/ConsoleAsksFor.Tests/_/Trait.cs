@@ -1,8 +1,7 @@
-﻿namespace ConsoleAsksFor.Tests
+﻿namespace ConsoleAsksFor.Tests;
+
+public static class Trait
 {
-    public static class Trait
-    {
-        public const string Category = "Category";
-        public const string IgnoreInDevOps = "IgnoreInDevOps";
-    }
+    public const string Category = "Category";
+    public const string IgnoreInDevOps = "IgnoreInDevOps";
 }

@@ -1,7 +1,6 @@
-﻿namespace ConsoleAsksFor
+﻿namespace ConsoleAsksFor;
+
+internal interface ISuspendableOutWriter
 {
-    internal interface ISuspendableOutWriter
-    {
-        void WriteLine(string? value);
-    }
+    void WriteLine(string? value);
 }

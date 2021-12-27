@@ -2,20 +2,19 @@
 
 using ConsoleAsksFor;
 
-namespace ExampleApp.Apps
+namespace ExampleApp.Apps;
+
+internal sealed class WipApp : IApp
 {
-    internal sealed class WipApp : IApp
+    private readonly IConsole _console;
+
+    public WipApp(IConsole console)
     {
-        private readonly IConsole _console;
+        _console = console;
+    }
 
-        public WipApp(IConsole console)
-        {
-            _console = console;
-        }
-
-        public async Task Run()
-        {
-            await _console.AskForItems("X1", new[] { "A", "a", "C" });
-        }
+    public async Task Run()
+    {
+        await _console.AskForItems("X1", new[] { "A", "a", "C" });
     }
 }

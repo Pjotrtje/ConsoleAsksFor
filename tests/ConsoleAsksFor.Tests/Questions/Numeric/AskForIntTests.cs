@@ -6,33 +6,32 @@ using ConsoleAsksFor.TestUtils;
 
 using Xunit;
 
-namespace ConsoleAsksFor.Tests
+namespace ConsoleAsksFor.Tests;
+
+public class AskForIntTests
 {
-    public class AskForIntTests
+    private const string Question = "Size?";
+
+    private readonly TestConsole _console = TestConsole.Create();
+
+    [Fact]
+    public async Task ValidInputFlow()
     {
-        private const string Question = "Size?";
-
-        private readonly TestConsole _console = TestConsole.Create();
-
-        [Fact]
-        public async Task ValidInputFlow()
+        _console.AddKeyInput(new()
         {
-            _console.AddKeyInput(new()
-            {
-                KeyInputs.Enter,
-            });
+            KeyInputs.Enter,
+        });
 
-            const int defaultValue = 2;
+        const int defaultValue = 2;
 
-            var answer = await _console.AskForInt(Question, RangeConstraint.Between(1, 3), defaultValue);
+        var answer = await _console.AskForInt(Question, RangeConstraint.Between(1, 3), defaultValue);
 
-            answer.Should().Be(defaultValue);
-            _console.Output.Should().Equal(new ConsoleLine[]
-            {
-                new(LineTypeId.Question, Question),
-                new(LineTypeId.QuestionHint, "Range: [1 ... 3]"),
-                new(LineTypeId.Answer, "2"),
-            });
-        }
+        answer.Should().Be(defaultValue);
+        _console.Output.Should().Equal(new ConsoleLine[]
+        {
+            new(LineTypeId.Question, Question),
+            new(LineTypeId.QuestionHint, "Range: [1 ... 3]"),
+            new(LineTypeId.Answer, "2"),
+        });
     }
 }

@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ConsoleAsksFor
+namespace ConsoleAsksFor;
+
+internal static class EnumerableOfStringExtensions
 {
-    internal static class EnumerableOfStringExtensions
-    {
-        public static bool WhenIgnoringCaseItemsAreStillUnique(this IEnumerable<string> items)
-            => !items
-                .GroupBy(
-                    x => x,
-                    StringComparer.InvariantCultureIgnoreCase)
-                .Any(x => x.Count() > 1);
-    }
+    public static bool WhenIgnoringCaseItemsAreStillUnique(this IEnumerable<string> items)
+        => !items
+            .GroupBy(
+                x => x,
+                StringComparer.InvariantCultureIgnoreCase)
+            .Any(x => x.Count() > 1);
 }

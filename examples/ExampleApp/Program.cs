@@ -9,59 +9,58 @@ using ExampleApp.Apps;
 
 using Microsoft.Extensions.Logging;
 
-namespace ExampleApp
+namespace ExampleApp;
+
+internal static class Program
 {
-    internal static class Program
+    private static IServiceProvider GetServiceProvider()
+        => new ServiceCollection()
+            .AddConsoleAsksFor()
+            .AddLogging(c => c.AddConsole(o => o.LogToStandardErrorThreshold = LogLevel.Error))
+            .AddScoped<MultiThreadedApp>()
+            .AddScoped<LoggingApp>()
+            .AddScoped<CancelApp>()
+            .AddScoped<ReadMeApp>()
+            .AddScoped<FlowApp>()
+            .AddScoped<DemoApp>()
+            .AddScoped<WipApp>()
+            .BuildServiceProvider();
+
+    private static async Task Main()
     {
-        private static IServiceProvider GetServiceProvider()
-            => new ServiceCollection()
-                .AddConsoleAsksFor()
-                .AddLogging(c => c.AddConsole(o => o.LogToStandardErrorThreshold = LogLevel.Error))
-                .AddScoped<MultiThreadedApp>()
-                .AddScoped<LoggingApp>()
-                .AddScoped<CancelApp>()
-                .AddScoped<ReadMeApp>()
-                .AddScoped<FlowApp>()
-                .AddScoped<DemoApp>()
-                .AddScoped<WipApp>()
-                .BuildServiceProvider();
+        var serviceProvider = GetServiceProvider();
+        using var scope = serviceProvider.CreateScope();
+        var console = scope.ServiceProvider.GetRequiredService<IConsole>();
 
-        private static async Task Main()
+        console.WriteHelpTextLines();
+
+        var apps = new[]
         {
-            var serviceProvider = GetServiceProvider();
-            using var scope = serviceProvider.CreateScope();
-            var console = scope.ServiceProvider.GetRequiredService<IConsole>();
+            typeof(MultiThreadedApp),
+            typeof(LoggingApp),
+            typeof(CancelApp),
+            typeof(ReadMeApp),
+            typeof(FlowApp),
+            typeof(DemoApp),
+            typeof(WipApp),
+        };
 
-            console.WriteHelpTextLines();
-
-            var apps = new[]
+        while (true)
+        {
+            try
             {
-               typeof(MultiThreadedApp),
-               typeof(LoggingApp),
-               typeof(CancelApp),
-               typeof(ReadMeApp),
-               typeof(FlowApp),
-               typeof(DemoApp),
-               typeof(WipApp),
-            };
+                var appType = await console.AskForItem(
+                    "Which app to start?",
+                    apps,
+                    t => t.Name);
 
-            while (true)
+                var app = (IApp)scope.ServiceProvider.GetRequiredService(appType);
+                await app.Run();
+                console.WriteSuccessLine("Completed");
+            }
+            catch (TaskCanceledByF12Exception)
             {
-                try
-                {
-                    var appType = await console.AskForItem(
-                        "Which app to start?",
-                        apps,
-                        t => t.Name);
-
-                    var app = (IApp)scope.ServiceProvider.GetRequiredService(appType);
-                    await app.Run();
-                    console.WriteSuccessLine("Completed");
-                }
-                catch (TaskCanceledByF12Exception)
-                {
-                    console.WriteErrorLine("Canceled By F12");
-                }
+                console.WriteErrorLine("Canceled By F12");
             }
         }
     }

@@ -4,58 +4,57 @@ using System.Threading.Tasks;
 
 using C = System.Console;
 
-namespace ConsoleAsksFor
+namespace ConsoleAsksFor;
+
+internal sealed class SystemConsole : ISystemConsole
 {
-    internal sealed class SystemConsole : ISystemConsole
+    public bool CursorVisible
     {
-        public bool CursorVisible
+        set => C.CursorVisible = value;
+    }
+
+    public Position CursorPosition
+    {
+        get => new(C.CursorLeft, C.CursorTop);
+        set => C.SetCursorPosition(value.Left, value.Top);
+    }
+
+    public int WindowWidth => C.WindowWidth;
+
+    public async Task<ConsoleKeyInfo> ReadKey(CancellationToken cancellationToken)
+        => await KeyReader.ReadKey(cancellationToken);
+
+    // https://stackoverflow.com/questions/57615/how-to-add-a-timeout-to-console-readline/18342182#18342182
+    private static class KeyReader
+    {
+        private static readonly AutoResetEvent GetInput = new(false);
+        private static readonly AsyncAutoResetEvent GotInput = new(false);
+        private static ConsoleKeyInfo input;
+
+        static KeyReader()
         {
-            set => C.CursorVisible = value;
+            var t = new Thread(Read)
+            {
+                IsBackground = true,
+            };
+            t.Start();
         }
 
-        public Position CursorPosition
+        private static void Read()
         {
-            get => new(C.CursorLeft, C.CursorTop);
-            set => C.SetCursorPosition(value.Left, value.Top);
+            while (true)
+            {
+                GetInput.WaitOne();
+                input = C.ReadKey(true);
+                GotInput.Set();
+            }
         }
 
-        public int WindowWidth => C.WindowWidth;
-
-        public async Task<ConsoleKeyInfo> ReadKey(CancellationToken cancellationToken)
-            => await KeyReader.ReadKey(cancellationToken);
-
-        // https://stackoverflow.com/questions/57615/how-to-add-a-timeout-to-console-readline/18342182#18342182
-        private static class KeyReader
+        public static async Task<ConsoleKeyInfo> ReadKey(CancellationToken cancellationToken)
         {
-            private static readonly AutoResetEvent GetInput = new(false);
-            private static readonly AsyncAutoResetEvent GotInput = new(false);
-            private static ConsoleKeyInfo input;
-
-            static KeyReader()
-            {
-                var t = new Thread(Read)
-                {
-                    IsBackground = true,
-                };
-                t.Start();
-            }
-
-            private static void Read()
-            {
-                while (true)
-                {
-                    GetInput.WaitOne();
-                    input = C.ReadKey(true);
-                    GotInput.Set();
-                }
-            }
-
-            public static async Task<ConsoleKeyInfo> ReadKey(CancellationToken cancellationToken)
-            {
-                GetInput.Set();
-                await GotInput.WaitAsync(cancellationToken);
-                return input;
-            }
+            GetInput.Set();
+            await GotInput.WaitAsync(cancellationToken);
+            return input;
         }
     }
 }
