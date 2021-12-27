@@ -1,14 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-using ConsoleAsksFor.TestUtils;
-
-using FluentAssertions;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public class FileSystemQuestionIntellisenseTests
 {

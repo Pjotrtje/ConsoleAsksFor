@@ -1,11 +1,4 @@
-﻿using System;
-
-using FluentAssertions;
-using FluentAssertions.Extensions;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public class DateTimeExtensionsTests
 {

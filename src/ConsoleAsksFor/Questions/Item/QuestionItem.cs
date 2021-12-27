@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal sealed class QuestionItem
 {

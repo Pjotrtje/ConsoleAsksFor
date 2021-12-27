@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal sealed class DateTimeOffsetFormat
 {

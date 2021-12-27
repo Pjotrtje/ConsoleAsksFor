@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal sealed class HistoryRepositoryStub : IHistoryRepository
 {

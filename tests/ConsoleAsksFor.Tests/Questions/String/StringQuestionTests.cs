@@ -1,10 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-using FluentAssertions;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public class StringQuestionTests
 {

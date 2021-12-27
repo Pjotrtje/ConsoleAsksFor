@@ -1,6 +1,4 @@
-﻿using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal static class QuestionExtensions
 {

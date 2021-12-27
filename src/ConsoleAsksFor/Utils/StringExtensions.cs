@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal static class StringExtensions
 {
@@ -11,7 +9,7 @@ internal static class StringExtensions
             return false;
         }
 
-        var firstPart = s.Substring(0, compareValue.Length);
+        var firstPart = s[..compareValue.Length];
         return stringComparer.Equals(firstPart, compareValue);
     }
 }

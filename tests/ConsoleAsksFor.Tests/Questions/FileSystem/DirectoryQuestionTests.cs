@@ -1,10 +1,4 @@
-﻿using System.IO;
-
-using FluentAssertions;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public class DirectoryQuestionTests
 {

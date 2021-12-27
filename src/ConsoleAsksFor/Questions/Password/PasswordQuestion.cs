@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal sealed class PasswordQuestion : IQuestion<string>
 {

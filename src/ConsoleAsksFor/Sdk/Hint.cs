@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleAsksFor.Sdk;
+﻿namespace ConsoleAsksFor.Sdk;
 
 /// <summary>
 /// Helper class to generate consistent hints for <see cref="IQuestion{TAnswer}"/>.

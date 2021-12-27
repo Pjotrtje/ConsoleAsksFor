@@ -1,14 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-
-using FluentAssertions.Extensions;
-
-using Moq;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public class WriteLineLoggerTests
 {

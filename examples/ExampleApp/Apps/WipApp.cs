@@ -1,8 +1,4 @@
-﻿using System.Threading.Tasks;
-
-using ConsoleAsksFor;
-
-namespace ExampleApp.Apps;
+﻿namespace ExampleApp.Apps;
 
 internal sealed class WipApp : IApp
 {

@@ -1,12 +1,4 @@
-﻿using System.Threading.Tasks;
-
-using FluentAssertions;
-
-using ConsoleAsksFor.TestUtils;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public class AskForIntTests
 {
@@ -19,7 +11,7 @@ public class AskForIntTests
     {
         _console.AddKeyInput(new()
         {
-            KeyInputs.Enter,
+            Enter,
         });
 
         const int defaultValue = 2;

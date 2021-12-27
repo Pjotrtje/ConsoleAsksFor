@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal sealed class DecimalQuestion : IQuestion<decimal>
 {

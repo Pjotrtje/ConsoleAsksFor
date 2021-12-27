@@ -1,15 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using ConsoleAsksFor.TestUtils;
-
-using FluentAssertions;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public class QuestionerTests
 {
@@ -32,9 +21,9 @@ public class QuestionerTests
         _internalConsole.AddKeyInput(new()
         {
             "O",
-            KeyInputs.F1,
+            F1,
             "K",
-            KeyInputs.Enter,
+            Enter,
         });
 
         var sut = GetQuestioner(question);
@@ -76,9 +65,9 @@ public class QuestionerTests
         _internalConsole.AddKeyInput(new()
         {
             "O",
-            KeyInputs.F4,
+            F4,
             "K",
-            KeyInputs.Enter,
+            Enter,
         });
 
         var sut = GetQuestioner(question);
@@ -99,7 +88,7 @@ public class QuestionerTests
         _internalConsole.AddKeyInput(new()
         {
             "O",
-            KeyInputs.F12,
+            F12,
         });
 
         var sut = GetQuestioner(question);
@@ -124,7 +113,7 @@ public class QuestionerTests
 
         _internalConsole.AddKeyInput(new()
         {
-            KeyInputs.Enter,
+            Enter,
         });
 
         var sut = GetQuestioner(question);
@@ -148,10 +137,10 @@ public class QuestionerTests
         _internalConsole.AddKeyInput(new()
         {
             "NOK",
-            KeyInputs.Enter,
-            KeyInputs.Escape,
+            Enter,
+            Escape,
             CorrectAnswer,
-            KeyInputs.Enter,
+            Enter,
         });
 
         var sut = GetQuestioner(question);
@@ -177,7 +166,7 @@ public class QuestionerTests
         _internalConsole.AddKeyInput(new()
         {
             CorrectAnswer,
-            KeyInputs.Enter,
+            Enter,
         });
 
         var sut = GetQuestioner(question);

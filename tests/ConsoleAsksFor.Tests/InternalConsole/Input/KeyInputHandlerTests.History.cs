@@ -1,16 +1,4 @@
-﻿using ConsoleAsksFor.Sdk;
-
-using FluentAssertions;
-
-using ConsoleAsksFor.TestUtils;
-
-using Moq;
-
-using Xunit;
-
-using static ConsoleAsksFor.TestUtils.KeyInputs;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public partial class KeyInputHandlerTests
 {

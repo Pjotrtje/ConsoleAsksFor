@@ -1,10 +1,4 @@
-﻿using ConsoleAsksFor.Sdk;
-
-using FluentAssertions;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests.Sdk;
+﻿namespace ConsoleAsksFor.Tests.Sdk;
 
 public class RangeTests
 {

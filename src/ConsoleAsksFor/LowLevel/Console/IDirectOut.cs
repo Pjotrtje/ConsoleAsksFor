@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal interface IDirectOut
 {

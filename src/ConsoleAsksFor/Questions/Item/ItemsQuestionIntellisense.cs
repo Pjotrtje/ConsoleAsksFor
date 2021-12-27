@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal sealed class ItemsQuestionIntellisense : IIntellisense
 {

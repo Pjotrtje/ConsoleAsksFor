@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 /// <summary>
 /// Extension methods for <see cref="Task{T}"/> related to handling of <see cref="TaskCanceledByF12Exception"/>.

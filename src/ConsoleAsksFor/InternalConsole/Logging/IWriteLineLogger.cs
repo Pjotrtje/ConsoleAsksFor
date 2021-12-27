@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal interface IWriteLineLogger
 {

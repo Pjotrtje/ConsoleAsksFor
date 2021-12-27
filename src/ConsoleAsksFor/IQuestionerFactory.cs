@@ -1,8 +1,4 @@
-﻿using System.Threading.Tasks;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal interface IQuestionerFactory
 {

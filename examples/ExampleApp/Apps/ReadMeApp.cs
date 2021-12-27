@@ -1,14 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-
-using ConsoleAsksFor;
-
-using static ConsoleAsksFor.RangeConstraint;
-
-// ReSharper disable MethodSupportsCancellation
+﻿// ReSharper disable MethodSupportsCancellation
 
 namespace ExampleApp.Apps;
 

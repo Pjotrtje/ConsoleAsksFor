@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-
-using ConsoleAsksFor.Sdk;
-
-using NodaTime;
-
-namespace ConsoleAsksFor.NodaTime.ISO;
+﻿namespace ConsoleAsksFor.NodaTime.ISO;
 
 internal sealed class LocalDateTimeQuestion : IQuestion<LocalDateTime>
 {

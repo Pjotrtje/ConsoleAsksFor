@@ -1,10 +1,4 @@
-﻿using FluentAssertions;
-
-using NodaTime;
-
-using Xunit;
-
-namespace ConsoleAsksFor.NodaTime.ISO.Tests;
+﻿namespace ConsoleAsksFor.NodaTime.ISO.Tests;
 
 public class LocalDateTimeQuestionTests
 {

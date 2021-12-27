@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal static class EnumerableCharExtensions
 {

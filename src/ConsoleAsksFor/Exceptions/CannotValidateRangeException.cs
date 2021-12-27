@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 /// <summary>
 /// An exception for when validity of range can not be determined.

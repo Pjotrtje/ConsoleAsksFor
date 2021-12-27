@@ -1,11 +1,3 @@
-using System.Threading.Tasks;
-
-using FluentAssertions;
-
-using ConsoleAsksFor.TestUtils;
-
-using Xunit;
-
 namespace ConsoleAsksFor.Tests;
 
 public class AskForBoolTests
@@ -19,7 +11,7 @@ public class AskForBoolTests
     {
         _console.AddKeyInput(new()
         {
-            KeyInputs.Enter,
+            Enter,
         });
 
         const bool defaultValue = false;

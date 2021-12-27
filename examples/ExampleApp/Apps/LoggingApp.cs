@@ -1,12 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-using ConsoleAsksFor;
-
-using Microsoft.Extensions.Logging;
-
-namespace ExampleApp.Apps;
+﻿namespace ExampleApp.Apps;
 
 internal sealed class LoggingApp : IApp
 {

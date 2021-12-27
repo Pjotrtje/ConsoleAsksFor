@@ -1,9 +1,4 @@
-﻿using System.Linq;
-
-using ConsoleAsksFor;
-
-// ReSharper disable once CheckNamespace
-namespace Microsoft.Extensions.DependencyInjection;
+﻿namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 /// Extension methods for <see cref="IServiceCollection" /> to register <see cref="IConsole"/>.

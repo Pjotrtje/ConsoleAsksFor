@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-
-using NodaTime;
-using NodaTime.Text;
-
-namespace ConsoleAsksFor.NodaTime.ISO;
+﻿namespace ConsoleAsksFor.NodaTime.ISO;
 
 internal sealed class LocalDateTimeFormat
 {

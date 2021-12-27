@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor.TestUtils;
+﻿namespace ConsoleAsksFor.TestUtils;
 
 /// <summary>
 /// List of known <see cref="KeyInputs" /> and method <see cref="FromChar" /> for converting <see cref="char" /> to <see cref="KeyInputs" />.

@@ -1,9 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using NodaTime;
-
-namespace ConsoleAsksFor.NodaTime.ISO;
+﻿namespace ConsoleAsksFor.NodaTime.ISO;
 
 public static partial class AskForAppender
 {

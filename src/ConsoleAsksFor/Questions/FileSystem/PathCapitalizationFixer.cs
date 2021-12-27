@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal static class PathCapitalizationFixer
 {

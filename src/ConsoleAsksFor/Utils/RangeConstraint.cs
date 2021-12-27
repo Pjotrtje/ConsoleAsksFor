@@ -1,8 +1,4 @@
-﻿using System;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 /// <summary>
 /// Represents "Empty" RangeConstraint. Also contains helper methods for creating readable <see cref="RangeConstraint{T}"/>

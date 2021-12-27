@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 /// <summary>
 /// Foreground and background colors for line.

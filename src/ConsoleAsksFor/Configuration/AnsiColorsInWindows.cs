@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 // https://www.jerriepelser.com/blog/using-ansi-color-codes-in-net-console-apps/
 internal static class AnsiColorsInWindows

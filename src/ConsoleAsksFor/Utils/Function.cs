@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal static class Function
 {

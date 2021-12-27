@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace ExampleApp;
+﻿namespace ExampleApp;
 
 internal static class FireAndForget
 {

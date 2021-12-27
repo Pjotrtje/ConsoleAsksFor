@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-
-namespace ConsoleAsksFor.Sdk;
+﻿namespace ConsoleAsksFor.Sdk;
 
 /// <summary>
 /// In NodaTime ZonedDateTime does not implement <see cref="IComparable{T}"/> because it unclear how to compare. <br/>

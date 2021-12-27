@@ -1,13 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-using FluentAssertions;
-
-using ConsoleAsksFor.TestUtils;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public class AskForStringTests
 {
@@ -21,7 +12,7 @@ public class AskForStringTests
         const string defaultValue = "some value";
         _console.AddKeyInput(new()
         {
-            KeyInputs.Enter,
+            Enter,
         });
 
         var answer = await _console.AskForString(Question, defaultValue);
@@ -40,7 +31,7 @@ public class AskForStringTests
         const string defaultValue = "someValue";
         _console.AddKeyInput(new()
         {
-            KeyInputs.Enter,
+            Enter,
         });
 
         var answer = await _console.AskForString(Question, new Regex("[a-z]+"), "SomeHint", defaultValue);

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 /// <summary>
 /// Options related to logging.

@@ -1,8 +1,4 @@
-﻿using System;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal sealed class KeyInputHandler : IKeyInputHandler
 {

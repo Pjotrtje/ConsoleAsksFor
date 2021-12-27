@@ -1,6 +1,4 @@
-﻿using NodaTime;
-
-namespace ConsoleAsksFor.NodaTime.ISO;
+﻿namespace ConsoleAsksFor.NodaTime.ISO;
 
 internal static class ZonedDateTimeExtensions
 {

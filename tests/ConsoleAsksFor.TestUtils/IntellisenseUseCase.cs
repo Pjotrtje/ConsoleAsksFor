@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xunit;
-
-namespace ConsoleAsksFor.TestUtils;
+﻿namespace ConsoleAsksFor.TestUtils;
 
 public sealed record IntellisenseUseCases
 {

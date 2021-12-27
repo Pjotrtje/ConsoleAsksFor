@@ -1,8 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 // https://gist.github.com/SHSE/5107198
 internal sealed class AsyncAutoResetEvent

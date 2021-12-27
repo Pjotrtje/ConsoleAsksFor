@@ -1,8 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-using System.Reflection;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public static class UnitTestFileSystem
 {

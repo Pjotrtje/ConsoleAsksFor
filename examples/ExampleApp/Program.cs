@@ -1,15 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using Microsoft.Extensions.DependencyInjection;
-
-using ConsoleAsksFor;
-
-using ExampleApp.Apps;
-
-using Microsoft.Extensions.Logging;
-
-namespace ExampleApp;
+﻿namespace ExampleApp;
 
 internal static class Program
 {

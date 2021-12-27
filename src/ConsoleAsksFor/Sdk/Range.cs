@@ -1,8 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-
-namespace ConsoleAsksFor.Sdk;
+﻿namespace ConsoleAsksFor.Sdk;
 
 /// <summary>
 /// Closed range; thus <see cref="Min"/>/<see cref="Max"/> are valid values of range

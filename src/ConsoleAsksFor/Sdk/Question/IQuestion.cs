@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-
-namespace ConsoleAsksFor.Sdk;
+﻿namespace ConsoleAsksFor.Sdk;
 
 /// <summary>
 /// Interface for asking question with <see cref="IConsole"/>.

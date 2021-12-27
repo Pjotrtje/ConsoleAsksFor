@@ -1,9 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 /// <summary>
 /// Main interface for using ConsoleAsksFor.

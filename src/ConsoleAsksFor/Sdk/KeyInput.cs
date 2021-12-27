@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleAsksFor.Sdk;
+﻿namespace ConsoleAsksFor.Sdk;
 
 /// <summary>
 /// Output of <see cref="IConsoleInputGetter.ReadKeyWhileBlinkLine" />.

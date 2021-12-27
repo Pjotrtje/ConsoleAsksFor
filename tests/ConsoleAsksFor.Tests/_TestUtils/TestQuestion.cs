@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public record TestQuestion : IQuestion<string>
 {

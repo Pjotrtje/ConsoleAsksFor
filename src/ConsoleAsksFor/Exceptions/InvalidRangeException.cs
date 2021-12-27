@@ -1,8 +1,4 @@
-﻿using System;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 /// <summary>
 /// An exception for when range is invalid.

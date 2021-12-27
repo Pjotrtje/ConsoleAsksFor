@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal static class ExceptionExtensions
 {

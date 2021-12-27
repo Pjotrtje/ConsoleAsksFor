@@ -1,11 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-
-using ConsoleAsksFor.Sdk;
-
-using C = System.Console;
+﻿using C = System.Console;
 
 namespace ConsoleAsksFor;
 

@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Text;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal sealed class DirectOut : IDirectOut, IDirectOutWriter
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-using ConsoleAsksFor;
-
-namespace ExampleApp.Apps;
+﻿namespace ExampleApp.Apps;
 
 internal sealed class MultiThreadedApp : IApp
 {

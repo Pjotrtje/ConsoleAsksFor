@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor.TestUtils;
+﻿namespace ConsoleAsksFor.TestUtils;
 
 public class TestConsole : IConsole
 {

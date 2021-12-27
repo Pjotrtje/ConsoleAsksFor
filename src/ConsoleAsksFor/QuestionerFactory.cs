@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal sealed class QuestionerFactory : IQuestionerFactory
 {

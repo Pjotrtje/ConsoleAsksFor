@@ -1,14 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using FluentAssertions;
-using FluentAssertions.Extensions;
-
-using ConsoleAsksFor.TestUtils;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public class AskForDateTimeTests
 {
@@ -21,7 +11,7 @@ public class AskForDateTimeTests
     {
         _console.AddKeyInput(new()
         {
-            KeyInputs.Enter,
+            Enter,
         });
 
         var defaultValue = 20.September(2021).At(22, 00).AsUtc();

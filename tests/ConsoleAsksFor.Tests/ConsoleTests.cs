@@ -1,13 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using FluentAssertions;
-
-using ConsoleAsksFor.TestUtils;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public class ConsoleTests
 {
@@ -88,7 +79,7 @@ public class ConsoleTests
         _internalConsole.AddKeyInput(new()
         {
             "OK",
-            KeyInputs.Enter,
+            Enter,
         });
 
         var result = await _sut.Ask(question, CancellationToken.None);

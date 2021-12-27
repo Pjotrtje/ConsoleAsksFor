@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using ConsoleAsksFor.TestUtils;
-
-using FluentAssertions;
-using FluentAssertions.Common;
-using FluentAssertions.Extensions;
-
-using Xunit;
-
-namespace ConsoleAsksFor.Tests;
+﻿namespace ConsoleAsksFor.Tests;
 
 public class DateTimeOffsetQuestionIntellisenseTests
 {

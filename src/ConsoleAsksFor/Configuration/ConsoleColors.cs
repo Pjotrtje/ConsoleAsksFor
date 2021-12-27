@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 /// <summary>
 /// Colors used in <see cref="IConsole"/>.

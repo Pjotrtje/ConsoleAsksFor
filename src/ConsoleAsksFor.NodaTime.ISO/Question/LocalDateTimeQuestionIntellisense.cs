@@ -1,11 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using ConsoleAsksFor.Sdk;
-
-using NodaTime;
-
-namespace ConsoleAsksFor.NodaTime.ISO;
+﻿namespace ConsoleAsksFor.NodaTime.ISO;
 
 internal sealed class LocalDateTimeQuestionIntellisense : IIntellisense
 {

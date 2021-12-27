@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ConsoleAsksFor;
+﻿namespace ConsoleAsksFor;
 
 internal sealed class ConsoleLineWriter : IConsoleLineWriter
 {
