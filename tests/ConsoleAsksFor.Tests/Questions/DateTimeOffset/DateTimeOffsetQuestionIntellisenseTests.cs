@@ -6,9 +6,11 @@ public class DateTimeOffsetQuestionIntellisenseTests
         new DateTimeOffsetQuestionParser(
             DateTimeOffsetFormat.Date,
             TimeZoneInfo.Utc,
-            RangeConstraint.Between(
-                2.January(1999).AsUtc().ToDateTimeOffset(),
-                4.May(4000).AsUtc().ToDateTimeOffset())),
+            RangeConstraint
+                .Between(
+                    2.January(1999).AsUtc().ToDateTimeOffset(),
+                    4.May(4000).AsUtc().ToDateTimeOffset())
+                .ToClusteredRange(TimeZoneInfo.Utc, DateTimeOffsetFormat.Date)),
         DateTimeOffsetFormat.Date);
 
     private static readonly IntellisenseUseCases UseCases = new()
@@ -84,12 +86,13 @@ public class DateTimeOffsetQuestionIntellisenseTests
     [Fact]
     public void Handles_TimeZone_When_MinValue_Is_Not_0001_01_01_00_00_00_Due_To_Offset()
     {
+        //ToDo op ander nivo testen
         var westEuropeStandardTime = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
         var sut = new DateTimeOffsetQuestionIntellisense(
             new DateTimeOffsetQuestionParser(
                 DateTimeOffsetFormat.DateTime,
                 westEuropeStandardTime,
-                RangeConstraint.None),
+                AskForAppender.ToClusteredRange(RangeConstraint.None, westEuropeStandardTime, DateTimeOffsetFormat.DateTime)),
             DateTimeOffsetFormat.DateTime);
 
         sut.CompleteValue("").Should().Be("0001-01-01 01:00:00");
@@ -99,12 +102,13 @@ public class DateTimeOffsetQuestionIntellisenseTests
     [Fact]
     public void Handles_TimeZone_When_MaxValue_Is_Not_9999_12_31_13_59_59_Due_To_Offset()
     {
+        //ToDo op ander nivo testen
         var hawaiianTime = TimeZoneInfo.FindSystemTimeZoneById("Hawaiian Standard Time");
         var sut = new DateTimeOffsetQuestionIntellisense(
             new DateTimeOffsetQuestionParser(
                 DateTimeOffsetFormat.DateTime,
                 hawaiianTime,
-                RangeConstraint.None),
+                AskForAppender.ToClusteredRange(RangeConstraint.None, hawaiianTime, DateTimeOffsetFormat.DateTime)),
             DateTimeOffsetFormat.DateTime);
 
         sut.PreviousValue("", "").Should().Be("9999-12-31 13:59:59");

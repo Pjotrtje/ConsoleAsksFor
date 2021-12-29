@@ -7,37 +7,28 @@ internal sealed class DateTimeOffsetQuestionParser
 
     public string TimeZoneInfoDescription { get; }
 
-    public Range<DateTimeOffset> Range { get; }
+    public ClusteredRange<DateTimeOffset> Range { get; }
 
     public DateTimeOffsetQuestionParser(
         DateTimeOffsetFormat format,
         TimeZoneInfo? timeZone,
-        RangeConstraint<DateTimeOffset> range)
+        ClusteredRange<DateTimeOffset> range)
     {
         _format = format;
         _timeZone = timeZone ?? TimeZoneInfo.Utc;
-        Range = GetInputRange(range, _timeZone, format);
+        Range = TruncateMinMax(range, format);
         TimeZoneInfoDescription = timeZone?.Id ?? "Local";
     }
 
-    private static Range<DateTimeOffset> GetInputRange(
-        RangeConstraint<DateTimeOffset> range,
-        TimeZoneInfo timeZone,
-        DateTimeOffsetFormat format)
+    private static ClusteredRange<DateTimeOffset> TruncateMinMax(ClusteredRange<DateTimeOffset> range, DateTimeOffsetFormat dateTimeOffsetFormat)
     {
-        var allowedRange = timeZone.GetAllowedRange(format.SmallestIncrementInTicks);
+        var fixedRanges = range.SubRanges
+            .Select(r => new Range<DateTimeOffset>(
+                r.Min.TruncateMinValue(dateTimeOffsetFormat.SmallestIncrementInTicks),
+                r.Max.TruncateMaxValue(dateTimeOffsetFormat.SmallestIncrementInTicks)))
+            .ToList();
 
-        DateTimeOffset? Corrected(DateTimeOffset? value)
-            => value?.UtcDateTime < allowedRange.Min.UtcDateTime
-                ? allowedRange.Min
-                : value?.UtcDateTime > allowedRange.Max.UtcDateTime
-                    ? allowedRange.Max
-                    : value?.ToTimeZone(timeZone).TruncateMinValue(format.SmallestIncrementInTicks);
-
-        var min = Corrected(range.Min) ?? allowedRange.Min;
-        var max = Corrected(range.Max) ?? allowedRange.Max;
-
-        return new(min, max);
+        return new(fixedRanges);
     }
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out DateTimeOffset answer)

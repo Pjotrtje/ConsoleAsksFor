@@ -22,7 +22,7 @@ internal sealed class LocalDateTimeQuestion : IQuestion<LocalDateTime>
         string text,
         LocalDateTimeFormat format,
         DateTimeZone? dateTimeZone,
-        RangeConstraint<LocalDateTime> range,
+        ClusteredRange<LocalDateTime> range,
         LocalDateTime? defaultValue)
     {
         Text = text;

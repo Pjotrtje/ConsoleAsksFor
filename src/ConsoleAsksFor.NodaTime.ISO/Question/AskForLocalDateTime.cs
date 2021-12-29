@@ -22,9 +22,19 @@ public static partial class AskForAppender
             questionText,
             LocalDateTimeFormat.DateTime,
             null,
-            range ?? RangeConstraint.None,
+            (range ?? RangeConstraint.None).ToClusteredRange(),
             defaultValue);
 
         return await console.Ask(question, cancellationToken);
+    }
+
+    internal static ClusteredRange<LocalDateTime> ToClusteredRange(this RangeConstraint<LocalDateTime> rangeConstraint)
+    {
+        // ToDo truncate?
+        var range = new Range<LocalDateTime>(
+            rangeConstraint.Min ?? LocalDate.MinIsoValue.At(new LocalTime(00, 00, 00)),
+            rangeConstraint.Max ?? LocalDate.MaxIsoValue.At(new LocalTime(23, 59, 59)));
+
+        return new(new[] { range });
     }
 }

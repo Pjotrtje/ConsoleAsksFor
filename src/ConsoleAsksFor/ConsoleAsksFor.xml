@@ -785,12 +785,74 @@
             <exception cref="T:System.ArgumentOutOfRangeException"></exception>
             <param name="digitsAfterDecimalPoint">Allowed between 0 and 20.</param>
         </member>
+        <member name="T:ConsoleAsksFor.Sdk.CircularRanges">
+            <summary>
+            ToDo
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.CircularRanges.RegisterCircularRange``1">
+            <summary>
+            Register <see cref="T:System.IComparable`1"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:ConsoleAsksFor.Sdk.ClusteredRange`1">
+            <summary>
+            ToDo
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.ClusteredRange`1.Min">
+            <summary>
+            Min value of range.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.ClusteredRange`1.Max">
+            <summary>
+            Max value of range.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.Sdk.ClusteredRange`1.SubRanges">
+            <summary>
+            ToDo
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.ClusteredRange`1.#ctor(System.Collections.Generic.IReadOnlyCollection{ConsoleAsksFor.Sdk.Range{`0}})">
+            <summary>
+            ToDo
+            </summary>
+            <param name="subRanges"></param>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.ClusteredRange`1.Contains(`0)">
+            <summary>
+            Checks whether <paramref name="value"/> is in range.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.ClusteredRange`1.HasOverlap(ConsoleAsksFor.Sdk.Range{`0},ConsoleAsksFor.Sdk.ClusteredRange{`0}@)">
+            <summary>
+            Determine whether range has overlap with other range.
+            </summary>
+            <param name="other"></param>
+            <param name="overlap">When overlap; the range of overlap.</param>
+            <returns></returns>
+        </member>
         <member name="T:ConsoleAsksFor.Sdk.Hint">
             <summary>
             Helper class to generate consistent hints for <see cref="T:ConsoleAsksFor.Sdk.IQuestion`1"/>.
             </summary>
         </member>
         <member name="M:ConsoleAsksFor.Sdk.Hint.ForRange``1(ConsoleAsksFor.Sdk.Range{``0},System.Func{``0,System.String})">
+            <summary>
+            Creates range hint.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="range"></param>
+            <param name="formatter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.Hint.ForRange``1(ConsoleAsksFor.Sdk.ClusteredRange{``0},System.Func{``0,System.String})">
             <summary>
             Creates range hint.
             </summary>

@@ -24,7 +24,7 @@ public static partial class AskForAppender
             questionText,
             DateTimeOffsetFormat.DateTime,
             timeZone,
-            range ?? RangeConstraint.None,
+            (range ?? RangeConstraint.None).ToClusteredRange(timeZone, DateTimeOffsetFormat.DateTime),
             defaultValue?.ToTimeZone(timeZone));
 
         return await console.Ask(question, cancellationToken);

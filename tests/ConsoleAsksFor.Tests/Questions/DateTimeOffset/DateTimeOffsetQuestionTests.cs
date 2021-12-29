@@ -13,7 +13,7 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.None,
+            NoRange(WestEuropeStandardTime, DateTimeOffsetFormat.Date),
             null);
 
         question.Text.Should().Be(QuestionText);
@@ -29,7 +29,9 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.AtLeast(3.January(2020).ToDateTimeOffset(WestEuropeStandardTime)),
+            RangeConstraint
+                .AtLeast(3.January(2020).ToDateTimeOffset(WestEuropeStandardTime))
+                .ToClusteredRange(WestEuropeStandardTime, DateTimeOffsetFormat.Date),
             null);
 
         question.Text.Should().Be(QuestionText);
@@ -45,7 +47,9 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.AtMost(3.January(2020).ToDateTimeOffset(WestEuropeStandardTime)),
+            RangeConstraint
+                .AtMost(3.January(2020).ToDateTimeOffset(WestEuropeStandardTime))
+                .ToClusteredRange(WestEuropeStandardTime, DateTimeOffsetFormat.Date),
             null);
 
         question.Text.Should().Be(QuestionText);
@@ -61,7 +65,7 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.None,
+            NoRange(WestEuropeStandardTime, DateTimeOffsetFormat.Date),
             null);
 
         question.PrefilledValue.Should().BeEmpty();
@@ -74,7 +78,7 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.None,
+            NoRange(WestEuropeStandardTime, DateTimeOffsetFormat.Date),
             3.January(2020).ToDateTimeOffset(WestEuropeStandardTime));
 
         question.PrefilledValue.Should().Be("2020-01-03");
@@ -87,7 +91,7 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.None,
+            NoRange(WestEuropeStandardTime, DateTimeOffsetFormat.Date),
             null);
 
         var isParsed = question.TryParse("2020-01-03", out _, out var answer);
@@ -102,7 +106,7 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.None,
+            NoRange(WestEuropeStandardTime, DateTimeOffsetFormat.Date),
             null);
 
         var isParsed = question.TryParse(" 2020-01-03 ", out _, out var answer);
@@ -117,7 +121,7 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.Date,
             TimeZoneInfo.Utc,
-            RangeConstraint.None,
+            NoRange(TimeZoneInfo.Utc, DateTimeOffsetFormat.Date),
             null);
 
         var isParsed = question.TryParse("2020-01-03", out _, out var answer);
@@ -132,7 +136,9 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.AtLeast(4.January(2020).ToDateTimeOffset(WestEuropeStandardTime)),
+            RangeConstraint
+                .AtLeast(4.January(2020).ToDateTimeOffset(WestEuropeStandardTime))
+                .ToClusteredRange(WestEuropeStandardTime, DateTimeOffsetFormat.Date),
             null);
 
         var isParsed = question.TryParse("2020-01-03", out var errors, out _);
@@ -147,7 +153,9 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.AtMost(2.January(2020).ToDateTimeOffset(WestEuropeStandardTime)),
+            RangeConstraint
+                .AtMost(2.January(2020).ToDateTimeOffset(WestEuropeStandardTime))
+                .ToClusteredRange(WestEuropeStandardTime, DateTimeOffsetFormat.Date),
             null);
 
         var isParsed = question.TryParse("2020-01-03", out var errors, out _);
@@ -170,7 +178,7 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.None,
+            NoRange(WestEuropeStandardTime, DateTimeOffsetFormat.Date),
             null);
 
         var isParsed = question.TryParse(answerAsString, out var errors, out _);
@@ -185,11 +193,14 @@ public class DateTimeOffsetQuestionTests
             QuestionText,
             DateTimeOffsetFormat.DateTime,
             WestEuropeStandardTime,
-            RangeConstraint.None,
+            NoRange(WestEuropeStandardTime, DateTimeOffsetFormat.DateTime),
             null);
 
         var isParsed = question.TryParse("2021-03-28 02:30:00", out var errors, out _);
         isParsed.Should().BeFalse();
         errors.Should().BeEmpty();
     }
+
+    private static ClusteredRange<DateTimeOffset> NoRange(TimeZoneInfo timeZone, DateTimeOffsetFormat format)
+        => AskForAppender.ToClusteredRange(RangeConstraint.None, timeZone, format);
 }

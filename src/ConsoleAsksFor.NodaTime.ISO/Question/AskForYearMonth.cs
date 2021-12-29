@@ -22,14 +22,14 @@ public static partial class AskForAppender
             questionText,
             LocalDateTimeFormat.YearMonth,
             null,
-            ToLocalDateTimeConstraint(range),
+            range.ToLocalDateTimeConstraint().ToClusteredRange(),
             defaultValue?.ToLocalDateTime());
 
         var localDateTime = await console.Ask(question, cancellationToken);
         return new YearMonth(localDateTime.Year, localDateTime.Month);
     }
 
-    private static RangeConstraint<LocalDateTime> ToLocalDateTimeConstraint(RangeConstraint<YearMonth>? range)
+    private static RangeConstraint<LocalDateTime> ToLocalDateTimeConstraint(this RangeConstraint<YearMonth>? range)
         => new(
             range?.Min?.ToLocalDateTime(),
             range?.Max?.ToLocalDateTime());

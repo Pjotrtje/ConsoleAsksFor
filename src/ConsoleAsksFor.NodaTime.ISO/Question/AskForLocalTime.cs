@@ -2,6 +2,10 @@
 
 public static partial class AskForAppender
 {
+    private static readonly Range<LocalTime> FullLocalTimeRange = new(
+        LocalTime.Midnight,
+        LocalTime.Midnight.PlusSeconds(-1));
+
     /// <summary>
     /// Ask for <see cref="LocalTime"/>.
     /// </summary>
@@ -22,17 +26,15 @@ public static partial class AskForAppender
             questionText,
             LocalDateTimeFormat.Time,
             null,
-            ToLocalDateTimeConstraint(range),
+            range.ToLocalDateTimeClusteredRange(),
             defaultValue?.ToLocalDateTime());
 
         var localDateTime = await console.Ask(question, cancellationToken);
-        return new LocalTime(localDateTime.Hour, localDateTime.Minute, localDateTime.Second);
+        return localDateTime.TimeOfDay;
     }
 
-    private static RangeConstraint<LocalDateTime> ToLocalDateTimeConstraint(RangeConstraint<LocalTime>? rangeConstraint)
-        => RangeConstraint.Between(
-            (rangeConstraint?.Min ?? LocalTime.Midnight).ToLocalDateTime(),
-            (rangeConstraint?.Max ?? LocalTime.Midnight.PlusSeconds(-1)).ToLocalDateTime());
+    internal static ClusteredRange<LocalDateTime> ToLocalDateTimeClusteredRange(this RangeConstraint<LocalTime>? range)
+        => range.ToLocalDateTimeClusteredRange(FullLocalTimeRange, ToLocalDateTime);
 
     private static LocalDateTime ToLocalDateTime(this LocalTime localTime)
         => new LocalDate(2000, 1, 1).At(localTime);

@@ -21,14 +21,14 @@ public static partial class AskForAppender
         var zonedDateTime = await console.AskForZonedDateTime(
             questionText,
             DateTimeZone.Utc,
-            ToZonedDateTimeConstraint(range),
+            range.ToZonedDateTimeConstraint(),
             defaultValue?.InUtc(),
             cancellationToken);
 
         return zonedDateTime.ToInstant();
     }
 
-    private static RangeConstraint<ZonedDateTime> ToZonedDateTimeConstraint(RangeConstraint<Instant>? range)
+    private static RangeConstraint<ZonedDateTime> ToZonedDateTimeConstraint(this RangeConstraint<Instant>? range)
         => new(
             range?.Min?.InUtc(),
             range?.Max?.InUtc());

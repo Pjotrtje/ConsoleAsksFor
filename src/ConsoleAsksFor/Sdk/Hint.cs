@@ -16,6 +16,16 @@ public static class Hint
         => $"Range: [{formatter(range.Min)} ... {formatter(range.Max)}]";
 
     /// <summary>
+    /// Creates range hint.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="range"></param>
+    /// <param name="formatter"></param>
+    /// <returns></returns>
+    public static string ForRange<T>(ClusteredRange<T> range, Func<T, string> formatter) where T : struct, IComparable<T>
+        => $"Range: [{formatter(range.Min())} ... {formatter(range.Max())}]";
+
+    /// <summary>
     /// Creates format hint.
     /// </summary>
     /// <param name="formatDescription"></param>

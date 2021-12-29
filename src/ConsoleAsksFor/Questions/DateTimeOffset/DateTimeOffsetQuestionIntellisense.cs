@@ -49,27 +49,30 @@ internal sealed class DateTimeOffsetQuestionIntellisense : IIntellisense
         }
 
         return direction == IntellisenseDirection.Previous
-            ? _format.FormatAnswer(overlap.Max)
-            : _format.FormatAnswer(overlap.Min);
+            ? _format.FormatAnswer(overlap.Max())
+            : _format.FormatAnswer(overlap.Min());
     }
 
-    private Range<DateTimeOffset>? GetRangeOverlappingWithIntellisense(string value)
+    private ClusteredRange<DateTimeOffset>? GetRangeOverlappingWithIntellisense(string value)
     {
         var minValue = _format.IntellisenseMinPatterns
-            .Append(_format.FormatAnswer(_parser.Range.Min))
+            .Append(_format.FormatAnswer(_parser.Range.Min()))
             .Select(p => TryCompleteByTemplate(value, p))
             .Min(d => d);
 
         var maxValue = _format.IntellisenseMaxPatterns
-            .Append(_format.FormatAnswer(_parser.Range.Max))
+            .Append(_format.FormatAnswer(_parser.Range.Max()))
             .Select(p => TryCompleteByTemplate(value, p))
             .Max(d => d);
 
-        var intellisenseRange = minValue.HasValue && maxValue.HasValue
-            ? new Range<DateTimeOffset>(minValue.Value, maxValue.Value)
-            : null;
+        if (!minValue.HasValue || !maxValue.HasValue)
+        {
+            return null;
+        }
 
-        return intellisenseRange is not null && intellisenseRange.HasOverlap(_parser.Range, out var overlap)
+        var intellisenseRange = new Range<DateTimeOffset>(minValue.Value, maxValue.Value);
+
+        return _parser.Range.HasOverlap(intellisenseRange, out var overlap)
             ? overlap
             : null;
     }
@@ -87,25 +90,38 @@ internal sealed class DateTimeOffsetQuestionIntellisense : IIntellisense
             : null;
     }
 
-    private DateTimeOffset SafeMove(DateTimeOffset answer, Range<DateTimeOffset> overlap, IntellisenseDirection direction)
+    private DateTimeOffset SafeMove(DateTimeOffset answer, ClusteredRange<DateTimeOffset> overlap, IntellisenseDirection direction)
     {
         try
         {
             var delta = GetDelta(direction);
             var newAnswer = answer.AddTicks(delta);
-            return newAnswer switch
+            if (overlap.Contains(newAnswer))
             {
-                _ when newAnswer < overlap.Min && overlap.Contains(answer) => overlap.Max,
-                _ when newAnswer > overlap.Max && overlap.Contains(answer) => overlap.Min,
-                _ => newAnswer,
-            };
+                return newAnswer;
+            }
+
+            if (overlap.SubRanges.First().Contains(answer))
+            {
+                return direction == IntellisenseDirection.Previous
+                    ? overlap.SubRanges.Last().Max
+                    : overlap.SubRanges.Last().Min;
+            }
+
+            if (overlap.SubRanges.Last().Contains(answer))
+            {
+                return direction == IntellisenseDirection.Previous
+                    ? overlap.SubRanges.First().Max
+                    : overlap.SubRanges.First().Min;
+            }
         }
         catch (ArgumentOutOfRangeException)
         {
-            return direction == IntellisenseDirection.Previous
-                ? overlap.Max
-                : overlap.Min;
         }
+
+        return direction == IntellisenseDirection.Previous
+            ? overlap.Max()
+            : overlap.Min();
     }
 
     private long GetDelta(IntellisenseDirection direction)

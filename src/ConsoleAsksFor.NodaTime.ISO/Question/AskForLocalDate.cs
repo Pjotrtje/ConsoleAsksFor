@@ -22,14 +22,14 @@ public static partial class AskForAppender
             questionText,
             LocalDateTimeFormat.Date,
             null,
-            ToLocalDateTimeConstraint(range),
+            range.ToLocalDateTimeConstraint().ToClusteredRange(),
             defaultValue?.ToLocalDateTime());
 
         var result = await console.Ask(question, cancellationToken);
         return result.Date;
     }
 
-    private static RangeConstraint<LocalDateTime> ToLocalDateTimeConstraint(RangeConstraint<LocalDate>? range)
+    private static RangeConstraint<LocalDateTime> ToLocalDateTimeConstraint(this RangeConstraint<LocalDate>? range)
         => new(
             range?.Min?.ToLocalDateTime(),
             range?.Max?.ToLocalDateTime());
