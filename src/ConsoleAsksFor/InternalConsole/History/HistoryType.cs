@@ -1,9 +1,8 @@
-﻿namespace ConsoleAsksFor
+﻿namespace ConsoleAsksFor;
+
+internal enum HistoryType
 {
-    internal enum HistoryType
-    {
-        ByQuestionTextAndType,
-        ByQuestionType,
-        NotFiltered,
-    }
+    ByQuestionTextAndType,
+    ByQuestionType,
+    NotFiltered,
 }

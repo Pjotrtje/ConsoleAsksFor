@@ -1,9 +1,8 @@
-﻿namespace ConsoleAsksFor
+﻿namespace ConsoleAsksFor;
+
+/// <summary>
+/// Extension methods for <see cref="IConsole"/>.
+/// </summary>
+public static partial class AskForAppender
 {
-    /// <summary>
-    /// Extension methods for <see cref="IConsole"/>.
-    /// </summary>
-    public static partial class AskForAppender
-    {
-    }
 }

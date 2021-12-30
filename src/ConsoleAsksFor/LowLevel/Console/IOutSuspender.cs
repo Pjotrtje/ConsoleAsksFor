@@ -1,9 +1,6 @@
-﻿using System;
+﻿namespace ConsoleAsksFor;
 
-namespace ConsoleAsksFor
+internal interface IOutSuspender
 {
-    internal interface IOutSuspender
-    {
-        IDisposable Suspend();
-    }
+    IDisposable Suspend();
 }

@@ -1,14 +1,9 @@
-﻿using ConsoleAsksFor.Sdk;
+﻿namespace ConsoleAsksFor.NodaTime.ISO;
 
-using NodaTime;
-
-namespace ConsoleAsksFor.NodaTime.ISO
+internal sealed class OnStartupHook : IOnStartupHook
 {
-    internal sealed class OnStartupHook : IOnStartupHook
+    public void Initialize()
     {
-        public void Initialize()
-        {
-            RangeConstraintComparers.RegisterComparer(ZonedDateTime.Comparer.Instant);
-        }
+        RangeConstraintComparers.RegisterComparer(ZonedDateTime.Comparer.Instant);
     }
 }

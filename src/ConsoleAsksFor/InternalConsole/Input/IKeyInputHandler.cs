@@ -1,9 +1,6 @@
-﻿using ConsoleAsksFor.Sdk;
+﻿namespace ConsoleAsksFor;
 
-namespace ConsoleAsksFor
+internal interface IKeyInputHandler
 {
-    internal interface IKeyInputHandler
-    {
-        InProgressLine HandleKeyInput(InProgressLine line, KeyInput keyInput, IScopedHistory scopedHistory, IIntellisense intellisense);
-    }
+    InProgressLine HandleKeyInput(InProgressLine line, KeyInput keyInput, IScopedHistory scopedHistory, IIntellisense intellisense);
 }

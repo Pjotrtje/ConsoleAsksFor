@@ -1,25 +1,22 @@
-﻿using System.Collections.Generic;
+﻿namespace ConsoleAsksFor;
 
-namespace ConsoleAsksFor
+internal interface IConsoleLineWriter
 {
-    internal interface IConsoleLineWriter
-    {
-        void WriteSuccessLine(string value);
+    void WriteSuccessLine(string value);
 
-        void WriteWarningLine(string value);
+    void WriteWarningLine(string value);
 
-        void WriteErrorLine(string value);
+    void WriteErrorLine(string value);
 
-        void WriteInfoLine(string value);
+    void WriteInfoLine(string value);
 
-        void WriteQuestionLine(string value);
+    void WriteQuestionLine(string value);
 
-        void WriteQuestionHintLine(string value);
+    void WriteQuestionHintLine(string value);
 
-        void WriteAnswerLine(string value);
+    void WriteAnswerLine(string value);
 
-        void WriteInvalidAnswerLine(string value);
+    void WriteInvalidAnswerLine(string value);
 
-        void WriteHelpTextLines(IEnumerable<string> values);
-    }
+    void WriteHelpTextLines(IEnumerable<string> values);
 }

@@ -1,9 +1,8 @@
-﻿namespace ConsoleAsksFor.NodaTime.ISO
+﻿namespace ConsoleAsksFor.NodaTime.ISO;
+
+internal enum IntellisenseDirection
 {
-    internal enum IntellisenseDirection
-    {
-        Previous = -1,
-        None = 0,
-        Next = 1,
-    }
+    Previous = -1,
+    None = 0,
+    Next = 1,
 }

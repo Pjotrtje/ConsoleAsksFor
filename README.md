@@ -102,7 +102,8 @@ var likableWords = await console.AskForItems("Which of these words do you like?"
 * AskForLong 
 * AskForUnsignedLong
 * AskForDecimal
-* AskForDate
+* AskForDateOnly
+* AskForTimeOnly
 * AskForDateTime
 * AskForDateTimeOffset
 * AskForDirectory 

@@ -6,9 +6,15 @@ pool:
 
 variables:
 - name  : version
-  value : '1.0.0'
+  value : '2.0.0'
 
 steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk'
+  inputs:
+    packageType: 'sdk'
+    version: '6.0.x'
+    
 - task: PowerShell@2
   displayName: 'Set version NuGet'
   inputs:

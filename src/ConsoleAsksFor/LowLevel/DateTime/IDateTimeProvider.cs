@@ -1,9 +1,6 @@
-﻿using System;
+﻿namespace ConsoleAsksFor;
 
-namespace ConsoleAsksFor
+internal interface IDateTimeProvider
 {
-    internal interface IDateTimeProvider
-    {
-        DateTime Now { get; }
-    }
+    DateTime Now { get; }
 }

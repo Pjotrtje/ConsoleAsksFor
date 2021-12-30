@@ -1,52 +1,48 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿namespace ConsoleAsksFor;
 
-namespace ConsoleAsksFor
+internal sealed class History
 {
-    internal sealed class History
+    private readonly int _maxSize;
+    private readonly LinkedList<HistoryItem> _items;
+
+    public IEnumerable<HistoryItem> Items => _items;
+
+    public History(IEnumerable<HistoryItem> items, int maxSize)
     {
-        private readonly int _maxSize;
-        private readonly LinkedList<HistoryItem> _items;
+        _maxSize = maxSize;
+        _items = new LinkedList<HistoryItem>(items);
+    }
 
-        public IEnumerable<HistoryItem> Items => _items;
-
-        public History(IEnumerable<HistoryItem> items, int maxSize)
+    public void Add(HistoryItem item)
+    {
+        if (_items.Contains(item))
         {
-            _maxSize = maxSize;
-            _items = new LinkedList<HistoryItem>(items);
+            _items.Remove(item);
         }
 
-        public void Add(HistoryItem item)
+        _items.AddLast(item);
+
+        while (_items.Count > _maxSize)
         {
-            if (_items.Contains(item))
-            {
-                _items.Remove(item);
-            }
-
-            _items.AddLast(item);
-
-            while (_items.Count > _maxSize)
-            {
-                _items.RemoveFirst();
-            }
+            _items.RemoveFirst();
         }
+    }
 
-        public ScopedHistory GetScopedHistory(HistoryType type, string questionType, string questionText)
+    public ScopedHistory GetScopedHistory(HistoryType type, string questionType, string questionText)
+    {
+        var items = type switch
         {
-            var items = type switch
-            {
-                HistoryType.ByQuestionTextAndType => _items.Where(i => i.QuestionType == questionType && i.QuestionText == questionText),
-                HistoryType.ByQuestionType => _items.Where(i => i.QuestionType == questionType),
-                _ => _items,
-            };
+            HistoryType.ByQuestionTextAndType => _items.Where(i => i.QuestionType == questionType && i.QuestionText == questionText),
+            HistoryType.ByQuestionType => _items.Where(i => i.QuestionType == questionType),
+            _ => _items,
+        };
 
-            var history = items
-                .Select(i => i.Answer)
-                .Reverse()
-                .Distinct()
-                .Reverse();
+        var history = items
+            .Select(i => i.Answer)
+            .Reverse()
+            .Distinct()
+            .Reverse();
 
-            return new ScopedHistory(history);
-        }
+        return new ScopedHistory(history);
     }
 }

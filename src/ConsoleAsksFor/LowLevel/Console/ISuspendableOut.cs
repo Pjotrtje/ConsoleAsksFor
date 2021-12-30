@@ -1,9 +1,8 @@
-﻿namespace ConsoleAsksFor
-{
-    internal interface ISuspendableOut
-    {
-        void Suspend();
+﻿namespace ConsoleAsksFor;
 
-        void Resume();
-    }
+internal interface ISuspendableOut
+{
+    void Suspend();
+
+    void Resume();
 }

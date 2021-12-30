@@ -1,15 +1,12 @@
-﻿using System.Text;
+﻿namespace ConsoleAsksFor;
 
-namespace ConsoleAsksFor
+internal interface IDirectOut
 {
-    internal interface IDirectOut
-    {
-        void Write(char value);
+    void Write(char value);
 
-        void Write(string? value);
+    void Write(string? value);
 
-        void WriteLine(string? value);
+    void WriteLine(string? value);
 
-        public Encoding Encoding { get; }
-    }
+    public Encoding Encoding { get; }
 }

@@ -1,15 +1,9 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿namespace ConsoleAsksFor;
 
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor
+internal interface IConsoleInputGetter
 {
-    internal interface IConsoleInputGetter
-    {
-        Task<KeyInput> ReadKeyWhileBlinkLine(
-            InProgressLine line,
-            bool currentLineIsValid,
-            CancellationToken cancellationToken);
-    }
+    Task<KeyInput> ReadKeyWhileBlinkLine(
+        InProgressLine line,
+        bool currentLineIsValid,
+        CancellationToken cancellationToken);
 }

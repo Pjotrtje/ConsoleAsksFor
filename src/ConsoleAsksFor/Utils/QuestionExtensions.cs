@@ -1,17 +1,14 @@
-﻿using ConsoleAsksFor.Sdk;
+﻿namespace ConsoleAsksFor;
 
-namespace ConsoleAsksFor
+internal static class QuestionExtensions
 {
-    internal static class QuestionExtensions
+    public static string GetHistoryType<T>(this IQuestion<T> question)
+        where T : notnull
     {
-        public static string GetHistoryType<T>(this IQuestion<T> question)
-            where T : notnull
-        {
-            var type = question.GetType().Name;
+        var type = question.GetType().Name;
 
-            return question.SubType is null
-                ? type
-                : $"{type}: {question.SubType}";
-        }
+        return question.SubType is null
+            ? type
+            : $"{type}: {question.SubType}";
     }
 }

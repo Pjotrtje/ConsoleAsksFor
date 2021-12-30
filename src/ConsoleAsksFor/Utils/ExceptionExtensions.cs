@@ -1,13 +1,10 @@
-﻿using System;
+﻿namespace ConsoleAsksFor;
 
-namespace ConsoleAsksFor
+internal static class ExceptionExtensions
 {
-    internal static class ExceptionExtensions
+    public static string ToActionExceptionMessage(this Exception exception, string actionName)
     {
-        public static string ToActionExceptionMessage(this Exception exception, string actionName)
-        {
-            var message = exception.Message.Replace(Environment.NewLine, "; ");
-            return $"{actionName} failed: {message}.";
-        }
+        var message = exception.Message.Replace(Environment.NewLine, "; ");
+        return $"{actionName} failed: {message}.";
     }
 }

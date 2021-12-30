@@ -1,17 +1,12 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿namespace ConsoleAsksFor;
 
-namespace ConsoleAsksFor
+internal interface ISystemConsole
 {
-    internal interface ISystemConsole
-    {
-        bool CursorVisible { set; }
+    bool CursorVisible { set; }
 
-        Position CursorPosition { get; set; }
+    Position CursorPosition { get; set; }
 
-        int WindowWidth { get; }
+    int WindowWidth { get; }
 
-        Task<ConsoleKeyInfo> ReadKey(CancellationToken cancellationToken);
-    }
+    Task<ConsoleKeyInfo> ReadKey(CancellationToken cancellationToken);
 }

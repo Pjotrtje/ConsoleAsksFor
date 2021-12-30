@@ -1,11 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿namespace ConsoleAsksFor;
 
-namespace ConsoleAsksFor
+internal interface IHistoryRepository
 {
-    internal interface IHistoryRepository
-    {
-        Task<History> GetHistory();
+    Task<History> GetHistory();
 
-        Task PersistHistory(History scopedHistory);
-    }
+    Task PersistHistory(History scopedHistory);
 }

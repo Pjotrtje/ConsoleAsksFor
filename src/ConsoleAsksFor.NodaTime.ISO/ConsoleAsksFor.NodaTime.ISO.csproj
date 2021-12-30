@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/Pjotrtje/ConsoleAsksFor</PackageProjectUrl>
     <Copyright>Copyright Pieter van Sambeek</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageReleaseNotes>https://github.com/Pjotrtje/ConsoleAsksFor/blob/main/docs/ConsoleAsksFor.releases.md</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/Pjotrtje/ConsoleAsksFor/releases/</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <DocumentationFile>$(MSBuildProjectName).xml</DocumentationFile>
@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NodaTime" Version="3.0.7" />
+    <PackageReference Include="NodaTime" Version="3.0.9" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,7 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,65 +1,59 @@
-﻿using System;
-using System.Linq;
+﻿namespace ConsoleAsksFor;
 
-using ConsoleAsksFor.Sdk;
-
-namespace ConsoleAsksFor
+internal sealed class ItemsQuestionIntellisense : IIntellisense
 {
-    internal sealed class ItemsQuestionIntellisense : IIntellisense
+    private readonly QuestionItems _items;
+
+    public ItemsQuestionIntellisense(QuestionItems items)
     {
-        private readonly QuestionItems _items;
+        _items = items;
+    }
 
-        public ItemsQuestionIntellisense(QuestionItems items)
+    public string? CompleteValue(string value)
+        => Handle(value, value, IntellisenseDirection.None);
+
+    public string? PreviousValue(string value, string hint)
+        => Handle(value, hint, IntellisenseDirection.Previous);
+
+    public string? NextValue(string value, string hint)
+        => Handle(value, hint, IntellisenseDirection.Next);
+
+    private string? Handle(string value, string hint, IntellisenseDirection direction)
+    {
+        var subAnswers = value
+            .Split(Splitter.Value)
+            .ToList();
+
+        var allPotentiallyCompletedSubAnswers = subAnswers.Count == 1
+            ? Array.Empty<string>()
+            : subAnswers.SkipLast(1).ToArray();
+
+        if (!_items.TryParse(allPotentiallyCompletedSubAnswers, out var allCompletedSubAnswers))
         {
-            _items = items;
+            return null;
         }
 
-        public string? CompleteValue(string value)
-            => Handle(value, value, IntellisenseDirection.None);
+        var lastItemQuestionItems = _items.ExceptAnswers(allCompletedSubAnswers);
+        var lastItemIntellisense = new ItemQuestionIntellisense(lastItemQuestionItems);
+        var lastItemHint = hint
+            .Split(Splitter.Value)
+            .Last();
 
-        public string? PreviousValue(string value, string hint)
-            => Handle(value, hint, IntellisenseDirection.Previous);
-
-        public string? NextValue(string value, string hint)
-            => Handle(value, hint, IntellisenseDirection.Next);
-
-        private string? Handle(string value, string hint, IntellisenseDirection direction)
+        var lastItemValue = subAnswers.Last();
+        var addition = direction switch
         {
-            var subAnswers = value
-                .Split(Splitter.Value)
-                .ToList();
+            IntellisenseDirection.Next => lastItemIntellisense.NextValue(lastItemValue, lastItemHint),
+            IntellisenseDirection.Previous => lastItemIntellisense.PreviousValue(lastItemValue, lastItemHint),
+            _ => lastItemIntellisense.CompleteValue(lastItemValue),
+        };
 
-            var allPotentiallyCompletedSubAnswers = subAnswers.Count == 1
-                ? Array.Empty<string>()
-                : subAnswers.SkipLast(1).ToArray();
+        var newValue = allCompletedSubAnswers
+            .Select(_items.FormatAnswer)
+            .Append(addition ?? lastItemValue.Trim())
+            .JoinStrings(Splitter.DisplayValue);
 
-            if (!_items.TryParse(allPotentiallyCompletedSubAnswers, out var allCompletedSubAnswers))
-            {
-                return null;
-            }
-
-            var lastItemQuestionItems = _items.ExceptAnswers(allCompletedSubAnswers);
-            var lastItemIntellisense = new ItemQuestionIntellisense(lastItemQuestionItems);
-            var lastItemHint = hint
-                .Split(Splitter.Value)
-                .Last();
-
-            var lastItemValue = subAnswers.Last();
-            var addition = direction switch
-            {
-                IntellisenseDirection.Next => lastItemIntellisense.NextValue(lastItemValue, lastItemHint),
-                IntellisenseDirection.Previous => lastItemIntellisense.PreviousValue(lastItemValue, lastItemHint),
-                _ => lastItemIntellisense.CompleteValue(lastItemValue),
-            };
-
-            var newValue = allCompletedSubAnswers
-                .Select(_items.FormatAnswer)
-                .Append(addition ?? lastItemValue.Trim())
-                .JoinStrings(Splitter.DisplayValue);
-
-            return newValue != value
-                ? newValue
-                : null;
-        }
+        return newValue != value
+            ? newValue
+            : null;
     }
 }
