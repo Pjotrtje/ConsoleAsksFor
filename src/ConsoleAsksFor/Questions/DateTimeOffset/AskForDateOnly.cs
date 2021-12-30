@@ -18,49 +18,48 @@ public static partial class AskForAppender
         DateOnly? defaultValue = null,
         CancellationToken cancellationToken = default)
     {
-        var question = new DateTimeOffsetQuestion(
-            questionText,
-            DateTimeOffsetFormat.Date,
-            null,
-            range.ToDateTimeOffsetRangeConstraint().ToClusteredRange(TimeZoneInfo.Utc, DateTimeOffsetFormat.Date),
-            defaultValue.ToDateTimeOffset());
-
+        var question = GetDateOnlyQuestion(questionText, range, defaultValue);
         var result = await console.Ask(question, cancellationToken);
         return DateOnly.FromDateTime(result.Date);
     }
 
+    internal static DateTimeOffsetQuestion GetDateOnlyQuestion(string questionText, RangeConstraint<DateOnly>? range, DateOnly? defaultValue)
+        => new(
+            questionText,
+            DateTimeOffsetFormat.Date,
+            null,
+            range.ToDateTimeOffsetRangeConstraint().ToRange(TimeZoneInfo.Utc).ToClusteredRange(),
+            defaultValue?.ToDateTimeOffset());
+
     private static RangeConstraint<DateTimeOffset> ToDateTimeOffsetRangeConstraint(this RangeConstraint<DateOnly>? range)
         => new(
-            range?.Min.ToDateTimeOffset(),
-            range?.Max.ToDateTimeOffset());
+            range?.Min?.ToDateTimeOffset(),
+            range?.Max?.ToDateTimeOffset());
 
-    private static DateTimeOffset? ToDateTimeOffset(this DateOnly? date)
-        => date?.ToDateTime(new TimeOnly(00, 00, 00), DateTimeKind.Utc);
+    private static DateTimeOffset ToDateTimeOffset(this DateOnly date)
+        => date.ToDateTime(new TimeOnly(00, 00, 00), DateTimeKind.Utc);
 
-    internal static ClusteredRange<DateTimeOffset> ToClusteredRange(
+    private static Range<DateTimeOffset> ToRange(
         this RangeConstraint<DateTimeOffset> rangeConstraint,
-        TimeZoneInfo timeZone,
-        DateTimeOffsetFormat format)
+        TimeZoneInfo timeZone)
     {
-        var allowedRange = timeZone.GetAllowedRange(format.SmallestIncrementInTicks);
-
-        //Todo uitwerken
-        //3 corrects:
-        //-1 missende values invullen: niet relevant voor TimeOnlt/DateOnly
-        //-2 fixen voor tijdzone: niet relevant voor TimeOnlt/DateOnly
-
+        var allowedRange = timeZone.GetAllowedRange();
         DateTimeOffset? Corrected(DateTimeOffset? value)
             => value?.UtcDateTime < allowedRange.Min.UtcDateTime
                 ? allowedRange.Min
                 : value?.UtcDateTime > allowedRange.Max.UtcDateTime
                     ? allowedRange.Max
-                    : value?.ToTimeZone(timeZone);
+                    : value?.ToTimeZone(timeZone).WithoutMilliseconds();
 
         var min = Corrected(rangeConstraint.Min) ?? allowedRange.Min;
         var max = Corrected(rangeConstraint.Max) ?? allowedRange.Max;
 
-        var range = new Range<DateTimeOffset>(min, max);
+        return new Range<DateTimeOffset>(min, max);
+    }
 
+    private static ClusteredRange<DateTimeOffset> ToClusteredRange(
+        this Range<DateTimeOffset> range)
+    {
         return new(new[] { range });
     }
 }

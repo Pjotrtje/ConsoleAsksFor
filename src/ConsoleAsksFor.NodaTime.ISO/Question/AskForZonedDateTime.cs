@@ -65,6 +65,6 @@ public static partial class AskForAppender
 
     private static RangeConstraint<LocalDateTime> ToLocalDateTimeRangeConstraint(this RangeConstraint<ZonedDateTime>? range, DateTimeZone dateTimeZone)
         => new(
-            range?.Min?.InZone(dateTimeZone).LocalDateTime,
-            range?.Max?.InZone(dateTimeZone).LocalDateTime);
+            range?.Min?.InZone(dateTimeZone).LocalDateTime.WithoutMilliseconds(),
+            range?.Max?.InZone(dateTimeZone).LocalDateTime.WithoutMilliseconds());
 }

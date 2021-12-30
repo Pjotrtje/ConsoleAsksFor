@@ -16,19 +16,8 @@ internal sealed class DateTimeOffsetQuestionParser
     {
         _format = format;
         _timeZone = timeZone ?? TimeZoneInfo.Utc;
-        Range = TruncateMinMax(range, format);
+        Range = range;
         TimeZoneInfoDescription = timeZone?.Id ?? "Local";
-    }
-
-    private static ClusteredRange<DateTimeOffset> TruncateMinMax(ClusteredRange<DateTimeOffset> range, DateTimeOffsetFormat dateTimeOffsetFormat)
-    {
-        var fixedRanges = range.SubRanges
-            .Select(r => new Range<DateTimeOffset>(
-                r.Min.TruncateMinValue(dateTimeOffsetFormat.SmallestIncrementInTicks),
-                r.Max.TruncateMaxValue(dateTimeOffsetFormat.SmallestIncrementInTicks)))
-            .ToList();
-
-        return new(fixedRanges);
     }
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out DateTimeOffset answer)

@@ -37,5 +37,5 @@ public static partial class AskForAppender
         => range.ToLocalDateTimeClusteredRange(FullLocalTimeRange, ToLocalDateTime);
 
     private static LocalDateTime ToLocalDateTime(this LocalTime localTime)
-        => new LocalDate(2000, 1, 1).At(localTime);
+        => new LocalDate(2000, 1, 1).At(localTime).WithoutMilliseconds();
 }

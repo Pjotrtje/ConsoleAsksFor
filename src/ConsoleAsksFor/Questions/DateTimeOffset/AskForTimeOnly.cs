@@ -33,22 +33,25 @@ public static partial class AskForAppender
         TimeOnly? defaultValue = null,
         CancellationToken cancellationToken = default)
     {
-        var question = new DateTimeOffsetQuestion(
-            questionText,
-            DateTimeOffsetFormat.Time,
-            null,
-            range.ToLocalDateTimeClusteredRange(),
-            defaultValue?.ToDateTimeOffset());
+        var question = GetTimeOnlyQuestion(questionText, range, defaultValue);
 
         var result = await console.Ask(question, cancellationToken);
         return TimeOnly.FromDateTime(result.Date);
     }
 
-    private static DateTimeOffset ToDateTimeOffset(this TimeOnly time)
-        => FakeDate.ToDateTime(time, DateTimeKind.Utc);
+    private static DateTimeOffsetQuestion GetTimeOnlyQuestion(string questionText, RangeConstraint<TimeOnly>? range, TimeOnly? defaultValue)
+        => new(
+            questionText,
+            DateTimeOffsetFormat.Time,
+            null,
+            range.ToLocalDateTimeClusteredRange(FullTimeOnlyRange, ToDateTimeOffset),
+            defaultValue?.ToDateTimeOffset());
 
-    private static ClusteredRange<DateTimeOffset> ToLocalDateTimeClusteredRange(this RangeConstraint<TimeOnly>? range)
-        => range.ToLocalDateTimeClusteredRange(FullTimeOnlyRange, ToDateTimeOffset);
+    private static DateTimeOffset ToDateTimeOffset(this TimeOnly time)
+        => FakeDate
+            .ToDateTime(time, DateTimeKind.Unspecified)
+            .ToDateTimeOffset(TimeZoneInfo.Utc)
+            .WithoutMilliseconds();
 
     private static ClusteredRange<DateTimeOffset> ToLocalDateTimeClusteredRange<T>(
         this RangeConstraint<T>? rangeConstraint,

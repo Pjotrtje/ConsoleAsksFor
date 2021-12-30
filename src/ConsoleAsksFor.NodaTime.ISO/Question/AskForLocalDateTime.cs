@@ -30,10 +30,9 @@ public static partial class AskForAppender
 
     internal static ClusteredRange<LocalDateTime> ToClusteredRange(this RangeConstraint<LocalDateTime> rangeConstraint)
     {
-        // ToDo truncate?
         var range = new Range<LocalDateTime>(
-            rangeConstraint.Min ?? LocalDate.MinIsoValue.At(new LocalTime(00, 00, 00)),
-            rangeConstraint.Max ?? LocalDate.MaxIsoValue.At(new LocalTime(23, 59, 59)));
+            rangeConstraint.Min?.WithoutMilliseconds() ?? LocalDate.MinIsoValue.At(new LocalTime(00, 00, 00)),
+            rangeConstraint.Max?.WithoutMilliseconds() ?? LocalDate.MaxIsoValue.At(new LocalTime(23, 59, 59)));
 
         return new(new[] { range });
     }

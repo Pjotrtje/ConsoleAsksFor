@@ -2,16 +2,14 @@
 
 public class DateTimeOffsetQuestionIntellisenseTests
 {
-    private readonly DateTimeOffsetQuestionIntellisense _sut = new(
-        new DateTimeOffsetQuestionParser(
-            DateTimeOffsetFormat.Date,
-            TimeZoneInfo.Utc,
-            RangeConstraint
-                .Between(
-                    2.January(1999).AsUtc().ToDateTimeOffset(),
-                    4.May(4000).AsUtc().ToDateTimeOffset())
-                .ToClusteredRange(TimeZoneInfo.Utc, DateTimeOffsetFormat.Date)),
-        DateTimeOffsetFormat.Date);
+    private const string QuestionText = "Some Question";
+
+    private readonly DateTimeOffsetQuestion _sut = AskForAppender.GetDateOnlyQuestion(
+        QuestionText,
+        RangeConstraint.Between(
+            new DateOnly(1999, 01, 02),
+            new DateOnly(4000, 05, 04)),
+        null);
 
     private static readonly IntellisenseUseCases UseCases = new()
     {
@@ -66,51 +64,47 @@ public class DateTimeOffsetQuestionIntellisenseTests
     [MemberData(nameof(CompleteValueUseCases))]
     public void CompleteValue_Returns_CorrectValue(string useCase, string value, string? newValue)
     {
-        _sut.CompleteValue(value).Should().Be(newValue, useCase);
+        _sut.Intellisense.CompleteValue(value).Should().Be(newValue, useCase);
     }
 
     [Theory]
     [MemberData(nameof(PreviousValueUseCases))]
     public void PreviousValue_Returns_CorrectValue(string useCase, string value, string hint, string? newValue)
     {
-        _sut.PreviousValue(value, hint).Should().Be(newValue, useCase);
+        _sut.Intellisense.PreviousValue(value, hint).Should().Be(newValue, useCase);
     }
 
     [Theory]
     [MemberData(nameof(NextValueUseCases))]
     public void NextValue_Returns_CorrectValue(string useCase, string value, string hint, string? newValue)
     {
-        _sut.NextValue(value, hint).Should().Be(newValue, useCase);
+        _sut.Intellisense.NextValue(value, hint).Should().Be(newValue, useCase);
     }
 
     [Fact]
     public void Handles_TimeZone_When_MinValue_Is_Not_0001_01_01_00_00_00_Due_To_Offset()
     {
-        //ToDo op ander nivo testen
         var westEuropeStandardTime = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
-        var sut = new DateTimeOffsetQuestionIntellisense(
-            new DateTimeOffsetQuestionParser(
-                DateTimeOffsetFormat.DateTime,
-                westEuropeStandardTime,
-                AskForAppender.ToClusteredRange(RangeConstraint.None, westEuropeStandardTime, DateTimeOffsetFormat.DateTime)),
-            DateTimeOffsetFormat.DateTime);
+        var sut = AskForAppender.GetDateTimeQuestion(
+            QuestionText,
+            westEuropeStandardTime,
+            RangeConstraint.None,
+            null);
 
-        sut.CompleteValue("").Should().Be("0001-01-01 01:00:00");
-        sut.NextValue("", "").Should().Be("0001-01-01 01:00:00");
+        sut.Intellisense.CompleteValue("").Should().Be("0001-01-01 01:00:00");
+        sut.Intellisense.NextValue("", "").Should().Be("0001-01-01 01:00:00");
     }
 
     [Fact]
     public void Handles_TimeZone_When_MaxValue_Is_Not_9999_12_31_13_59_59_Due_To_Offset()
     {
-        //ToDo op ander nivo testen
         var hawaiianTime = TimeZoneInfo.FindSystemTimeZoneById("Hawaiian Standard Time");
-        var sut = new DateTimeOffsetQuestionIntellisense(
-            new DateTimeOffsetQuestionParser(
-                DateTimeOffsetFormat.DateTime,
-                hawaiianTime,
-                AskForAppender.ToClusteredRange(RangeConstraint.None, hawaiianTime, DateTimeOffsetFormat.DateTime)),
-            DateTimeOffsetFormat.DateTime);
+        var sut = AskForAppender.GetDateTimeQuestion(
+            QuestionText,
+            hawaiianTime,
+            RangeConstraint.None,
+            null);
 
-        sut.PreviousValue("", "").Should().Be("9999-12-31 13:59:59");
+        sut.Intellisense.PreviousValue("", "").Should().Be("9999-12-31 13:59:59");
     }
 }

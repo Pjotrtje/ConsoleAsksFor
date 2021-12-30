@@ -1,7 +1,8 @@
 ﻿namespace ConsoleAsksFor.Sdk;
 
 /// <summary>
-/// ToDo
+/// Closed range; thus <see cref="Min"/>/<see cref="Max"/> are valid values of range.
+/// Can be used for logic related to <see cref="CircularRanges"/>.
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public sealed class ClusteredRange<T>
@@ -18,12 +19,12 @@ public sealed class ClusteredRange<T>
     public T Max() => SubRanges.Last().Max;
 
     /// <summary>
-    /// ToDo
+    /// The sub ranges.
     /// </summary>
     public IReadOnlyCollection<Range<T>> SubRanges { get; }
 
     /// <summary>
-    /// ToDo
+    /// Constructs <see cref="ClusteredRange{T}"/>.
     /// </summary>
     /// <param name="subRanges"></param>
     public ClusteredRange(IReadOnlyCollection<Range<T>> subRanges)
