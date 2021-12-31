@@ -9,58 +9,50 @@ public class DateTimeOffsetQuestionTests
     [Fact]
     public void Has_Correct_Guidance_When_No_Min_Or_Max()
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateOnlyQuestion(
             QuestionText,
-            DateTimeOffsetFormat.Date,
-            WestEuropeStandardTime,
             RangeConstraint.None,
             null);
 
         question.Text.Should().Be(QuestionText);
         question.GetHints().Should().BeEquivalentTo(
-            "Range: [0001-01-02 ... 9999-12-31]",
-            "Format: 'yyyy-MM-dd' (W. Europe Standard Time)");
+            "Range: [0001-01-01 ... 9999-12-31]",
+            "Format: 'yyyy-MM-dd' (Local)");
     }
 
     [Fact]
     public void Has_Correct_Guidance_When_Min()
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateOnlyQuestion(
             QuestionText,
-            DateTimeOffsetFormat.Date,
-            WestEuropeStandardTime,
-            RangeConstraint.AtLeast(3.January(2020).ToDateTimeOffset(WestEuropeStandardTime)),
+            RangeConstraint.AtLeast(new DateOnly(2020, 01, 03)),
             null);
 
         question.Text.Should().Be(QuestionText);
         question.GetHints().Should().BeEquivalentTo(
             "Range: [2020-01-03 ... 9999-12-31]",
-            "Format: 'yyyy-MM-dd' (W. Europe Standard Time)");
+            "Format: 'yyyy-MM-dd' (Local)");
     }
 
     [Fact]
     public void Has_Correct_Guidance_When_Max()
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateOnlyQuestion(
             QuestionText,
-            DateTimeOffsetFormat.Date,
-            WestEuropeStandardTime,
-            RangeConstraint.AtMost(3.January(2020).ToDateTimeOffset(WestEuropeStandardTime)),
+            RangeConstraint.AtMost(new DateOnly(2020, 01, 03)),
             null);
 
         question.Text.Should().Be(QuestionText);
         question.GetHints().Should().BeEquivalentTo(
-            "Range: [0001-01-02 ... 2020-01-03]",
-            "Format: 'yyyy-MM-dd' (W. Europe Standard Time)");
+            "Range: [0001-01-01 ... 2020-01-03]",
+            "Format: 'yyyy-MM-dd' (Local)");
     }
 
     [Fact]
     public void When_No_Default_Value_Has_No_PrefilledValue()
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateOnlyQuestion(
             QuestionText,
-            DateTimeOffsetFormat.Date,
-            WestEuropeStandardTime,
             RangeConstraint.None,
             null);
 
@@ -70,12 +62,10 @@ public class DateTimeOffsetQuestionTests
     [Fact]
     public void When_Default_Value_Has_Correct_PrefilledValue()
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateOnlyQuestion(
             QuestionText,
-            DateTimeOffsetFormat.Date,
-            WestEuropeStandardTime,
             RangeConstraint.None,
-            3.January(2020).ToDateTimeOffset(WestEuropeStandardTime));
+            new DateOnly(2020, 01, 03));
 
         question.PrefilledValue.Should().Be("2020-01-03");
     }
@@ -83,40 +73,34 @@ public class DateTimeOffsetQuestionTests
     [Fact]
     public void Parses_When_InZone_And_Correct_Value()
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateOnlyQuestion(
             QuestionText,
-            DateTimeOffsetFormat.Date,
-            WestEuropeStandardTime,
             RangeConstraint.None,
             null);
 
         var isParsed = question.TryParse("2020-01-03", out _, out var answer);
         isParsed.Should().BeTrue();
-        answer.Should().Be(3.January(2020).WithOffset(TimeSpan.FromHours(1)));
+        answer.Should().Be(3.January(2020).WithOffset(TimeSpan.Zero));
     }
 
     [Fact]
     public void Parses_When_Correct_Value_With_Whitespace()
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateOnlyQuestion(
             QuestionText,
-            DateTimeOffsetFormat.Date,
-            WestEuropeStandardTime,
             RangeConstraint.None,
             null);
 
         var isParsed = question.TryParse(" 2020-01-03 ", out _, out var answer);
         isParsed.Should().BeTrue();
-        answer.Should().Be(3.January(2020).WithOffset(TimeSpan.FromHours(1)));
+        answer.Should().Be(3.January(2020).WithOffset(TimeSpan.Zero));
     }
 
     [Fact]
     public void Parses_When_InUtc_And_Correct_Value()
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateOnlyQuestion(
             QuestionText,
-            DateTimeOffsetFormat.Date,
-            TimeZoneInfo.Utc,
             RangeConstraint.None,
             null);
 
@@ -128,11 +112,9 @@ public class DateTimeOffsetQuestionTests
     [Fact]
     public void Does_Not_Parse_When_Smaller_Than_Min()
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateOnlyQuestion(
             QuestionText,
-            DateTimeOffsetFormat.Date,
-            WestEuropeStandardTime,
-            RangeConstraint.AtLeast(4.January(2020).ToDateTimeOffset(WestEuropeStandardTime)),
+            RangeConstraint.AtLeast(new DateOnly(2020, 01, 04)),
             null);
 
         var isParsed = question.TryParse("2020-01-03", out var errors, out _);
@@ -143,11 +125,9 @@ public class DateTimeOffsetQuestionTests
     [Fact]
     public void Does_Not_Parse_When_Greater_Than_Max()
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateOnlyQuestion(
             QuestionText,
-            DateTimeOffsetFormat.Date,
-            WestEuropeStandardTime,
-            RangeConstraint.AtMost(2.January(2020).ToDateTimeOffset(WestEuropeStandardTime)),
+            RangeConstraint.AtMost(new DateOnly(2020, 01, 02)),
             null);
 
         var isParsed = question.TryParse("2020-01-03", out var errors, out _);
@@ -166,10 +146,8 @@ public class DateTimeOffsetQuestionTests
     [InlineData("2000-01-001", "Day too long")]
     public void Does_Not_Parse_When_Incorrect_Value(string answerAsString, string useCase)
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateOnlyQuestion(
             QuestionText,
-            DateTimeOffsetFormat.Date,
-            WestEuropeStandardTime,
             RangeConstraint.None,
             null);
 
@@ -181,9 +159,8 @@ public class DateTimeOffsetQuestionTests
     [Fact]
     public void Does_Not_Parse_When_DateTime_Does_Not_Exist_In_TimeZone()
     {
-        var question = new DateTimeOffsetQuestion(
+        var question = AskForAppender.GetDateTimeQuestion(
             QuestionText,
-            DateTimeOffsetFormat.DateTime,
             WestEuropeStandardTime,
             RangeConstraint.None,
             null);

@@ -24,7 +24,7 @@ public static partial class AskForAppender
             questionText,
             LocalDateTimeFormat.DateTime,
             dateTimeZone,
-            ToLocalDateTimeRangeConstraint(range, dateTimeZone),
+            range.ToLocalDateTimeRangeConstraint(dateTimeZone).ToClusteredRange(),
             defaultValue?.InZone(dateTimeZone).LocalDateTime);
 
         var localDateTime = await console.Ask(question, cancellationToken);
@@ -63,8 +63,8 @@ public static partial class AskForAppender
             cancellationToken);
     }
 
-    private static RangeConstraint<LocalDateTime> ToLocalDateTimeRangeConstraint(RangeConstraint<ZonedDateTime>? range, DateTimeZone dateTimeZone)
+    private static RangeConstraint<LocalDateTime> ToLocalDateTimeRangeConstraint(this RangeConstraint<ZonedDateTime>? range, DateTimeZone dateTimeZone)
         => new(
-            range?.Min?.InZone(dateTimeZone).LocalDateTime,
-            range?.Max?.InZone(dateTimeZone).LocalDateTime);
+            range?.Min?.InZone(dateTimeZone).LocalDateTime.WithoutMilliseconds(),
+            range?.Max?.InZone(dateTimeZone).LocalDateTime.WithoutMilliseconds());
 }

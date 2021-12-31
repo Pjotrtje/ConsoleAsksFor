@@ -785,12 +785,77 @@
             <exception cref="T:System.ArgumentOutOfRangeException"></exception>
             <param name="digitsAfterDecimalPoint">Allowed between 0 and 20.</param>
         </member>
+        <member name="T:ConsoleAsksFor.Sdk.CircularRanges">
+            <summary>
+            Some constructs like <see cref="T:System.DateOnly"/> implement <see cref="T:System.IComparable`1"/>, but are really circular.
+            A range of [23:00 ... 01:00] is also a valid range...
+            Here we can register such constructs so when creating ranges with <see cref="T:ConsoleAsksFor.RangeConstraint"/> no exceptions are thrown.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.CircularRanges.RegisterCircularRange``1">
+            <summary>
+            Register <see cref="T:System.IComparable`1"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:ConsoleAsksFor.Sdk.ClusteredRange`1">
+            <summary>
+            Closed range; thus <see cref="M:ConsoleAsksFor.Sdk.ClusteredRange`1.Min"/>/<see cref="M:ConsoleAsksFor.Sdk.ClusteredRange`1.Max"/> are valid values of range.
+            Can be used for logic related to <see cref="T:ConsoleAsksFor.Sdk.CircularRanges"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.ClusteredRange`1.Min">
+            <summary>
+            Min value of range.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.ClusteredRange`1.Max">
+            <summary>
+            Max value of range.
+            </summary>
+        </member>
+        <member name="P:ConsoleAsksFor.Sdk.ClusteredRange`1.SubRanges">
+            <summary>
+            The sub ranges.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.ClusteredRange`1.#ctor(System.Collections.Generic.IReadOnlyCollection{ConsoleAsksFor.Sdk.Range{`0}})">
+            <summary>
+            Constructs <see cref="T:ConsoleAsksFor.Sdk.ClusteredRange`1"/>.
+            </summary>
+            <param name="subRanges"></param>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.ClusteredRange`1.Contains(`0)">
+            <summary>
+            Checks whether <paramref name="value"/> is in range.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.ClusteredRange`1.HasOverlap(ConsoleAsksFor.Sdk.Range{`0},ConsoleAsksFor.Sdk.ClusteredRange{`0}@)">
+            <summary>
+            Determine whether range has overlap with other range.
+            </summary>
+            <param name="other"></param>
+            <param name="overlap">When overlap; the range of overlap.</param>
+            <returns></returns>
+        </member>
         <member name="T:ConsoleAsksFor.Sdk.Hint">
             <summary>
             Helper class to generate consistent hints for <see cref="T:ConsoleAsksFor.Sdk.IQuestion`1"/>.
             </summary>
         </member>
         <member name="M:ConsoleAsksFor.Sdk.Hint.ForRange``1(ConsoleAsksFor.Sdk.Range{``0},System.Func{``0,System.String})">
+            <summary>
+            Creates range hint.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="range"></param>
+            <param name="formatter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.Hint.ForRange``1(ConsoleAsksFor.Sdk.ClusteredRange{``0},System.Func{``0,System.String})">
             <summary>
             Creates range hint.
             </summary>
@@ -975,7 +1040,7 @@
         </member>
         <member name="T:ConsoleAsksFor.Sdk.Range`1">
             <summary>
-            Closed range; thus <see cref="P:ConsoleAsksFor.Sdk.Range`1.Min"/>/<see cref="P:ConsoleAsksFor.Sdk.Range`1.Max"/> are valid values of range
+            Closed range; thus <see cref="P:ConsoleAsksFor.Sdk.Range`1.Min"/>/<see cref="P:ConsoleAsksFor.Sdk.Range`1.Max"/> are valid values of range.
             </summary>
             <typeparam name="T"></typeparam>
         </member>

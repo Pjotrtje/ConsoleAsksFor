@@ -7,23 +7,27 @@ internal sealed class LocalDateTimeQuestionParser
 
     public string DateTimeZoneDescription => _dateTimeZone?.Id ?? "Local";
 
-    public Range<LocalDateTime> Range { get; }
+    public ClusteredRange<LocalDateTime> Range { get; }
 
     public LocalDateTimeQuestionParser(
         LocalDateTimeFormat format,
         DateTimeZone? dateTimeZone,
-        RangeConstraint<LocalDateTime> range)
+        ClusteredRange<LocalDateTime> range)
     {
         _format = format;
         _dateTimeZone = dateTimeZone;
-        Range = new(
-            range.Min ?? LocalDate.MinIsoValue.At(new LocalTime(00, 00, 00)),
-            range.Max ?? LocalDate.MaxIsoValue.At(new LocalTime(23, 59, 59)));
+        Range = range;
     }
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out LocalDateTime answer)
     {
-        return TryParseExact(answerAsString, out errors, out answer) && Range.Contains(answer);
+        if (!TryParseExact(answerAsString, out errors, out answer))
+        {
+            return false;
+        }
+
+        var x = answer;
+        return Range.SubRanges.Any(r => r.Contains(x));
     }
 
     public bool TryParseExact(string answerAsString, out IEnumerable<string> errors, out LocalDateTime answer)

@@ -30,7 +30,7 @@ internal sealed class LocalDateTimeQuestionIntellisense : IIntellisense
             return TryCompleteValue(trimmedHint, direction);
         }
 
-        var overlap = GetRangeOverlappingWithIntellisense(trimmedHint);
+        var overlap = GetRangesOverlappingWithIntellisense(trimmedHint);
         if (overlap is null)
         {
             return null;
@@ -42,18 +42,18 @@ internal sealed class LocalDateTimeQuestionIntellisense : IIntellisense
 
     private string? TryCompleteValue(string value, IntellisenseDirection direction)
     {
-        var overlap = GetRangeOverlappingWithIntellisense(value);
+        var overlap = GetRangesOverlappingWithIntellisense(value);
         if (overlap is null)
         {
             return null;
         }
 
         return direction == IntellisenseDirection.Previous
-            ? _format.FormatAnswer(overlap.Max)
-            : _format.FormatAnswer(overlap.Min);
+            ? _format.FormatAnswer(overlap.Max())
+            : _format.FormatAnswer(overlap.Min());
     }
 
-    private Range<LocalDateTime>? GetRangeOverlappingWithIntellisense(string value)
+    private ClusteredRange<LocalDateTime>? GetRangesOverlappingWithIntellisense(string value)
     {
         var minValue = _format.IntellisenseMinPatterns
             .Select(p => TryCompleteByTemplate(value, p))
@@ -63,11 +63,14 @@ internal sealed class LocalDateTimeQuestionIntellisense : IIntellisense
             .Select(p => TryCompleteByTemplate(value, p))
             .Max(d => d);
 
-        var intellisenseRange = minValue.HasValue && maxValue.HasValue
-            ? new Range<LocalDateTime>(minValue.Value, maxValue.Value)
-            : null;
+        if (!minValue.HasValue || !maxValue.HasValue)
+        {
+            return null;
+        }
 
-        return intellisenseRange is not null && intellisenseRange.HasOverlap(_parser.Range, out var overlap)
+        var intellisenseRange = new Range<LocalDateTime>(minValue.Value, maxValue.Value);
+
+        return _parser.Range.HasOverlap(intellisenseRange, out var overlap)
             ? overlap
             : null;
     }
@@ -85,25 +88,38 @@ internal sealed class LocalDateTimeQuestionIntellisense : IIntellisense
             : null;
     }
 
-    private LocalDateTime SafeMove(LocalDateTime answer, Range<LocalDateTime> overlap, IntellisenseDirection direction)
+    private LocalDateTime SafeMove(LocalDateTime answer, ClusteredRange<LocalDateTime> overlap, IntellisenseDirection direction)
     {
         try
         {
             var delta = GetDelta(direction);
             var newAnswer = answer.Plus(delta);
-            return newAnswer switch
+            if (overlap.Contains(newAnswer))
             {
-                _ when newAnswer < overlap.Min && overlap.Contains(answer) => overlap.Max,
-                _ when newAnswer > overlap.Max && overlap.Contains(answer) => overlap.Min,
-                _ => newAnswer,
-            };
+                return newAnswer;
+            }
+
+            if (overlap.SubRanges.First().Contains(answer))
+            {
+                return direction == IntellisenseDirection.Previous
+                    ? overlap.SubRanges.Last().Max
+                    : overlap.SubRanges.Last().Min;
+            }
+
+            if (overlap.SubRanges.Last().Contains(answer))
+            {
+                return direction == IntellisenseDirection.Previous
+                    ? overlap.SubRanges.First().Max
+                    : overlap.SubRanges.First().Min;
+            }
         }
         catch (OverflowException)
         {
-            return direction == IntellisenseDirection.Previous
-                ? overlap.Max
-                : overlap.Min;
         }
+
+        return direction == IntellisenseDirection.Previous
+            ? overlap.Max()
+            : overlap.Min();
     }
 
     private Period GetDelta(IntellisenseDirection direction)

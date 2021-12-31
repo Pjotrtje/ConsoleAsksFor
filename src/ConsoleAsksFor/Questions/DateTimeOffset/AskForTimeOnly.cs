@@ -2,6 +2,10 @@
 
 public static partial class AskForAppender
 {
+    private static readonly Range<TimeOnly> FullTimeOnlyRange = new(
+        new TimeOnly(00, 00, 00),
+        new TimeOnly(23, 59, 59));
+
     private static readonly DateOnly FakeDate = GetFakeDate();
 
     private static DateOnly GetFakeDate()
@@ -29,24 +33,54 @@ public static partial class AskForAppender
         TimeOnly? defaultValue = null,
         CancellationToken cancellationToken = default)
     {
-        var question = new DateTimeOffsetQuestion(
-            questionText,
-            DateTimeOffsetFormat.Time,
-            null,
-            range.ToDateTimeOffsetRangeConstraint(),
-            defaultValue.ToDateTimeOffset());
+        var question = GetTimeOnlyQuestion(questionText, range, defaultValue);
 
         var result = await console.Ask(question, cancellationToken);
         return TimeOnly.FromDateTime(result.Date);
     }
 
-    private static RangeConstraint<DateTimeOffset> ToDateTimeOffsetRangeConstraint(this RangeConstraint<TimeOnly>? range)
+    private static DateTimeOffsetQuestion GetTimeOnlyQuestion(string questionText, RangeConstraint<TimeOnly>? range, TimeOnly? defaultValue)
         => new(
-            range?.Min.ToDateTimeOffset(),
-            range?.Max.ToDateTimeOffset());
+            questionText,
+            DateTimeOffsetFormat.Time,
+            null,
+            range.ToLocalDateTimeClusteredRange(FullTimeOnlyRange, ToDateTimeOffset),
+            defaultValue?.ToDateTimeOffset());
 
-    private static DateTimeOffset? ToDateTimeOffset(this TimeOnly? time)
-        => time is null
-            ? null
-            : FakeDate.ToDateTime(time.Value, DateTimeKind.Utc);
+    private static DateTimeOffset ToDateTimeOffset(this TimeOnly time)
+        => FakeDate
+            .ToDateTime(time, DateTimeKind.Unspecified)
+            .ToDateTimeOffset(TimeZoneInfo.Utc)
+            .WithoutMilliseconds();
+
+    private static ClusteredRange<DateTimeOffset> ToLocalDateTimeClusteredRange<T>(
+        this RangeConstraint<T>? rangeConstraint,
+        Range<T> fullRange,
+        Func<T, DateTimeOffset> converter)
+        where T : struct, IComparable<T>
+    {
+        var isCircular = rangeConstraint is not null &&
+                         rangeConstraint.Min.HasValue &&
+                         rangeConstraint.Max.HasValue &&
+                         rangeConstraint.Min.Value.CompareTo(rangeConstraint.Max.Value) > 0;
+
+        if (isCircular)
+        {
+            var range1 = new Range<DateTimeOffset>(
+                converter(rangeConstraint!.Min!.Value),
+                converter(fullRange.Max));
+
+            var range2 = new Range<DateTimeOffset>(
+                converter(fullRange.Min),
+                converter(rangeConstraint.Max!.Value));
+
+            return new(new[] { range1, range2 });
+        }
+
+        var range = new Range<DateTimeOffset>(
+            converter(rangeConstraint?.Min ?? fullRange.Min),
+            converter(rangeConstraint?.Max ?? fullRange.Max));
+
+        return new(new[] { range });
+    }
 }

@@ -116,6 +116,11 @@ public sealed class RangeConstraint<T>
             return;
         }
 
+        if (CircularRanges.IsCircular<T>())
+        {
+            return;
+        }
+
         if (min.Value is IComparable<T> comparable)
         {
             if (comparable.CompareTo(max.Value) > 0)

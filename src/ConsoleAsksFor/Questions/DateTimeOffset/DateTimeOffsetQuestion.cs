@@ -22,7 +22,7 @@ internal sealed class DateTimeOffsetQuestion : IQuestion<DateTimeOffset>
         string text,
         DateTimeOffsetFormat format,
         TimeZoneInfo? timeZone,
-        RangeConstraint<DateTimeOffset> range,
+        ClusteredRange<DateTimeOffset> range,
         DateTimeOffset? defaultValue)
     {
         Text = text;

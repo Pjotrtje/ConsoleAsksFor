@@ -7,37 +7,17 @@ internal sealed class DateTimeOffsetQuestionParser
 
     public string TimeZoneInfoDescription { get; }
 
-    public Range<DateTimeOffset> Range { get; }
+    public ClusteredRange<DateTimeOffset> Range { get; }
 
     public DateTimeOffsetQuestionParser(
         DateTimeOffsetFormat format,
         TimeZoneInfo? timeZone,
-        RangeConstraint<DateTimeOffset> range)
+        ClusteredRange<DateTimeOffset> range)
     {
         _format = format;
         _timeZone = timeZone ?? TimeZoneInfo.Utc;
-        Range = GetInputRange(range, _timeZone, format);
+        Range = range;
         TimeZoneInfoDescription = timeZone?.Id ?? "Local";
-    }
-
-    private static Range<DateTimeOffset> GetInputRange(
-        RangeConstraint<DateTimeOffset> range,
-        TimeZoneInfo timeZone,
-        DateTimeOffsetFormat format)
-    {
-        var allowedRange = timeZone.GetAllowedRange(format.SmallestIncrementInTicks);
-
-        DateTimeOffset? Corrected(DateTimeOffset? value)
-            => value?.UtcDateTime < allowedRange.Min.UtcDateTime
-                ? allowedRange.Min
-                : value?.UtcDateTime > allowedRange.Max.UtcDateTime
-                    ? allowedRange.Max
-                    : value?.ToTimeZone(timeZone).TruncateMinValue(format.SmallestIncrementInTicks);
-
-        var min = Corrected(range.Min) ?? allowedRange.Min;
-        var max = Corrected(range.Max) ?? allowedRange.Max;
-
-        return new(min, max);
     }
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out DateTimeOffset answer)

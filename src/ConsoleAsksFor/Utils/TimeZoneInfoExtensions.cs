@@ -2,10 +2,10 @@
 
 internal static class TimeZoneInfoExtensions
 {
-    public static Range<DateTimeOffset> GetAllowedRange(this TimeZoneInfo timeZone, long resolution)
+    public static Range<DateTimeOffset> GetAllowedRange(this TimeZoneInfo timeZone)
     {
-        var min = timeZone.GetMinDateTimeOffsetForTimeZone().TruncateMinValue(resolution);
-        var max = timeZone.GetMaxDateTimeOffsetForTimeZone().TruncateMaxValue(resolution);
+        var min = timeZone.GetMinDateTimeOffsetForTimeZone();
+        var max = timeZone.GetMaxDateTimeOffsetForTimeZone();
 
         return new(min, max);
     }

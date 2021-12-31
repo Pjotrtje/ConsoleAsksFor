@@ -1,7 +1,7 @@
 ﻿namespace ConsoleAsksFor.Sdk;
 
 /// <summary>
-/// Closed range; thus <see cref="Min"/>/<see cref="Max"/> are valid values of range
+/// Closed range; thus <see cref="Min"/>/<see cref="Max"/> are valid values of range.
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public sealed record Range<T>

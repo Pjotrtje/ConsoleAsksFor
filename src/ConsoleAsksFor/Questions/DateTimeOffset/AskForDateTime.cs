@@ -24,15 +24,32 @@ public static partial class AskForAppender
             ? TimeZoneInfo.Utc
             : TimeZoneInfo.Local;
 
-        var question = new DateTimeOffsetQuestion(
+        var question = GetDateTimeQuestion(
             questionText,
-            DateTimeOffsetFormat.DateTime,
             timeZoneInfo,
-            range.ToDateTimeOffsetRangeConstraint(kind),
-            defaultValue?.ToKind(kind));
+            range,
+            defaultValue);
 
         var result = await console.Ask(question, cancellationToken);
         return DateTime.SpecifyKind(result.DateTime, kind);
+    }
+
+    internal static DateTimeOffsetQuestion GetDateTimeQuestion(
+        string questionText,
+        TimeZoneInfo timeZoneInfo,
+        RangeConstraint<DateTime>? range,
+        DateTime? defaultValue)
+    {
+        var kind = timeZoneInfo.Id == TimeZoneInfo.Utc.Id
+            ? DateTimeKind.Utc
+            : DateTimeKind.Local;
+
+        return new(
+            questionText,
+            DateTimeOffsetFormat.DateTime,
+            timeZoneInfo,
+            range.ToDateTimeOffsetRangeConstraint(kind).ToRange(timeZoneInfo).ToClusteredRange(),
+            defaultValue?.ToKind(kind));
     }
 
     private static RangeConstraint<DateTimeOffset> ToDateTimeOffsetRangeConstraint(this RangeConstraint<DateTime>? range, DateTimeKind kind)

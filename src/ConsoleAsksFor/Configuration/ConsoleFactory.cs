@@ -119,7 +119,7 @@ public static class ConsoleFactory
         => Assembly
             .GetEntryAssembly()?
             .GetReferencedAssemblies()
-            .Where(x => x.FullName.StartsWith("ConsoleAsksFor.", StringComparison.InvariantCultureIgnoreCase))
+            .Where(x => x.FullName.StartsWith("ConsoleAsksFor", StringComparison.InvariantCultureIgnoreCase))
             .Select(Assembly.Load)
             .SelectMany(a => a.DefinedTypes)
             .Where(t => t.GetInterfaces().Any(i => i == typeof(IOnStartupHook)))

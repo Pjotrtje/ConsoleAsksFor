@@ -6,6 +6,11 @@ public class LocalDateTimeQuestionTests
 
     private const string QuestionText = "Some Question";
 
+    private static readonly LocalDateTime? NoDefaultValue = null!;
+
+    private static ClusteredRange<LocalDateTime> NoRange
+        => AskForAppender.ToClusteredRange(RangeConstraint.None);
+
     [Fact]
     public void Has_Correct_Guidance_When_No_Min_Or_Max()
     {
@@ -13,8 +18,8 @@ public class LocalDateTimeQuestionTests
             QuestionText,
             LocalDateTimeFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.None,
-            null);
+            NoRange,
+            NoDefaultValue);
 
         question.Text.Should().Be(QuestionText);
         question.GetHints().Should().BeEquivalentTo(
@@ -29,8 +34,10 @@ public class LocalDateTimeQuestionTests
             QuestionText,
             LocalDateTimeFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.AtLeast(new LocalDateTime(2020, 01, 03, 00, 00)),
-            null);
+            RangeConstraint
+                .AtLeast(new LocalDateTime(2020, 01, 03, 00, 00))
+                .ToClusteredRange(),
+            NoDefaultValue);
 
         question.Text.Should().Be(QuestionText);
         question.GetHints().Should().BeEquivalentTo(
@@ -45,8 +52,10 @@ public class LocalDateTimeQuestionTests
             QuestionText,
             LocalDateTimeFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.AtMost(new LocalDateTime(2020, 01, 03, 00, 00)),
-            null);
+            RangeConstraint
+                .AtMost(new LocalDateTime(2020, 01, 03, 00, 00))
+                .ToClusteredRange(),
+            NoDefaultValue);
 
         question.Text.Should().Be(QuestionText);
         question.GetHints().Should().BeEquivalentTo(
@@ -61,8 +70,8 @@ public class LocalDateTimeQuestionTests
             QuestionText,
             LocalDateTimeFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.None,
-            null);
+            NoRange,
+            NoDefaultValue);
 
         question.PrefilledValue.Should().BeEmpty();
     }
@@ -74,7 +83,7 @@ public class LocalDateTimeQuestionTests
             QuestionText,
             LocalDateTimeFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.None,
+            NoRange,
             new LocalDateTime(2020, 01, 03, 00, 00));
 
         question.PrefilledValue.Should().Be("2020-01-03");
@@ -89,8 +98,8 @@ public class LocalDateTimeQuestionTests
             QuestionText,
             LocalDateTimeFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.None,
-            null);
+            NoRange,
+            NoDefaultValue);
 
         var isParsed = question.TryParse(answerAsString, out _, out var answer);
         isParsed.Should().BeTrue(useCase);
@@ -105,8 +114,10 @@ public class LocalDateTimeQuestionTests
             QuestionText,
             LocalDateTimeFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.AtLeast(new LocalDateTime(2020, 01, 04, 00, 00)),
-            null);
+            RangeConstraint
+                .AtLeast(new LocalDateTime(2020, 01, 04, 00, 00))
+                .ToClusteredRange(),
+            NoDefaultValue);
 
         var isParsed = question.TryParse("2020-01-03", out var errors, out _);
         isParsed.Should().BeFalse();
@@ -120,8 +131,10 @@ public class LocalDateTimeQuestionTests
             QuestionText,
             LocalDateTimeFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.AtMost(new LocalDateTime(2020, 01, 02, 00, 00)),
-            null);
+            RangeConstraint
+                .AtMost(new LocalDateTime(2020, 01, 02, 00, 00))
+                .ToClusteredRange(),
+            NoDefaultValue);
 
         var isParsed = question.TryParse("2020-01-03", out var errors, out _);
         isParsed.Should().BeFalse();
@@ -143,8 +156,8 @@ public class LocalDateTimeQuestionTests
             QuestionText,
             LocalDateTimeFormat.Date,
             WestEuropeStandardTime,
-            RangeConstraint.None,
-            null);
+            NoRange,
+            NoDefaultValue);
 
         var isParsed = question.TryParse(answerAsString, out var errors, out _);
         isParsed.Should().BeFalse(useCase);
@@ -158,8 +171,8 @@ public class LocalDateTimeQuestionTests
             QuestionText,
             LocalDateTimeFormat.DateTime,
             WestEuropeStandardTime,
-            RangeConstraint.None,
-            null);
+            NoRange,
+            NoDefaultValue);
 
         var isParsed = question.TryParse("2021-03-28 02:30:00", out var errors, out _);
         isParsed.Should().BeFalse();
