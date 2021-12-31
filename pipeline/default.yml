@@ -31,6 +31,10 @@ stages:
               Else 
               { "$(version)" }
 
+            Write-Host "env:Build_SourceBranch = $env:Build_SourceBranch"
+            Write-Host "isPreRelease = $isPreRelease"
+            Write-Host "versionWithPostfix = $versionWithPostfix"
+
             Write-Host "##vso[task.setvariable variable=isPreRelease;]$isPreRelease"
             Write-Host "##vso[task.setvariable variable=isPreRelease;isOutput=true;]$isPreRelease"
             Write-Host "##vso[task.setvariable variable=versionWithPostfix;]$versionWithPostfix"
@@ -42,10 +46,13 @@ stages:
         targetType: 'inline'
         workingDirectory: '$(System.DefaultWorkingDirectory)'
         script: |
+            Write-Host "versionWithPostfix = $versionWithPostfix"
+            Write-Host "(versionWithPostfix) = $(versionWithPostfix)"
+
             function Update-Version ([string] $fullName) 
             {
                 $originalContent = Get-Content $fullName
-                $newContent = $originalContent.Replace("</Version>", $versionWithPostfix + "</Version>");
+                $newContent = $originalContent.Replace("</Version>", $(versionWithPostfix) + "</Version>");
                 Set-Content -Path $fullName -Value $newContent
             }
         
