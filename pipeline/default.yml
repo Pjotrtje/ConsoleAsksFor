@@ -76,7 +76,9 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy NuGet to Publish folder'
   inputs:
-    Contents: '**/*.nupkg'
+    Contents: |
+        **/*.nupkg
+        **/*.snupkg
     TargetFolder: '$(Agent.TempDirectory)/NuGet'
     flattenFolders: true
     

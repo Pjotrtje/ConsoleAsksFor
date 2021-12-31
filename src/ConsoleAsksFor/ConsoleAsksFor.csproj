@@ -17,9 +17,9 @@
     <DocumentationFile>$(MSBuildProjectName).xml</DocumentationFile>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <!--<IncludeSymbols>true</IncludeSymbols>
+    <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources> ToDo Enable this when net6 is available https://github.com/NuGet/Home/issues/10791 -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources> 
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
