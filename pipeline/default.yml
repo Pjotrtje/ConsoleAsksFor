@@ -12,13 +12,7 @@ stages:
 - stage: Build
   jobs:
   - job: Build
-    steps: 
-    - task: UseDotNet@2
-      displayName: 'Use .NET Core sdk'
-      inputs:
-        packageType: 'sdk'
-        version: '6.0.x'
-    
+    steps:    
     - task: PowerShell@2
       displayName: 'Set VersionWithPostfix'
       name: SetVersionWithPostfix
@@ -46,17 +40,22 @@ stages:
         targetType: 'inline'
         workingDirectory: '$(System.DefaultWorkingDirectory)'
         script: |
-            Write-Host "versionWithPostfix = $versionWithPostfix"
-            Write-Host "(versionWithPostfix) = $(versionWithPostfix)"
-
             function Update-Version ([string] $fullName) 
             {
+                Write-Host "$fullName => $(versionWithPostfix)"
+
                 $originalContent = Get-Content $fullName
-                $newContent = $originalContent.Replace("</Version>", $(versionWithPostfix) + "</Version>");
+                $newContent = $originalContent.Replace("</Version>", "$(versionWithPostfix)</Version>");
                 Set-Content -Path $fullName -Value $newContent
             }
         
             Get-ChildItem -Path src\*.csproj -Recurse | Foreach-Object { Update-Version $_.FullName }
+
+    - task: UseDotNet@2
+      displayName: 'Use .NET Core sdk'
+      inputs:
+        packageType: 'sdk'
+        version: '6.0.x'
 
     - task: DotNetCoreCLI@2
       displayName: 'Restore NuGet'
