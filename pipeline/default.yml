@@ -135,10 +135,6 @@ stages:
               changeLogType: 'issueBased'
               isPreRelease: $(isPreRelease)
 
-          - task: NuGetAuthenticate@0
-            inputs:
-              nuGetServiceConnections: 'NuGet.org'
-
           - task: NuGetCommand@2
             inputs:
               command: 'push'
