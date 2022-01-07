@@ -1,7 +1,7 @@
 ﻿namespace ConsoleAsksFor.Sdk;
 
 /// <summary>
-/// Some constructs like <see cref="DateOnly"/> implement <see cref="IComparable{T}"/>, but are really circular.
+/// Some constructs like DateOnly implement <see cref="IComparable{T}"/>, but are really circular.
 /// A range of [23:00 ... 01:00] is also a valid range...
 /// Here we can register such constructs so when creating ranges with <see cref="RangeConstraint"/> no exceptions are thrown.
 /// </summary>

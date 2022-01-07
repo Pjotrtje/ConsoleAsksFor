@@ -23,6 +23,8 @@ internal sealed class WipApp : IApp
 
         await _console.AskForLocalTime("How late?", Between(new LocalTime(11, 01, 00, 01), new LocalTime(11, 02, 00, 02)));
 
+#if NET6_0_OR_GREATER
         await _console.AskForTimeOnly("When?", Between(new TimeOnly(11, 01, 00, 01), new TimeOnly(11, 01, 00, 02)));
+#endif
     }
 }

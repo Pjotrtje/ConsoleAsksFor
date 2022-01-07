@@ -1,4 +1,6 @@
-﻿namespace ConsoleAsksFor.Tests;
+﻿#if NET6_0_OR_GREATER
+
+namespace ConsoleAsksFor.Tests;
 
 public class AskForDateOnlyTests
 {
@@ -31,3 +33,5 @@ public class AskForDateOnlyTests
             new(LineTypeId.Answer, "2021-09-20"));
     }
 }
+
+#endif

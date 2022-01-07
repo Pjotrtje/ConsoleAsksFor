@@ -787,7 +787,7 @@
         </member>
         <member name="T:ConsoleAsksFor.Sdk.CircularRanges">
             <summary>
-            Some constructs like <see cref="T:System.DateOnly"/> implement <see cref="T:System.IComparable`1"/>, but are really circular.
+            Some constructs like DateOnly implement <see cref="T:System.IComparable`1"/>, but are really circular.
             A range of [23:00 ... 01:00] is also a valid range...
             Here we can register such constructs so when creating ranges with <see cref="T:ConsoleAsksFor.RangeConstraint"/> no exceptions are thrown.
             </summary>

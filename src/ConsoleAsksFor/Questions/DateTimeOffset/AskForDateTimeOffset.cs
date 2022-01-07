@@ -29,4 +29,28 @@ public static partial class AskForAppender
 
         return await console.Ask(question, cancellationToken);
     }
+
+    private static Range<DateTimeOffset> ToRange(
+        this RangeConstraint<DateTimeOffset> rangeConstraint,
+        TimeZoneInfo timeZone)
+    {
+        var allowedRange = timeZone.GetAllowedRange();
+        DateTimeOffset? Corrected(DateTimeOffset? value)
+            => value?.UtcDateTime < allowedRange.Min.UtcDateTime
+                ? allowedRange.Min
+                : value?.UtcDateTime > allowedRange.Max.UtcDateTime
+                    ? allowedRange.Max
+                    : value?.ToTimeZone(timeZone).WithoutMilliseconds();
+
+        var min = Corrected(rangeConstraint.Min) ?? allowedRange.Min;
+        var max = Corrected(rangeConstraint.Max) ?? allowedRange.Max;
+
+        return new Range<DateTimeOffset>(min, max);
+    }
+
+    private static ClusteredRange<DateTimeOffset> ToClusteredRange(
+        this Range<DateTimeOffset> range)
+    {
+        return new(new[] { range });
+    }
 }

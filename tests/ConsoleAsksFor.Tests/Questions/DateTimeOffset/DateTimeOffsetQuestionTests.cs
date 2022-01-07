@@ -1,4 +1,6 @@
-﻿namespace ConsoleAsksFor.Tests;
+﻿#if NET6_0_OR_GREATER
+
+namespace ConsoleAsksFor.Tests;
 
 public class DateTimeOffsetQuestionTests
 {
@@ -170,3 +172,5 @@ public class DateTimeOffsetQuestionTests
         errors.Should().BeEmpty();
     }
 }
+
+#endif

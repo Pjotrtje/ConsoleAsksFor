@@ -1,4 +1,6 @@
-﻿namespace ConsoleAsksFor;
+﻿#if NET6_0_OR_GREATER
+
+namespace ConsoleAsksFor;
 
 public static partial class AskForAppender
 {
@@ -84,3 +86,5 @@ public static partial class AskForAppender
         return new(new[] { range });
     }
 }
+
+#endif

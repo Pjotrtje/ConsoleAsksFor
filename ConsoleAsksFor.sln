@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31112.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAsksFor", "src\ConsoleAsksFor\ConsoleAsksFor.csproj", "{76AB9158-8CF3-4FC5-8147-17F06FBDCD7C}"
 EndProject
@@ -28,7 +28,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAsksFor.TestUtils", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{6AF2BF83-AB9E-417E-BEED-7F926816E555}"
 	ProjectSection(SolutionItems) = preProject
-		docs\ConsoleAsksFor.releases.md = docs\ConsoleAsksFor.releases.md
 		docs\demo.gif = docs\demo.gif
 		docs\icon-128x128.png = docs\icon-128x128.png
 		docs\icon-512x512.png = docs\icon-512x512.png
@@ -41,7 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipeline", "pipeline", "{FF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAsksFor.NodaTime.ISO.Tests", "tests\ConsoleAsksFor.NodaTime.ISO.Tests\ConsoleAsksFor.NodaTime.ISO.Tests.csproj", "{EFDC3FC4-2D6F-4571-8C80-E290DC7CA4D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAsksFor.Microsoft.DependencyInjection", "src\ConsoleAsksFor.Microsoft.DependencyInjection\ConsoleAsksFor.Microsoft.DependencyInjection.csproj", "{274C2F77-5ED9-484E-BA32-4258D1757E6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAsksFor.Microsoft.DependencyInjection", "src\ConsoleAsksFor.Microsoft.DependencyInjection\ConsoleAsksFor.Microsoft.DependencyInjection.csproj", "{274C2F77-5ED9-484E-BA32-4258D1757E6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

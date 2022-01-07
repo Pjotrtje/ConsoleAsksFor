@@ -1,4 +1,6 @@
-﻿namespace ConsoleAsksFor.Tests;
+﻿#if NET6_0_OR_GREATER
+
+namespace ConsoleAsksFor.Tests;
 
 public class DateTimeOffsetQuestionIntellisenseTests
 {
@@ -108,3 +110,5 @@ public class DateTimeOffsetQuestionIntellisenseTests
         sut.Intellisense.PreviousValue("", "").Should().Be("9999-12-31 13:59:59");
     }
 }
+
+#endif
