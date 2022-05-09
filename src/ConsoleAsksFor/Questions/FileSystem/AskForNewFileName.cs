@@ -19,6 +19,7 @@ public static partial class AskForAppender
         var question = new FileNameQuestion(
             questionText,
             FileSystemExistence.New,
+            "",
             defaultValue);
 
         return await console.Ask(question, cancellationToken);

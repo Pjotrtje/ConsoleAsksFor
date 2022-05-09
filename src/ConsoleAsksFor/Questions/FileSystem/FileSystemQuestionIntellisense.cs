@@ -2,6 +2,15 @@
 
 internal sealed class FileSystemQuestionIntellisense : IIntellisense
 {
+    private readonly bool _includeFiles;
+    private readonly string _extension;
+
+    public FileSystemQuestionIntellisense(bool includeFiles, string extension)
+    {
+        _includeFiles = includeFiles;
+        _extension = extension;
+    }
+
     public string? CompleteValue(string value)
         => Handle(value, value, IntellisenseDirection.None);
 
@@ -11,21 +20,32 @@ internal sealed class FileSystemQuestionIntellisense : IIntellisense
     public string? NextValue(string value, string hint)
         => Handle(value, hint, IntellisenseDirection.Next);
 
-    private static string? Handle(string value, string hint, IntellisenseDirection direction)
+    private string? Handle(string value, string hint, IntellisenseDirection direction)
     {
-        var directory = DriveExists(hint)
-            ? hint
-            : Path.GetDirectoryName(hint) ?? string.Empty;
+        var fixedHint = hint == ""
+            ? !value.EndsWith("\\", StringComparison.InvariantCultureIgnoreCase) && value.Contains('\\', StringComparison.InvariantCultureIgnoreCase)
+                ? Path.GetDirectoryName(value) + "\\"
+                : value
+            : hint;
+
+        var directory = DriveExists(fixedHint)
+            ? fixedHint
+            : Path.GetDirectoryName(fixedHint) ?? string.Empty;
 
         if (!Directory.Exists(directory) && !DriveExists(directory))
         {
             return null;
         }
 
-        var subItems = Directory
-            .GetFileSystemEntries(directory)
+        var files = _includeFiles
+            ? Directory.GetFiles(directory).Where(f => f.EndsWith(_extension, StringComparison.InvariantCultureIgnoreCase))
+            : Enumerable.Empty<string>();
+
+        var directories = Directory.GetDirectories(directory);
+
+        var subItems = files.Concat(directories)
             .OrderBy(x => x)
-            .Where(e => e.StartsWith(hint, true, CultureInfo.InvariantCulture))
+            .Where(e => e.StartsWith(fixedHint, true, CultureInfo.InvariantCulture))
             .ToList();
 
         if (!subItems.Any())

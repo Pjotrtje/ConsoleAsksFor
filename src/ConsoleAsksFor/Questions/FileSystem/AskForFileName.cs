@@ -7,12 +7,14 @@ public static partial class AskForAppender
     /// </summary>
     /// <param name="console"></param>
     /// <param name="questionText"></param>
+    /// <param name="extension"></param>
     /// <param name="defaultValue"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public static async Task<FileInfo> AskForFileName(
         this IConsole console,
         string questionText,
+        string? extension = null,
         FileInfo? defaultValue = null,
         CancellationToken cancellationToken = default)
     {
@@ -20,6 +22,7 @@ public static partial class AskForAppender
         var question = new FileNameQuestion(
             questionText,
             fileSystemExistence,
+            extension ?? "",
             defaultValue);
 
         return await console.Ask(question, cancellationToken);

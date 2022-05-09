@@ -461,22 +461,24 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:ConsoleAsksFor.AskForAppender.AskForExistingFileName(ConsoleAsksFor.IConsole,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForExistingFileName(ConsoleAsksFor.IConsole,System.String,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
             <summary>
             Ask for existing <see cref="T:System.IO.FileInfo"/>.
             </summary>
             <param name="console"></param>
             <param name="questionText"></param>
+            <param name="extension"></param>
             <param name="defaultValue"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:ConsoleAsksFor.AskForAppender.AskForFileName(ConsoleAsksFor.IConsole,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForFileName(ConsoleAsksFor.IConsole,System.String,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
             <summary>
             Ask for <see cref="T:System.IO.FileInfo"/>.
             </summary>
             <param name="console"></param>
             <param name="questionText"></param>
+            <param name="extension"></param>
             <param name="defaultValue"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -767,7 +769,7 @@
         </member>
         <member name="M:ConsoleAsksFor.AskForAppender.AskForStringBasedValueObject``1(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.TryParse{``0},System.Func{``0,System.String},System.String,System.String,System.Threading.CancellationToken)">
             <summary>
-            Ask for <see cref="T:System.String"/>.
+            Ask for string based value object.
             </summary>
             <param name="console"></param>
             <param name="questionText"></param>
@@ -815,7 +817,7 @@
         </member>
         <member name="T:ConsoleAsksFor.TryParse`1">
             <summary>
-            ToDo
+            Parse string to TValueType
             </summary>
             <typeparam name="TValueType"></typeparam>
         </member>

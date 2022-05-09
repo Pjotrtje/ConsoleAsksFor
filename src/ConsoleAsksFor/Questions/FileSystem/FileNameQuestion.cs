@@ -6,7 +6,7 @@ internal sealed class FileNameQuestion : IQuestion<FileInfo>
 
     public bool MustObfuscateAnswer => false;
 
-    public IIntellisense Intellisense { get; } = new FileSystemQuestionIntellisense();
+    public IIntellisense Intellisense { get; }
 
     public string Text { get; }
 
@@ -18,11 +18,13 @@ internal sealed class FileNameQuestion : IQuestion<FileInfo>
     public FileNameQuestion(
         string text,
         FileSystemExistence fileSystemExistence,
+        string extension,
         FileInfo? defaultValue)
     {
         Text = text;
         _fileSystemExistence = fileSystemExistence;
         _defaultValue = defaultValue;
+        Intellisense = new FileSystemQuestionIntellisense(true, extension);
     }
 
     public IEnumerable<string> GetHints()
