@@ -107,7 +107,8 @@ public static class ConsoleFactory
 
         var console = new Console(
             consoleLineWriter,
-            questionerFactory);
+            questionerFactory,
+            systemConsole);
 
         regularDirectOut.WriteLogo(options.Colors.Logo);
         ExecuteOnStartupHooks();

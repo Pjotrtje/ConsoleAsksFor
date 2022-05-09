@@ -221,6 +221,11 @@
             Id for <see cref="F:ConsoleAsksFor.LineTypeId.HelpText"/>.
             </summary>
         </member>
+        <member name="F:ConsoleAsksFor.LineTypeId.Other">
+            <summary>
+            Id for all other lines.
+            </summary>
+        </member>
         <member name="T:ConsoleAsksFor.LoggingOptions">
             <summary>
             Options related to logging.
@@ -363,6 +368,16 @@
         <member name="M:ConsoleAsksFor.IConsole.WriteHelpTextLines">
             <summary>
             Write all help texts so user can read all shortcuts etc.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteCustomLine(System.String,System.ConsoleColor,System.ConsoleColor)">
+            <summary>
+            Write line in the specified colors.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteSplitter(System.ConsoleColor,System.ConsoleColor,System.Char)">
+            <summary>
+            Write line in the specified colors.
             </summary>
         </member>
         <member name="T:ConsoleAsksFor.AskForAppender">

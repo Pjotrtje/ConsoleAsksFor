@@ -40,6 +40,9 @@ internal sealed class ConsoleLineWriter : IConsoleLineWriter
     public void WriteInvalidAnswerLine(string value)
         => WriteLine(_lineTypes.InvalidAnswer, value);
 
+    public void WriteCustomLine(string value, LineColor color)
+        => WriteLine(new LineType(LineTypeId.Other, color), value);
+
     public void WriteHelpTextLines(IEnumerable<string> values)
     {
         foreach (var value in values)

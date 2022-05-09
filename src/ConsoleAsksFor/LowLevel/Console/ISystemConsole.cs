@@ -1,12 +1,15 @@
 ﻿namespace ConsoleAsksFor;
 
-internal interface ISystemConsole
+internal interface ISystemConsole : IWindowWidthProvider
 {
     bool CursorVisible { set; }
 
     Position CursorPosition { get; set; }
 
-    int WindowWidth { get; }
-
     Task<ConsoleKeyInfo> ReadKey(CancellationToken cancellationToken);
+}
+
+internal interface IWindowWidthProvider
+{
+    int WindowWidth { get; }
 }

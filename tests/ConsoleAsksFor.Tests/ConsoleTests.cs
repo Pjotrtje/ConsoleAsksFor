@@ -13,7 +13,8 @@ public class ConsoleTests
                 _internalConsole,
                 _internalConsole,
                 new KeyInputHandler(),
-                new HistoryRepositoryStub(int.MaxValue)));
+                new HistoryRepositoryStub(int.MaxValue)),
+            _internalConsole);
     }
 
     [Fact]

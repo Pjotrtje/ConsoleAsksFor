@@ -1,6 +1,6 @@
 ﻿namespace ConsoleAsksFor;
 
-internal sealed class ItemsQuestion : IQuestion<IReadOnlyCollection<string>>
+internal sealed class ItemsQuestion : IQuestion<IReadOnlyList<string>>
 {
     private readonly Range<int> _amountOfItemsToSelect;
     public string? SubType => null;
@@ -93,7 +93,7 @@ internal sealed class ItemsQuestion : IQuestion<IReadOnlyCollection<string>>
     public bool TryParse(
         string answerAsString,
         out IEnumerable<string> errors,
-        [MaybeNullWhen(false)] out IReadOnlyCollection<string> answer)
+        [MaybeNullWhen(false)] out IReadOnlyList<string> answer)
     {
         if (answerAsString.Trim() == "")
         {
@@ -129,7 +129,7 @@ internal sealed class ItemsQuestion : IQuestion<IReadOnlyCollection<string>>
         return itemCountAllowed;
     }
 
-    public string FormatAnswer(IReadOnlyCollection<string> answer)
+    public string FormatAnswer(IReadOnlyList<string> answer)
         => answer
             .Select(a => _items.FormatAnswer(a))
             .JoinStrings(Splitter.DisplayValue);

@@ -49,4 +49,9 @@ public enum LineTypeId
     /// Id for <see cref="HelpText"/>.
     /// </summary>
     HelpText = 256,
+
+    /// <summary>
+    /// Id for all other lines.
+    /// </summary>
+    Other = 512,
 }

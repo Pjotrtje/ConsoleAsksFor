@@ -15,7 +15,7 @@ public static partial class AskForAppender
     /// <exception cref="MissingItemsException"></exception>
     /// <exception cref="InvalidRangeException"></exception>
     /// <returns></returns>
-    public static async Task<IReadOnlyCollection<string>> AskForItems(
+    public static async Task<IReadOnlyList<string>> AskForItems(
         this IConsole console,
         string questionText,
         IEnumerable<string> items,
@@ -46,7 +46,7 @@ public static partial class AskForAppender
     /// <exception cref="MissingItemsException"></exception>
     /// <exception cref="InvalidRangeException"></exception>
     /// <returns></returns>
-    public static async Task<IReadOnlyCollection<T>> AskForItems<T>(
+    public static async Task<IReadOnlyList<T>> AskForItems<T>(
         this IConsole console,
         string questionText,
         IEnumerable<T> items,
@@ -88,7 +88,7 @@ public static partial class AskForAppender
     /// <exception cref="MissingItemsException"></exception>
     /// <exception cref="InvalidRangeException"></exception>
     /// <returns></returns>
-    public static async Task<IReadOnlyCollection<T>> AskForItems<T>(
+    public static async Task<IReadOnlyList<T>> AskForItems<T>(
         this IConsole console,
         string questionText,
         IReadOnlyDictionary<string, T> namedItems,

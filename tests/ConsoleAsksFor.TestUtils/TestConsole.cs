@@ -12,7 +12,8 @@ public class TestConsole : IConsole
                 internalConsole,
                 internalConsole,
                 new KeyInputHandler(),
-                new HistoryRepositoryStub(int.MaxValue)));
+                new HistoryRepositoryStub(int.MaxValue)),
+            internalConsole);
 
         return new TestConsole(console, internalConsole);
     }
@@ -58,6 +59,12 @@ public class TestConsole : IConsole
 
     public void WriteHelpTextLines()
         => _console.WriteHelpTextLines();
+
+    public void WriteCustomLine(string value, ConsoleColor foregroundColor, ConsoleColor backgroundColor = ConsoleColor.Black)
+        => _console.WriteCustomLine(value, foregroundColor, backgroundColor);
+
+    public void WriteSplitter(ConsoleColor foregroundColor, ConsoleColor backgroundColor = ConsoleColor.Black, char splitter = '-')
+        => _console.WriteSplitter(foregroundColor, backgroundColor, splitter);
 
     /// <summary>
     /// The input <see cref="TestConsole" /> uses for answering questions.
