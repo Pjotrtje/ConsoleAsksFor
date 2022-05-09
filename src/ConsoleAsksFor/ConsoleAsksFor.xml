@@ -765,6 +765,19 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForStringBasedValueObject``1(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.TryParse{``0},System.Func{``0,System.String},System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.String"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="tryParse"></param>
+            <param name="hint"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <param name="toString"></param>
+            <returns></returns>
+        </member>
         <member name="M:ConsoleAsksFor.DecimalFormat.GetAllowedRange">
             Nobody wants the real min/max and edge cases are hard to fix. So for now fix it by being dumb
         </member>
@@ -799,6 +812,12 @@
             </summary>
             <exception cref="T:System.ArgumentOutOfRangeException"></exception>
             <param name="digitsAfterDecimalPoint">Allowed between 0 and 20.</param>
+        </member>
+        <member name="T:ConsoleAsksFor.TryParse`1">
+            <summary>
+            ToDo
+            </summary>
+            <typeparam name="TValueType"></typeparam>
         </member>
         <member name="T:ConsoleAsksFor.Sdk.CircularRanges">
             <summary>
