@@ -2,7 +2,7 @@
 
 public class FileSystemQuestionIntellisenseTests
 {
-    private readonly FileSystemQuestionIntellisense _sut = new(true, "");
+    private readonly FileSystemQuestionIntellisense _sut = new(true, null);
 
     private static readonly IntellisenseUseCases UseCases = new()
     {

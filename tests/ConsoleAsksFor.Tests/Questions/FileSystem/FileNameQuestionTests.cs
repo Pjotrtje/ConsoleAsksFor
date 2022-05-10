@@ -7,7 +7,7 @@ public class FileNameQuestionTests
     [Fact]
     public void Has_Correct_Guidance()
     {
-        var question = new FileNameQuestion(QuestionText, FileSystemExistence.NewOrExisting, "", null);
+        var question = new FileNameQuestion(QuestionText, FileSystemExistence.NewOrExisting, null, null);
         question.Text.Should().Be(QuestionText);
         question.GetHints().Should().BeEmpty();
     }
@@ -15,14 +15,14 @@ public class FileNameQuestionTests
     [Fact]
     public void When_No_Default_Value_Has_No_PrefilledValue()
     {
-        var question = new FileNameQuestion(QuestionText, FileSystemExistence.NewOrExisting, "", null);
+        var question = new FileNameQuestion(QuestionText, FileSystemExistence.NewOrExisting, null, null);
         question.PrefilledValue.Should().BeEmpty();
     }
 
     [Fact]
     public void When_Default_Value_Has_Correct_PrefilledValue()
     {
-        var question = new FileNameQuestion(QuestionText, FileSystemExistence.NewOrExisting, "", new FileInfo(@"C:\Test\Test.txt"));
+        var question = new FileNameQuestion(QuestionText, FileSystemExistence.NewOrExisting, null, new FileInfo(@"C:\Test\Test.txt"));
         question.PrefilledValue.Should().Be(@"C:\Test\Test.txt");
     }
 
@@ -40,7 +40,7 @@ public class FileNameQuestionTests
     [MemberData(nameof(CorrectParseUseCases))]
     internal void Parses_When_Correct_Value(FileSystemExistence fileSystemExistence, string fullName)
     {
-        var question = new FileNameQuestion(QuestionText, fileSystemExistence, "", null);
+        var question = new FileNameQuestion(QuestionText, fileSystemExistence, null, null);
         var isParsed = question.TryParse(fullName, out _, out var answer);
         isParsed.Should().BeTrue();
         answer!.FullName.Should().Be(fullName);
@@ -67,7 +67,7 @@ public class FileNameQuestionTests
     [MemberData(nameof(IncorrectParseUseCases))]
     internal void Does_Not_Parse_When_Incorrect_Value(FileSystemExistence fileSystemExistence, string fullName, string error)
     {
-        var question = new FileNameQuestion(QuestionText, fileSystemExistence, "", null);
+        var question = new FileNameQuestion(QuestionText, fileSystemExistence, null, null);
         var isParsed = question.TryParse(fullName, out var errors, out _);
         isParsed.Should().BeFalse();
         errors.Should().ContainSingle().Which.Should().Be(error);

@@ -38,6 +38,10 @@ internal sealed class WipApp : IApp
         //var nowLocalTime = LocalTime.Noon;
         //await _console.AskForLocalTime("How late?", Between(LocalTime.MinValue, nowLocalTime.PlusHours(1)), defaultValue: nowLocalTime);
 
+        await _console.AskForExistingFileName("aa", defaultValue: new FileInfo("C:\\temp\\"));
+        await _console.AskForExistingFileName("aa", ".svg", new FileInfo("C:\\temp\\"));
+        await _console.AskForExistingFileName("aa", new[] { ".svg", ".log" }, new FileInfo("C:\\temp\\"));
+
         await _console.AskForDirectory("aa", defaultValue: new DirectoryInfo("C:\\temp\\BlazorApp"));
         await _console.AskForDirectory("aa", defaultValue: new DirectoryInfo("C:\\temp\\"));
         await _console.AskForDirectory("aa", defaultValue: new DirectoryInfo("C:\\temp\\"));

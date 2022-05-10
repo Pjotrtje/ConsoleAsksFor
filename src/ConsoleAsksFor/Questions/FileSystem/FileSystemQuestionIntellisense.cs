@@ -3,12 +3,12 @@
 internal sealed class FileSystemQuestionIntellisense : IIntellisense
 {
     private readonly bool _includeFiles;
-    private readonly string _extension;
+    private readonly IReadOnlySet<string>? _allowedExtensions;
 
-    public FileSystemQuestionIntellisense(bool includeFiles, string extension)
+    public FileSystemQuestionIntellisense(bool includeFiles, IReadOnlySet<string>? allowedExtensions)
     {
         _includeFiles = includeFiles;
-        _extension = extension;
+        _allowedExtensions = allowedExtensions;
     }
 
     public string? CompleteValue(string value)
@@ -38,7 +38,7 @@ internal sealed class FileSystemQuestionIntellisense : IIntellisense
         }
 
         var files = _includeFiles
-            ? Directory.GetFiles(directory).Where(f => f.EndsWith(_extension, StringComparison.InvariantCultureIgnoreCase))
+            ? Directory.GetFiles(directory).Where(f => _allowedExtensions is null || _allowedExtensions.Contains(Path.GetExtension(f)))
             : Enumerable.Empty<string>();
 
         var directories = Directory.GetDirectories(directory);

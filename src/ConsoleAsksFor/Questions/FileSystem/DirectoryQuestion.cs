@@ -6,7 +6,7 @@ internal sealed class DirectoryQuestion : IQuestion<DirectoryInfo>
 
     public bool MustObfuscateAnswer => false;
 
-    public IIntellisense Intellisense { get; } = new FileSystemQuestionIntellisense(false, string.Empty);
+    public IIntellisense Intellisense { get; } = new FileSystemQuestionIntellisense(false, null);
 
     public string Text { get; }
 
