@@ -27,8 +27,8 @@ public class AskForDateTimeTests
         answer.Should().Be(defaultValue).And.BeIn(DateTimeKind.Utc);
         _console.Output.Should().Equal(
             new(LineTypeId.Question, Question),
-            new(LineTypeId.QuestionHint, "Range: [2020-01-02 09:30:00 ... 2022-12-31 13:00:00]"),
             new(LineTypeId.QuestionHint, "Format: 'yyyy-MM-dd HH:mm:ss' (UTC)"),
+            new(LineTypeId.QuestionHint, "Range: [2020-01-02 09:30:00 ... 2022-12-31 13:00:00]"),
             new(LineTypeId.Answer, "2021-09-20 22:00:00"));
     }
 }

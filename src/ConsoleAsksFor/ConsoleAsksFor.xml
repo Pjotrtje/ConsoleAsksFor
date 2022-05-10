@@ -221,6 +221,11 @@
             Id for <see cref="F:ConsoleAsksFor.LineTypeId.HelpText"/>.
             </summary>
         </member>
+        <member name="F:ConsoleAsksFor.LineTypeId.Other">
+            <summary>
+            Id for all other lines.
+            </summary>
+        </member>
         <member name="T:ConsoleAsksFor.LoggingOptions">
             <summary>
             Options related to logging.
@@ -365,6 +370,16 @@
             Write all help texts so user can read all shortcuts etc.
             </summary>
         </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteCustomLine(System.String,System.ConsoleColor,System.ConsoleColor)">
+            <summary>
+            Write line in the specified colors.
+            </summary>
+        </member>
+        <member name="M:ConsoleAsksFor.IConsole.WriteSplitter(System.ConsoleColor,System.ConsoleColor,System.Char)">
+            <summary>
+            Write line in the specified colors.
+            </summary>
+        </member>
         <member name="T:ConsoleAsksFor.AskForAppender">
             <summary>
             Extension methods for <see cref="T:ConsoleAsksFor.IConsole"/>.
@@ -446,22 +461,46 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:ConsoleAsksFor.AskForAppender.AskForExistingFileName(ConsoleAsksFor.IConsole,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForExistingFileName(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IEnumerable{System.String},System.IO.FileInfo,System.Threading.CancellationToken)">
             <summary>
             Ask for existing <see cref="T:System.IO.FileInfo"/>.
             </summary>
             <param name="console"></param>
             <param name="questionText"></param>
+            <param name="allowedExtensions"></param>
             <param name="defaultValue"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:ConsoleAsksFor.AskForAppender.AskForFileName(ConsoleAsksFor.IConsole,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForExistingFileName(ConsoleAsksFor.IConsole,System.String,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
+            <summary>
+            Ask for existing <see cref="T:System.IO.FileInfo"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="allowedExtension"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForFileName(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IEnumerable{System.String},System.IO.FileInfo,System.Threading.CancellationToken)">
             <summary>
             Ask for <see cref="T:System.IO.FileInfo"/>.
             </summary>
             <param name="console"></param>
             <param name="questionText"></param>
+            <param name="allowedExtensions"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForFileName(ConsoleAsksFor.IConsole,System.String,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.IO.FileInfo"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="allowedExtension"></param>
             <param name="defaultValue"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -476,12 +515,24 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:ConsoleAsksFor.AskForAppender.AskForNewFileName(ConsoleAsksFor.IConsole,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForNewFileName(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IEnumerable{System.String},System.IO.FileInfo,System.Threading.CancellationToken)">
             <summary>
             Ask for new <see cref="T:System.IO.FileInfo"/>.
             </summary>
             <param name="console"></param>
             <param name="questionText"></param>
+            <param name="allowedExtensions"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForNewFileName(ConsoleAsksFor.IConsole,System.String,System.String,System.IO.FileInfo,System.Threading.CancellationToken)">
+            <summary>
+            Ask for new <see cref="T:System.IO.FileInfo"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="allowedExtension"></param>
             <param name="defaultValue"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
@@ -750,6 +801,31 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForStringBasedValueObject``1(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.TryParse{``0},System.Func{``0,System.String},System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Ask for string based value object.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="tryParse"></param>
+            <param name="hint"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <param name="toString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForTimeSpan(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.TimeSpanUnitType,ConsoleAsksFor.RangeConstraint{System.TimeSpan},System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.TimeSpan"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <param name="unitType"></param>
+            <returns></returns>
+        </member>
         <member name="M:ConsoleAsksFor.DecimalFormat.GetAllowedRange">
             Nobody wants the real min/max and edge cases are hard to fix. So for now fix it by being dumb
         </member>
@@ -784,6 +860,47 @@
             </summary>
             <exception cref="T:System.ArgumentOutOfRangeException"></exception>
             <param name="digitsAfterDecimalPoint">Allowed between 0 and 20.</param>
+        </member>
+        <member name="T:ConsoleAsksFor.TryParse`1">
+            <summary>
+            Parse string to TValueType
+            </summary>
+            <typeparam name="TValueType"></typeparam>
+        </member>
+        <member name="T:ConsoleAsksFor.TimeSpanUnitType">
+            <summary>
+            Unit type for TimeSpan question
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromDays">
+            <summary>
+            From days
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromHours">
+            <summary>
+            From Hours
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromMilliseconds">
+            <summary>
+            From Milliseconds
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromMinutes">
+            <summary>
+            From Minutes
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromSeconds">
+             <summary>
+            From Seconds
+             </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromTicks">
+            <summary>
+            From Ticks
+            </summary>
         </member>
         <member name="T:ConsoleAsksFor.Sdk.CircularRanges">
             <summary>
@@ -869,6 +986,13 @@
             Creates format hint.
             </summary>
             <param name="formatDescription"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.Hint.ForUnit(System.String)">
+            <summary>
+            Creates unit hint.
+            </summary>
+            <param name="unitDescription"></param>
             <returns></returns>
         </member>
         <member name="T:ConsoleAsksFor.Sdk.IOnStartupHook">

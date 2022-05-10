@@ -11,6 +11,7 @@ public class DecimalQuestionTests
             QuestionText,
             Scale.Two,
             RangeConstraint.None,
+            null,
             null);
 
         question.Text.Should().Be(QuestionText);
@@ -28,6 +29,7 @@ public class DecimalQuestionTests
             QuestionText,
             Scale.Of(digitsAfterDecimalPoint),
             RangeConstraint.Between(1m, 2m),
+            null,
             null);
 
         question.Text.Should().Be(QuestionText);
@@ -41,6 +43,7 @@ public class DecimalQuestionTests
             QuestionText,
             Scale.Two,
             RangeConstraint.None,
+            null,
             null);
 
         question.PrefilledValue.Should().BeEmpty();
@@ -53,6 +56,7 @@ public class DecimalQuestionTests
             QuestionText,
             Scale.One,
             RangeConstraint.None,
+            null,
             10.1m);
 
         question.PrefilledValue.Should().Be("10.1");
@@ -78,6 +82,7 @@ public class DecimalQuestionTests
             QuestionText,
             Scale.Two,
             RangeConstraint.None,
+            null,
             null);
 
         var isParsed = question.TryParse(answerAsString, out _, out var answer);
@@ -92,6 +97,7 @@ public class DecimalQuestionTests
             QuestionText,
             Scale.Two,
             RangeConstraint.Between(9.01m, 10m),
+            null,
             null);
 
         var isParsed = question.TryParse("9", out var errors, out _);
@@ -106,6 +112,7 @@ public class DecimalQuestionTests
             QuestionText,
             Scale.Two,
             RangeConstraint.Between(8m, 8.99m),
+            null,
             null);
 
         var isParsed = question.TryParse("9", out var errors, out _);
@@ -123,6 +130,7 @@ public class DecimalQuestionTests
             QuestionText,
             Scale.Two,
             RangeConstraint.None,
+            null,
             null);
 
         var isParsed = question.TryParse(answerAsString, out var errors, out _);

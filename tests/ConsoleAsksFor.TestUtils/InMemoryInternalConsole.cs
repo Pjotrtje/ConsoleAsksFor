@@ -1,6 +1,6 @@
 namespace ConsoleAsksFor.TestUtils;
 
-internal sealed class InMemoryInternalConsole : IConsoleLineWriter, IConsoleInputGetter
+internal sealed class InMemoryInternalConsole : IConsoleLineWriter, IConsoleInputGetter, IWindowWidthProvider
 {
     private readonly LineTypes _lineTypes = new(ConsoleColors.Default);
     private readonly List<KeyInput> _readKeyInputs = new();
@@ -41,6 +41,9 @@ internal sealed class InMemoryInternalConsole : IConsoleLineWriter, IConsoleInpu
         }
     }
 
+    public void WriteCustomLine(string value, LineColor color)
+        => WriteLine(new LineType(LineTypeId.Other, color), value);
+
     public Task<KeyInput> ReadKeyWhileBlinkLine(
         InProgressLine line,
         bool currentLineIsValid,
@@ -54,4 +57,6 @@ internal sealed class InMemoryInternalConsole : IConsoleLineWriter, IConsoleInpu
 
     private void WriteLine(LineType lineType, string value)
         => _output.Add(new(lineType.Id, value));
+
+    public int WindowWidth => 200;
 }

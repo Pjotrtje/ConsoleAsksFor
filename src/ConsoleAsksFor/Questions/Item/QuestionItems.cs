@@ -93,7 +93,7 @@ internal sealed class QuestionItems : IReadOnlyList<QuestionItem>
 
     public bool TryParse(
         IEnumerable<string> answerAsStrings,
-        [MaybeNullWhen(false)] out IReadOnlyCollection<string> answer)
+        [MaybeNullWhen(false)] out IReadOnlyList<string> answer)
     {
         var possibleAnswer = answerAsStrings
             .Select(i => i.Trim())

@@ -6,13 +6,16 @@ internal sealed class Console : IConsole
 
     private readonly IConsoleLineWriter _consoleLineWriter;
     private readonly IQuestionerFactory _questionerFactory;
+    private readonly IWindowWidthProvider _windowWidthProvider;
 
     public Console(
         IConsoleLineWriter consoleLineWriter,
-        IQuestionerFactory questionerFactory)
+        IQuestionerFactory questionerFactory,
+        IWindowWidthProvider windowWidthProvider)
     {
         _consoleLineWriter = consoleLineWriter;
         _questionerFactory = questionerFactory;
+        _windowWidthProvider = windowWidthProvider;
     }
 
     public void WriteSuccessLine(string value)
@@ -41,6 +44,15 @@ internal sealed class Console : IConsole
 
     public void WriteHelpTextLines()
         => _consoleLineWriter.WriteHelpTextLines(HelpTexts.Lines);
+
+    public void WriteCustomLine(string value, ConsoleColor foregroundColor, ConsoleColor backgroundColor = ConsoleColor.Black)
+        => _consoleLineWriter.WriteCustomLine(value, new LineColor(foregroundColor, backgroundColor));
+
+    public void WriteSplitter(ConsoleColor foregroundColor, ConsoleColor backgroundColor = ConsoleColor.Black, char splitter = '-')
+    {
+        var value = new string(splitter, _windowWidthProvider.WindowWidth);
+        _consoleLineWriter.WriteCustomLine(value, new LineColor(foregroundColor, backgroundColor));
+    }
 
     public async Task<TAnswer> Ask<TAnswer>(IQuestion<TAnswer> question, CancellationToken cancellationToken)
         where TAnswer : notnull

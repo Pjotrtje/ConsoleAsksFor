@@ -19,4 +19,6 @@ internal interface IConsoleLineWriter
     void WriteInvalidAnswerLine(string value);
 
     void WriteHelpTextLines(IEnumerable<string> values);
+
+    void WriteCustomLine(string value, LineColor color);
 }

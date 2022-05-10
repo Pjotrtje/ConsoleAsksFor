@@ -33,8 +33,8 @@ internal sealed class DateTimeOffsetQuestion : IQuestion<DateTimeOffset>
 
     public IEnumerable<string> GetHints()
     {
-        yield return Hint.ForRange(_parser.Range, _format.FormatAnswer);
         yield return Hint.ForFormat($"'{_format.Pattern}' ({_parser.TimeZoneInfoDescription})");
+        yield return Hint.ForRange(_parser.Range, _format.FormatAnswer);
     }
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out DateTimeOffset answer)

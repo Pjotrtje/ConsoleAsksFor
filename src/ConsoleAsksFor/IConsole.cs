@@ -67,4 +67,20 @@ public interface IConsole
     /// Write all help texts so user can read all shortcuts etc.
     /// </summary>
     void WriteHelpTextLines();
+
+    /// <summary>
+    /// Write line in the specified colors.
+    /// </summary>
+    /// <param name="value">The value to write.</param>
+    /// <param name="foregroundColor"></param>
+    /// <param name="backgroundColor"></param>
+    void WriteCustomLine(string value, ConsoleColor foregroundColor, ConsoleColor backgroundColor = ConsoleColor.Black);
+
+    /// <summary>
+    /// Write splitter chars from left to right across the screen.
+    /// </summary>
+    /// <param name="foregroundColor"></param>
+    /// <param name="backgroundColor"></param>
+    /// <param name="splitter"></param>
+    void WriteSplitter(ConsoleColor foregroundColor, ConsoleColor backgroundColor = ConsoleColor.Black, char splitter = '-');
 }
