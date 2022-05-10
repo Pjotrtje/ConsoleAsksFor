@@ -14,11 +14,11 @@ The aim of ConsoleAsksFor is removing the hassle of retrieving/parsing/retrying 
 You can download the latest release / pre-release NuGet packages from nuget:
 
 
- Package|  |  | | 
---- | --- | --- | --- 
-ConsoleAsksFor|[![ConsoleAsksFor on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.svg)](https://www.nuget.org/packages/ConsoleAsksFor)|[![ConsoleAsksFor downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.svg)](https://www.nuget.org/packages/ConsoleAsksFor) |[![ConsoleAsksFor on FuGet](https://www.fuget.org/packages/ConsoleAsksFor/badge.svg)](https://www.fuget.org/packages/ConsoleAsksFor)
-ConsoleAsksFor.Microsoft.DependencyInjection|[![ConsoleAsksFor.Microsoft.DependencyInjection on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection)|[![ConsoleAsksFor.Microsoft.DependencyInjection downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection) |[![ConsoleAsksFor.Microsoft.DependencyInjection on FuGet](https://www.fuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection/badge.svg)](https://www.fuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection)
-ConsoleAsksFor.NodaTime.ISO|[![ConsoleAsksFor.NodaTime.ISO on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.NodaTime.ISO.svg)](https://www.nuget.org/packages/ConsoleAsksFor.NodaTime.ISO)|[![ConsoleAsksFor.NodaTime.ISO downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.NodaTime.ISO.svg)](https://www.nuget.org/packages/ConsoleAsksFor.NodaTime.ISO) |[![ConsoleAsksFor.NodaTime.ISO on FuGet](https://www.fuget.org/packages/ConsoleAsksFor.NodaTime.ISO/badge.svg)](https://www.fuget.org/packages/ConsoleAsksFor.NodaTime.ISO)
+ | Package: |  |  | 
+ | :--- | --- | --- |
+ | ConsoleAsksFor | [![ConsoleAsksFor on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.svg)](https://www.nuget.org/packages/ConsoleAsksFor) | [![ConsoleAsksFor downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.svg)](https://www.nuget.org/packages/ConsoleAsksFor) |
+ | ConsoleAsksFor.Microsoft.DependencyInjection | [![ConsoleAsksFor.Microsoft.DependencyInjection on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection) | [![ConsoleAsksFor.Microsoft.DependencyInjection downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection) | 
+ | ConsoleAsksFor.NodaTime.ISO | [![ConsoleAsksFor.NodaTime.ISO on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.NodaTime.ISO.svg)](https://www.nuget.org/packages/ConsoleAsksFor.NodaTime.ISO) | [![ConsoleAsksFor.NodaTime.ISO downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.NodaTime.ISO.svg)](https://www.nuget.org/packages/ConsoleAsksFor.NodaTime.ISO) |
 
 
 ## Setup
@@ -55,6 +55,7 @@ var preferredName = await console.AskForItem("Which name do you prefer?", new[] 
 var directory = await console.AskForExistingDirectory("Where to store file?", defaultValue: new DirectoryInfo(@"C:\Temp"));
 var name = await console.AskForString("What is your name?");
 var zipcode = await console.AskForString("What is your Dutch zipcode?", new Regex("^[1-9][0-9]{3}[A-Z]{2}$"), "Format: '5555AA' where first digit is not a 0");
+var agb = await console.AskForStringBasedValueObject<Agb>("What is your agb?", Agb.TryParse, x => x.ToString(), "8 numbers");
 var pw = await console.AskForPassword("What is the secret code?");
 ```
 
@@ -106,6 +107,7 @@ var likableWords = await console.AskForItems("Which of these words do you like?"
 * AskForTimeOnly
 * AskForDateTime
 * AskForDateTimeOffset
+* AskForTimeSpan
 * AskForDirectory 
 * AskForExistingDirectory 
 * AskForNewDirectory
@@ -117,6 +119,7 @@ var likableWords = await console.AskForItems("Which of these words do you like?"
 * AskForItem\<T>
 * AskForItems\<T>
 * AskForString
+* AskForStringBasedValueObject\<T>
 * AskForPassword
 
 

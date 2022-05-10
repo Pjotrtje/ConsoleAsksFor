@@ -24,9 +24,9 @@ public sealed record ConsoleOptions
     /// When asking question when input is idle for this amount of seconds all Console.Out in queue is flushed and printed to screen. <br/>
     /// This can theoretically result in a minimal hick-up. So setting to 1 seconds is not optimal. <br/>
     /// When value is lower than 1, 1 is still used.
-    /// Default value: 10.
+    /// Default value: 100.
     /// </summary>
-    public int OnIdleKeyPressFlushOutEverySeconds { get; init; } = 10;
+    public int OnIdleKeyPressFlushOutEverySeconds { get; init; } = 100;
 
     private ConsoleOptions()
     {
