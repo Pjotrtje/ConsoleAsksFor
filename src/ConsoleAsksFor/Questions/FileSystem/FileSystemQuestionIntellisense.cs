@@ -22,11 +22,7 @@ internal sealed class FileSystemQuestionIntellisense : IIntellisense
 
     private string? Handle(string value, string hint, IntellisenseDirection direction)
     {
-        var fixedHint = hint == ""
-            ? !value.EndsWith("\\", StringComparison.InvariantCultureIgnoreCase) && value.Contains('\\', StringComparison.InvariantCultureIgnoreCase)
-                ? Path.GetDirectoryName(value) + "\\"
-                : value
-            : hint;
+        var fixedHint = GetFixedHint(value, hint);
 
         var directory = DriveExists(fixedHint)
             ? fixedHint
@@ -77,6 +73,28 @@ internal sealed class FileSystemQuestionIntellisense : IIntellisense
             _ when toSelectIndex >= subItems.Count => GetIfChanged(subItems.First()),
             _ => GetIfChanged(subItems[toSelectIndex]),
         };
+    }
+
+    private static string GetFixedHint(string value, string hint)
+    {
+        if (hint != "")
+        {
+            return hint;
+        }
+
+        if (value.EndsWith("\\", StringComparison.InvariantCultureIgnoreCase))
+        {
+            return value;
+        }
+
+        if (File.Exists(value) || Directory.Exists(value))
+        {
+            var path = Path.GetDirectoryName(value)!;
+            return DriveExists(path)
+                ? path
+                : path + "\\";
+        }
+        return value;
     }
 
     private static bool DriveExists(string path)

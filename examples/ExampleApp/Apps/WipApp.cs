@@ -33,6 +33,9 @@ internal sealed class WipApp : IApp
 
         //var nowLocalTime = LocalTime.Noon;
         //await _console.AskForLocalTime("How late?", Between(LocalTime.MinValue, nowLocalTime.PlusHours(1)), defaultValue: nowLocalTime);
+        await _console.AskForDirectory("Root", defaultValue: new DirectoryInfo("C:\\"));
+        await _console.AskForDirectory("Not Exist", defaultValue: new DirectoryInfo("C:\\temp\\b"));
+        await _console.AskForDirectory("Exist", defaultValue: new DirectoryInfo("C:\\temp\\BlazorApp"));
         while (true)
         {
             foreach (var @enum in Enum.GetValues<TimeSpanType>())
