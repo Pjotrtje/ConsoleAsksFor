@@ -814,7 +814,7 @@
             <param name="toString"></param>
             <returns></returns>
         </member>
-        <member name="M:ConsoleAsksFor.AskForAppender.AskForTimeSpan(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.TimeSpanType,ConsoleAsksFor.RangeConstraint{System.TimeSpan},System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForTimeSpan(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.TimeSpanUnitType,ConsoleAsksFor.RangeConstraint{System.TimeSpan},System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
             <summary>
             Ask for <see cref="T:System.TimeSpan"/>.
             </summary>
@@ -823,7 +823,7 @@
             <param name="range"></param>
             <param name="defaultValue"></param>
             <param name="cancellationToken"></param>
-            <param name="type"></param>
+            <param name="unitType"></param>
             <returns></returns>
         </member>
         <member name="M:ConsoleAsksFor.DecimalFormat.GetAllowedRange">
@@ -867,40 +867,40 @@
             </summary>
             <typeparam name="TValueType"></typeparam>
         </member>
-        <member name="T:ConsoleAsksFor.TimeSpanType">
+        <member name="T:ConsoleAsksFor.TimeSpanUnitType">
             <summary>
-            ToDo
+            Unit type for TimeSpan question
             </summary>
         </member>
-        <member name="F:ConsoleAsksFor.TimeSpanType.FromDays">
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromDays">
+            <summary>
+            From days
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromHours">
+            <summary>
+            From Hours
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromMilliseconds">
+            <summary>
+            From Milliseconds
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromMinutes">
+            <summary>
+            From Minutes
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromSeconds">
              <summary>
-            ToDo
+            From Seconds
              </summary>
         </member>
-        <member name="F:ConsoleAsksFor.TimeSpanType.FromHours">
-             <summary>
-            ToDo
-             </summary>
-        </member>
-        <member name="F:ConsoleAsksFor.TimeSpanType.FromMilliseconds">
-             <summary>
-            ToDo
-             </summary>
-        </member>
-        <member name="F:ConsoleAsksFor.TimeSpanType.FromMinutes">
-             <summary>
-            ToDo
-             </summary>
-        </member>
-        <member name="F:ConsoleAsksFor.TimeSpanType.FromSeconds">
-             <summary>
-            ToDo
-             </summary>
-        </member>
-        <member name="F:ConsoleAsksFor.TimeSpanType.FromTicks">
-             <summary>
-            ToDo
-             </summary>
+        <member name="F:ConsoleAsksFor.TimeSpanUnitType.FromTicks">
+            <summary>
+            From Ticks
+            </summary>
         </member>
         <member name="T:ConsoleAsksFor.Sdk.CircularRanges">
             <summary>

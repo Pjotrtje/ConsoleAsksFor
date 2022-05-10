@@ -38,7 +38,7 @@ internal sealed class WipApp : IApp
         await _console.AskForDirectory("Exist", defaultValue: new DirectoryInfo("C:\\temp\\BlazorApp"));
         while (true)
         {
-            foreach (var @enum in Enum.GetValues<TimeSpanType>())
+            foreach (var @enum in Enum.GetValues<TimeSpanUnitType>())
             {
                 var ts = await _console.AskForTimeSpan("WHAT?!" + @enum.ToString(), @enum, Between(TimeSpan.MinValue, TimeSpan.MaxValue), TimeSpan.MaxValue);
                 _console.WriteAnswerLine($"{ts}");

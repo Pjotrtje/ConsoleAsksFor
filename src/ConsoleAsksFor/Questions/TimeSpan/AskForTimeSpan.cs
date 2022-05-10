@@ -10,91 +10,55 @@ public static partial class AskForAppender
     /// <param name="range"></param>
     /// <param name="defaultValue"></param>
     /// <param name="cancellationToken"></param>
-    /// <param name="type"></param>
+    /// <param name="unitType"></param>
     /// <returns></returns>
     public static async Task<TimeSpan> AskForTimeSpan(
         this IConsole console,
         string questionText,
-        TimeSpanType type,
+        TimeSpanUnitType unitType,
         RangeConstraint<TimeSpan>? range = null,
         TimeSpan? defaultValue = null,
         CancellationToken cancellationToken = default)
     {
-        var defaultDecimalValue = GetDecimal(type, defaultValue);
-        var min = GetDecimal(type, range?.Min ?? TimeSpan.MinValue);
-        var max = GetDecimal(type, range?.Max ?? TimeSpan.MaxValue);
+        var defaultDecimalValue = GetDecimal(unitType, defaultValue);
+        var min = GetDecimal(unitType, range?.Min ?? TimeSpan.MinValue);
+        var max = GetDecimal(unitType, range?.Max ?? TimeSpan.MaxValue);
         var decimalRange = new RangeConstraint<decimal>(min, max);
 
         var question = new DecimalQuestion(
             questionText,
             Scale.Zero,
             decimalRange,
-            Hint.ForUnit($"{type.ToString().Replace("From", "")}"),
+            Hint.ForUnit($"{unitType.ToString().Replace("From", "")}"),
             defaultDecimalValue);
 
         var decimalValue = await console.Ask(question, cancellationToken);
-        return GetTimeSpanValue(type, (long)decimalValue);
+        return GetTimeSpanValue(unitType, (long)decimalValue);
     }
 
-    private static decimal? GetDecimal(TimeSpanType type, TimeSpan? value)
+    private static decimal? GetDecimal(TimeSpanUnitType unitType, TimeSpan? value)
         => !value.HasValue
             ? null
-            : type switch
+            : unitType switch
             {
-                TimeSpanType.FromDays => (long)value.Value.TotalDays,
-                TimeSpanType.FromHours => (long)value.Value.TotalHours,
-                TimeSpanType.FromMinutes => (long)value.Value.TotalMinutes,
-                TimeSpanType.FromSeconds => (long)value.Value.TotalSeconds,
-                TimeSpanType.FromMilliseconds => (long)value.Value.TotalMilliseconds,
-                TimeSpanType.FromTicks => value.Value.Ticks,
+                TimeSpanUnitType.FromDays => (long)value.Value.TotalDays,
+                TimeSpanUnitType.FromHours => (long)value.Value.TotalHours,
+                TimeSpanUnitType.FromMinutes => (long)value.Value.TotalMinutes,
+                TimeSpanUnitType.FromSeconds => (long)value.Value.TotalSeconds,
+                TimeSpanUnitType.FromMilliseconds => (long)value.Value.TotalMilliseconds,
+                TimeSpanUnitType.FromTicks => value.Value.Ticks,
                 _ => null,
             };
 
-    private static TimeSpan GetTimeSpanValue(TimeSpanType type, long value)
-        => type switch
+    private static TimeSpan GetTimeSpanValue(TimeSpanUnitType unitType, long value)
+        => unitType switch
         {
-            TimeSpanType.FromDays => TimeSpan.FromDays(value),
-            TimeSpanType.FromHours => TimeSpan.FromHours(value),
-            TimeSpanType.FromMinutes => TimeSpan.FromMinutes(value),
-            TimeSpanType.FromSeconds => TimeSpan.FromSeconds(value),
-            TimeSpanType.FromMilliseconds => TimeSpan.FromMilliseconds(value),
-            TimeSpanType.FromTicks => TimeSpan.FromTicks(value),
+            TimeSpanUnitType.FromDays => TimeSpan.FromDays(value),
+            TimeSpanUnitType.FromHours => TimeSpan.FromHours(value),
+            TimeSpanUnitType.FromMinutes => TimeSpan.FromMinutes(value),
+            TimeSpanUnitType.FromSeconds => TimeSpan.FromSeconds(value),
+            TimeSpanUnitType.FromMilliseconds => TimeSpan.FromMilliseconds(value),
+            TimeSpanUnitType.FromTicks => TimeSpan.FromTicks(value),
             _ => default,
         };
-}
-
-/// <summary>
-/// ToDo
-/// </summary>
-public enum TimeSpanType
-{
-    /// <summary>
-    ///ToDo
-    /// </summary>
-    FromDays,
-
-    /// <summary>
-    ///ToDo
-    /// </summary>
-    FromHours,
-
-    /// <summary>
-    ///ToDo
-    /// </summary>
-    FromMilliseconds,
-
-    /// <summary>
-    ///ToDo
-    /// </summary>
-    FromMinutes,
-
-    /// <summary>
-    ///ToDo
-    /// </summary>
-    FromSeconds,
-
-    /// <summary>
-    ///ToDo
-    /// </summary>
-    FromTicks,
 }
