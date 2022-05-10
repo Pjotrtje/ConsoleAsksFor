@@ -16,16 +16,19 @@ internal sealed class DecimalQuestion : IQuestion<decimal>
 
     private readonly DecimalQuestionParser _parser;
     private readonly DecimalFormat _format;
+    private readonly string? _additionalHint;
     private readonly decimal? _defaultValue;
 
     public DecimalQuestion(
         string text,
         Scale scale,
         RangeConstraint<decimal> range,
+        string? additionalHint,
         decimal? defaultValue)
     {
         var format = new DecimalFormat(scale);
         _parser = new DecimalQuestionParser(format, range);
+        _additionalHint = additionalHint;
         _defaultValue = defaultValue;
         _format = format;
         Text = text;
@@ -33,6 +36,10 @@ internal sealed class DecimalQuestion : IQuestion<decimal>
 
     public IEnumerable<string> GetHints()
     {
+        if (_additionalHint is not null)
+        {
+            yield return _additionalHint;
+        }
         yield return Hint.ForRange(_parser.Range, _format.FormatAnswer);
     }
 

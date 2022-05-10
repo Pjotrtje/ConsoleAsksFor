@@ -29,6 +29,7 @@ public static partial class AskForAppender
             questionText,
             scale,
             range ?? RangeConstraint.None,
+            null,
             defaultValue);
 
         return await console.Ask(question, cancellationToken);

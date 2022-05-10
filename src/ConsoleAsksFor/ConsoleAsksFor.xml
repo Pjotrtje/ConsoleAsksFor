@@ -814,6 +814,18 @@
             <param name="toString"></param>
             <returns></returns>
         </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForTimeSpan(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.TimeSpanType,ConsoleAsksFor.RangeConstraint{System.TimeSpan},System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+            <summary>
+            Ask for <see cref="T:System.TimeSpan"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="range"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
         <member name="M:ConsoleAsksFor.DecimalFormat.GetAllowedRange">
             Nobody wants the real min/max and edge cases are hard to fix. So for now fix it by being dumb
         </member>
@@ -854,6 +866,41 @@
             Parse string to TValueType
             </summary>
             <typeparam name="TValueType"></typeparam>
+        </member>
+        <member name="T:ConsoleAsksFor.TimeSpanType">
+            <summary>
+            ToDo
+            </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanType.FromDays">
+             <summary>
+            ToDo
+             </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanType.FromHours">
+             <summary>
+            ToDo
+             </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanType.FromMilliseconds">
+             <summary>
+            ToDo
+             </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanType.FromMinutes">
+             <summary>
+            ToDo
+             </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanType.FromSeconds">
+             <summary>
+            ToDo
+             </summary>
+        </member>
+        <member name="F:ConsoleAsksFor.TimeSpanType.FromTicks">
+             <summary>
+            ToDo
+             </summary>
         </member>
         <member name="T:ConsoleAsksFor.Sdk.CircularRanges">
             <summary>
@@ -939,6 +986,13 @@
             Creates format hint.
             </summary>
             <param name="formatDescription"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.Sdk.Hint.ForUnit(System.String)">
+            <summary>
+            Creates unit hint.
+            </summary>
+            <param name="unitDescription"></param>
             <returns></returns>
         </member>
         <member name="T:ConsoleAsksFor.Sdk.IOnStartupHook">

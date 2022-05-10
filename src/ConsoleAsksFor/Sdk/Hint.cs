@@ -32,4 +32,12 @@ public static class Hint
     /// <returns></returns>
     public static string ForFormat(string formatDescription)
         => $"Format: {formatDescription}";
+
+    /// <summary>
+    /// Creates unit hint.
+    /// </summary>
+    /// <param name="unitDescription"></param>
+    /// <returns></returns>
+    public static string ForUnit(string unitDescription)
+        => $"Unit: {unitDescription}";
 }

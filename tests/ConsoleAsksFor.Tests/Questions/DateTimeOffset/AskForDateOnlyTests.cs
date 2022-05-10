@@ -26,8 +26,8 @@ public class AskForDateOnlyTests
         answer.Should().Be(defaultValue);
         _console.Output.Should().Equal(
             new(LineTypeId.Question, Question),
-            new(LineTypeId.QuestionHint, "Range: [2020-01-02 ... 2022-12-31]"),
             new(LineTypeId.QuestionHint, "Format: 'yyyy-MM-dd' (Local)"),
+            new(LineTypeId.QuestionHint, "Range: [2020-01-02 ... 2022-12-31]"),
             new(LineTypeId.Answer, "2021-09-20"));
     }
 }

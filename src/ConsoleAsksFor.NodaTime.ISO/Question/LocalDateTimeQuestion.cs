@@ -33,8 +33,8 @@ internal sealed class LocalDateTimeQuestion : IQuestion<LocalDateTime>
 
     public IEnumerable<string> GetHints()
     {
-        yield return Hint.ForRange(_parser.Range, _format.FormatAnswer);
         yield return Hint.ForFormat($"'{_format.Pattern.PatternText}' ({_parser.DateTimeZoneDescription})");
+        yield return Hint.ForRange(_parser.Range, _format.FormatAnswer);
     }
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out LocalDateTime answer)
