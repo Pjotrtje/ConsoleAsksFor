@@ -51,12 +51,6 @@ stages:
         
             Get-ChildItem -Path src\*.csproj -Recurse | Foreach-Object { Update-Version $_.FullName }
 
-    - task: UseDotNet@2
-      displayName: 'Use .NET Core sdk'
-      inputs:
-        packageType: 'sdk'
-        version: '6.0.x'
-
     - task: DotNetCoreCLI@2
       displayName: 'Restore NuGet'
       inputs:
