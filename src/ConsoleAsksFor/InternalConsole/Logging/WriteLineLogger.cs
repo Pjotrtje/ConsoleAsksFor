@@ -1,6 +1,6 @@
 ﻿namespace ConsoleAsksFor;
 
-internal sealed class WriteLineLogger : IWriteLineLogger
+internal sealed class WriteLineLogger : IWriteLineLogger, IDisposable
 {
     private readonly IFileSystem _fileSystem;
     private readonly ISuspendableOutWriter _suspendableOutWriter;
@@ -31,6 +31,11 @@ internal sealed class WriteLineLogger : IWriteLineLogger
         _lineTypeStringMaxLength = GetLineTypeStringMaxLength(options.ToLogLineTypes);
         _toLogLineTypeIds = options.ToLogLineTypes.ToHashSet();
         _fileNamePath = Path.Combine(LoggingOptions.DirectoryPath, $"{startTime:yyyy-MM-dd_HH.mm.ss}.log");
+    }
+
+    public void Dispose()
+    {
+        _fileLocker.Dispose();
     }
 
     private static int GetLineTypeStringMaxLength(IEnumerable<LineTypeId> toLogLineTypes)

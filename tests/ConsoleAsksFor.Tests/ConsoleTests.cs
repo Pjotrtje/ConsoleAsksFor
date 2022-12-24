@@ -1,8 +1,8 @@
 ﻿namespace ConsoleAsksFor.Tests;
 
-public class ConsoleTests
+public sealed class ConsoleTests : IDisposable
 {
-    private readonly IConsole _sut;
+    private readonly Console _sut;
     private readonly InMemoryInternalConsole _internalConsole = new();
 
     public ConsoleTests()
@@ -15,6 +15,11 @@ public class ConsoleTests
                 new KeyInputHandler(),
                 new HistoryRepositoryStub(int.MaxValue)),
             _internalConsole);
+    }
+
+    public void Dispose()
+    {
+        _sut.Dispose();
     }
 
     [Fact]

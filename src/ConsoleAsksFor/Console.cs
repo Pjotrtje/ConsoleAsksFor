@@ -1,6 +1,6 @@
 ﻿namespace ConsoleAsksFor;
 
-internal sealed class Console : IConsole
+internal sealed class Console : IConsole, IDisposable
 {
     private readonly AsyncLocker _userFocusLocker = new();
 
@@ -62,5 +62,10 @@ internal sealed class Console : IConsole
             var questioner = await _questionerFactory.Create(question);
             return await questioner.GetAnswer(cancellationToken);
         });
+    }
+
+    public void Dispose()
+    {
+        _userFocusLocker.Dispose();
     }
 }

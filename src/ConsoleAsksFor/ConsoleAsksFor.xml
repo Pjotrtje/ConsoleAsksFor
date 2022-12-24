@@ -106,7 +106,7 @@
             When asking question when input is idle for this amount of seconds all Console.Out in queue is flushed and printed to screen. <br/>
             This can theoretically result in a minimal hick-up. So setting to 1 seconds is not optimal. <br/>
             When value is lower than 1, 1 is still used.
-            Default value: 10.
+            Default value: 100.
             </summary>
         </member>
         <member name="P:ConsoleAsksFor.ConsoleOptions.Default">
@@ -374,11 +374,17 @@
             <summary>
             Write line in the specified colors.
             </summary>
+            <param name="value">The value to write.</param>
+            <param name="foregroundColor"></param>
+            <param name="backgroundColor"></param>
         </member>
         <member name="M:ConsoleAsksFor.IConsole.WriteSplitter(System.ConsoleColor,System.ConsoleColor,System.Char)">
             <summary>
-            Write line in the specified colors.
+            Write splitter chars from left to right across the screen.
             </summary>
+            <param name="foregroundColor"></param>
+            <param name="backgroundColor"></param>
+            <param name="splitter"></param>
         </member>
         <member name="T:ConsoleAsksFor.AskForAppender">
             <summary>

@@ -1,6 +1,6 @@
 ﻿namespace ConsoleAsksFor.TestUtils;
 
-public class TestConsole : IConsole
+public sealed class TestConsole : IConsole
 {
     public static TestConsole Create()
     {

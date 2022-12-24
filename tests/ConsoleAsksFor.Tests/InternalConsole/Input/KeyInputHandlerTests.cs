@@ -26,8 +26,8 @@ public partial class KeyInputHandlerTests
         VerifyAllSetupsCalled();
     }
 
-    internal static TheoryData<InProgressLine, KeyInput, InProgressLine, string> OtherUseCases()
-        => new()
+    public static IEnumerable<object[]> OtherUseCases()
+        => new TheoryData<InProgressLine, KeyInput, InProgressLine, string>
         {
             { Line("0123").AtIndex(0), FromChar('a'), Line("a0123").AtIndex(1), "Regular char; at end" },
             { Line("0123").AtIndex(4), FromChar('a'), Line("0123a").AtIndex(5), "Regular char; at end" },
@@ -40,8 +40,8 @@ public partial class KeyInputHandlerTests
             { Line("0123").AtIndex(4), F3, Line("0123").AtIndex(4), "A to ignore key" },
         };
 
-    internal static TheoryData<InProgressLine, KeyInput, InProgressLine, string> BackspaceUseCases()
-        => new()
+    public static IEnumerable<object[]> BackspaceUseCases()
+        => new TheoryData<InProgressLine, KeyInput, InProgressLine, string>
         {
             { Line("0123").AtIndex(0), Backspace, Line("0123").AtIndex(0), "Backspace: At start" },
             { Line("0123").AtIndex(2), Backspace, Line("023").AtIndex(1), "Backspace: In middle" },
@@ -55,8 +55,8 @@ public partial class KeyInputHandlerTests
             { Line(" 1234 6789 ").AtIndex(11), CtrlBackspace, Line(" 1234 ").AtIndex(6), "CtrlBackspace: At end" },
         };
 
-    internal static TheoryData<InProgressLine, KeyInput, InProgressLine, string> DeleteUseCases()
-        => new()
+    public static IEnumerable<object[]> DeleteUseCases()
+        => new TheoryData<InProgressLine, KeyInput, InProgressLine, string>
         {
             { Line("0123").AtIndex(0), Delete, Line("123").AtIndex(0), "Delete: At start" },
             { Line("0123").AtIndex(2), Delete, Line("013").AtIndex(2), "Delete: In middle" },
@@ -70,8 +70,8 @@ public partial class KeyInputHandlerTests
             { Line(" 1234 6789 ").AtIndex(0), CtrlDelete, Line("1234 6789 ").AtIndex(0), "CtrlDelete: At begin" },
         };
 
-    internal static TheoryData<InProgressLine, KeyInput, InProgressLine, string> MoveCursorLeftUseCases()
-        => new()
+    public static IEnumerable<object[]> MoveCursorLeftUseCases()
+        => new TheoryData<InProgressLine, KeyInput, InProgressLine, string>
         {
             { Line("0123").AtIndex(0), Home, Line("0123").AtIndex(0), "Home: At begin" },
             { Line("0123").AtIndex(2), Home, Line("0123").AtIndex(0), "Home: In middle" },
@@ -88,8 +88,8 @@ public partial class KeyInputHandlerTests
             { Line(" 1234 6789 ").AtIndex(11), CtrlLeftArrow, Line(" 1234 6789 ").AtIndex(6), "CtrlLeftArrow: At end" },
         };
 
-    internal static TheoryData<InProgressLine, KeyInput, InProgressLine, string> MoveCursorRightUseCases()
-        => new()
+    public static IEnumerable<object[]> MoveCursorRightUseCases()
+        => new TheoryData<InProgressLine, KeyInput, InProgressLine, string>
         {
             { Line("0123").AtIndex(0), End, Line("0123").AtIndex(4), "End: At begin" },
             { Line("0123").AtIndex(2), End, Line("0123").AtIndex(4), "End: In middle" },
