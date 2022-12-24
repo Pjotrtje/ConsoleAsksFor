@@ -50,7 +50,7 @@ internal sealed class Console : IConsole, IDisposable
 
     public void WriteSplitter(ConsoleColor foregroundColor, ConsoleColor backgroundColor = ConsoleColor.Black, char splitter = '-')
     {
-        var value = new string(splitter, _windowWidthProvider.WindowWidth);
+        var value = new string(splitter, _windowWidthProvider.WindowWidth - 1);
         _consoleLineWriter.WriteCustomLine(value, new LineColor(foregroundColor, backgroundColor));
     }
 
