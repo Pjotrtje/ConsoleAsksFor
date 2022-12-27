@@ -77,7 +77,7 @@ public class QuestionerTests
         {
             new(LineTypeId.Question, question.Text),
             new(LineTypeId.Question, question.Text),
-            new(LineTypeId.Answer, CorrectAnswer)
+            new(LineTypeId.Answer, CorrectAnswer),
         });
     }
 
@@ -99,7 +99,7 @@ public class QuestionerTests
         {
             new(LineTypeId.Question, question.Text),
             new(LineTypeId.InvalidAnswer, "O"),
-            new(LineTypeId.Warning, "Answering question interupted by F12!")
+            new(LineTypeId.Warning, "Answering question interupted by F12!"),
         });
     }
 

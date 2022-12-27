@@ -26,8 +26,8 @@ public class FileNameQuestionTests
         question.PrefilledValue.Should().Be(@"C:\Test\Test.txt");
     }
 
-    internal static TheoryData<FileSystemExistence, string> CorrectParseUseCases() =>
-        new()
+    public static IEnumerable<object[]> CorrectParseUseCases()
+        => new TheoryData<FileSystemExistence, string>
         {
             { FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.NotExistingFile.Location },
             { FileSystemExistence.Existing, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location },
@@ -46,8 +46,8 @@ public class FileNameQuestionTests
         answer!.FullName.Should().Be(fullName);
     }
 
-    internal static TheoryData<FileSystemExistence, string, string> IncorrectParseUseCases() =>
-        new()
+    public static IEnumerable<object[]> IncorrectParseUseCases()
+        => new TheoryData<FileSystemExistence, string, string>
         {
             { FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location, "File already exists." },
             { FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location.ToUpperInvariant(), "File already exists." },

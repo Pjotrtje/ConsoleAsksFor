@@ -6,7 +6,7 @@ pool:
 
 variables:
 - name  : version
-  value : '3.0.0'
+  value : '3.1.0'
 
 stages:
 - stage: Build
@@ -50,12 +50,6 @@ stages:
             }
         
             Get-ChildItem -Path src\*.csproj -Recurse | Foreach-Object { Update-Version $_.FullName }
-
-    - task: UseDotNet@2
-      displayName: 'Use .NET Core sdk'
-      inputs:
-        packageType: 'sdk'
-        version: '6.0.x'
 
     - task: DotNetCoreCLI@2
       displayName: 'Restore NuGet'

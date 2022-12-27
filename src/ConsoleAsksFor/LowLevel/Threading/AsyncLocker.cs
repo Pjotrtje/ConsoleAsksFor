@@ -1,7 +1,7 @@
 ﻿namespace ConsoleAsksFor;
 
 // https://stackoverflow.com/questions/7612602/why-cant-i-use-the-await-operator-within-the-body-of-a-lock-statement/50139704#50139704
-internal sealed class AsyncLocker
+internal sealed class AsyncLocker : IDisposable
 {
     private readonly SemaphoreSlim _semaphore = new(1, 1);
 
@@ -29,5 +29,10 @@ internal sealed class AsyncLocker
         {
             _semaphore.Release();
         }
+    }
+
+    public void Dispose()
+    {
+        _semaphore.Dispose();
     }
 }

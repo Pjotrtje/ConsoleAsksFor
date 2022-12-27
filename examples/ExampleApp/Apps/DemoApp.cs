@@ -1,6 +1,6 @@
 ﻿namespace ExampleApp.Apps;
 
-internal sealed class DemoApp
+internal sealed class DemoApp : IApp
 {
     private readonly IConsole _console;
 

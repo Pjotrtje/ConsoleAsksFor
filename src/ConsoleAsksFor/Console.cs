@@ -1,6 +1,6 @@
 ﻿namespace ConsoleAsksFor;
 
-internal sealed class Console : IConsole
+internal sealed class Console : IConsole, IDisposable
 {
     private readonly AsyncLocker _userFocusLocker = new();
 
@@ -50,7 +50,7 @@ internal sealed class Console : IConsole
 
     public void WriteSplitter(ConsoleColor foregroundColor, ConsoleColor backgroundColor = ConsoleColor.Black, char splitter = '-')
     {
-        var value = new string(splitter, _windowWidthProvider.WindowWidth);
+        var value = new string(splitter, _windowWidthProvider.WindowWidth - 1);
         _consoleLineWriter.WriteCustomLine(value, new LineColor(foregroundColor, backgroundColor));
     }
 
@@ -62,5 +62,10 @@ internal sealed class Console : IConsole
             var questioner = await _questionerFactory.Create(question);
             return await questioner.GetAnswer(cancellationToken);
         });
+    }
+
+    public void Dispose()
+    {
+        _userFocusLocker.Dispose();
     }
 }

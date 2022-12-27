@@ -26,8 +26,8 @@ public class DirectoryQuestionTests
         question.PrefilledValue.Should().Be(@"C:\Test\");
     }
 
-    internal static TheoryData<FileSystemExistence, string> CorrectParseUseCases() =>
-        new()
+    public static IEnumerable<object[]> CorrectParseUseCases() =>
+        new TheoryData<FileSystemExistence, string>
         {
             { FileSystemExistence.New, UnitTestFileSystem.NotExistingDirectory.Location },
             { FileSystemExistence.Existing, UnitTestFileSystem.ExistingDirectory1.Location },
@@ -48,8 +48,8 @@ public class DirectoryQuestionTests
         answer!.FullName.Should().Be(fullName);
     }
 
-    internal static TheoryData<FileSystemExistence, string, string> IncorrectParseUseCases() =>
-        new()
+    public static IEnumerable<object[]> IncorrectParseUseCases() =>
+        new TheoryData<FileSystemExistence, string, string>
         {
             { FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.Location, "Directory already exists." },
             { FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.Location.ToUpperInvariant(), "Directory already exists." },

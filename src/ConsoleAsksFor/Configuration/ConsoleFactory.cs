@@ -113,6 +113,7 @@ public static class ConsoleFactory
         regularDirectOut.WriteLogo(options.Colors.Logo);
         ExecuteOnStartupHooks();
 
+        // Console and some dependencies implement IDisposable, but because this is a "singleton factory" keeping reference to to object it will never be disposed. So it is OK
         return console;
     }
 
