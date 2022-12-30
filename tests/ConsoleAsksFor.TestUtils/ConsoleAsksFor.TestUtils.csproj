@@ -4,6 +4,20 @@
   </ItemGroup>
 
   <PropertyGroup>
+    <!--ToDo dit moet allemaal weg, dit is een test...-->
+    <PackageId>ConsoleAsksFor.TestUtils</PackageId>
+    <Description>Get typed input from Console.</Description>
+    <PackageTags>consoleasksfor console readline readkey writeline input question answer validation intellisense history</PackageTags>
+
+    <Version></Version>
+    <Authors>Pieter van Sambeek</Authors>
+    <PackageProjectUrl>https://github.com/Pjotrtje/ConsoleAsksFor</PackageProjectUrl>
+    <Copyright>Copyright Pieter van Sambeek</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReleaseNotes>https://github.com/Pjotrtje/ConsoleAsksFor/releases/</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
