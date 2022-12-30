@@ -55,26 +55,26 @@ public class DateTimeExtensionsTests
         action.Should().Throw<ArgumentException>().WithMessage("Expected Kind to be Unspecified*");
     }
 
-    public static TheoryData<DateTime, DateTimeKind, DateTime, string> ToKindUseCases()
-        => new()
-        {
-            { 1.January(2020).AsLocal(), DateTimeKind.Local, 1.January(2020).AsLocal(), "Date=Local, Kind=Local" },
-            { 1.January(2020), DateTimeKind.Local, 1.January(2020).AsLocal(), "Date=Unspecified, Kind=Local" },
-            { 1.January(2020).AsUtc(), DateTimeKind.Local, 1.January(2020).At(01, 00).AsLocal(), "Date=Utc, Kind=Local" },
+    //public static TheoryData<DateTime, DateTimeKind, DateTime, string> ToKindUseCases()
+    //    => new()
+    //    {
+    //        { 1.January(2020).AsLocal(), DateTimeKind.Local, 1.January(2020).AsLocal(), "Date=Local, Kind=Local" },
+    //        { 1.January(2020), DateTimeKind.Local, 1.January(2020).AsLocal(), "Date=Unspecified, Kind=Local" },
+    //        { 1.January(2020).AsUtc(), DateTimeKind.Local, 1.January(2020).At(01, 00).AsLocal(), "Date=Utc, Kind=Local" },
 
-            { 2.January(2020).AsLocal(), DateTimeKind.Utc, 1.January(2020).At(23, 00).AsUtc(), "Date=Local, Kind=Utc" },
-            { 2.January(2020), DateTimeKind.Utc, 1.January(2020).At(23, 00).AsUtc(), "Date=Unspecified, Kind=Utc" },
-            { 2.January(2020).AsUtc(), DateTimeKind.Utc, 2.January(2020).AsUtc(), "Date=Utc, Kind=Utc" },
-        };
+    //        { 2.January(2020).AsLocal(), DateTimeKind.Utc, 1.January(2020).At(23, 00).AsUtc(), "Date=Local, Kind=Utc" },
+    //        { 2.January(2020), DateTimeKind.Utc, 1.January(2020).At(23, 00).AsUtc(), "Date=Unspecified, Kind=Utc" },
+    //        { 2.January(2020).AsUtc(), DateTimeKind.Utc, 2.January(2020).AsUtc(), "Date=Utc, Kind=Utc" },
+    //    };
 
-    [Trait(Trait.Category, Trait.IgnoreInDevOps)] // Depends to much on TimeZoneInfo.Local
-    [Theory]
-    [MemberData(nameof(ToKindUseCases))]
-    public void When_Specified_Kind_ToKind_Returns_Correct_Value(DateTime input, DateTimeKind kind, DateTime expected, string useCase)
-    {
-        var result = input.ToKind(kind);
-        result.Should().Be(expected, useCase).And.BeIn(expected.Kind);
-    }
+    //[Trait(Trait.Category, Trait.IgnoreInDevOps)] // Depends to much on TimeZoneInfo.Local
+    //[Theory]
+    //[MemberData(nameof(ToKindUseCases))]
+    //public void When_Specified_Kind_ToKind_Returns_Correct_Value(DateTime input, DateTimeKind kind, DateTime expected, string useCase)
+    //{
+    //    var result = input.ToKind(kind);
+    //    result.Should().Be(expected, useCase).And.BeIn(expected.Kind);
+    //}
 
     [Fact]
     public void When_Unspecified_Kind_ToKind_Throws()

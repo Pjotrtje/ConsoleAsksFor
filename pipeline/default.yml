@@ -69,7 +69,8 @@ stages:
       inputs:
         command: 'test'
         projects: '**/*.sln'
-        arguments: '--configuration Release --no-build --filter Category!=IgnoreInDevOps --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude=[ConsoleAsksFor.TestUtils]*'
+        #arguments: '--configuration Release --no-build --filter Category!=IgnoreInDevOps --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude=[ConsoleAsksFor.TestUtils]*'
+        arguments: '--configuration Release --no-build --collect:"XPlat Code Coverage"'
         nobuild: true
 
     - task: reportgenerator@5
