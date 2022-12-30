@@ -23,10 +23,6 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
-    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-  </PropertyGroup>
-
   <ItemGroup>
     <None Remove="$(MSBuildProjectName).xml" />
     <AdditionalFiles Include="$(MSBuildProjectName).xml" Link="_\$(MSBuildProjectName).xml" />

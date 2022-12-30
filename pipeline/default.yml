@@ -73,7 +73,7 @@ stages:
         arguments: '--configuration Release --no-build --collect:"XPlat Code Coverage"'
         nobuild: true
 
-    - task: reportgenerator@5
+    - task: reportgenerator@4
       displayName: 'Merge code coverage report'
       inputs:
         reports: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
