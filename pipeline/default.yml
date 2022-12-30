@@ -61,7 +61,7 @@ stages:
       displayName: 'Build'
       inputs:
         command: 'build'
-        arguments: '--configuration Release --no-restore'
+        arguments: '/p:CollectCoverage --configuration Release --no-restore'
         projects: '**/*.sln'
 
     - task: DotNetCoreCLI@2
@@ -70,7 +70,7 @@ stages:
         command: 'test'
         projects: '**/*.sln'
         #arguments: '--configuration Release --no-build --filter Category!=IgnoreInDevOps --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude=[ConsoleAsksFor.TestUtils]*'
-        arguments: '--configuration Release --no-build --collect:"XPlat Code Coverage"'
+        arguments:  '/p:CollectCoverage=true --configuration Release --no-build --collect:"XPlat Code Coverage"'
         nobuild: true
 
     - task: reportgenerator@4
