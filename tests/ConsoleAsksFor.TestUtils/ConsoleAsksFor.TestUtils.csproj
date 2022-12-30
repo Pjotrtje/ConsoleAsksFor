@@ -1,7 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\ConsoleAsksFor\ConsoleAsksFor.csproj" />
-  </ItemGroup>
 
   <PropertyGroup>
     <!--ToDo dit moet allemaal weg, dit is een test...-->
@@ -23,6 +20,14 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ConsoleAsksFor\ConsoleAsksFor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+  </ItemGroup>
 
   <ItemGroup>
     <InternalsVisibleTo Include="ConsoleAsksFor.Tests" />
