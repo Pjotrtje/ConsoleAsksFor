@@ -80,6 +80,14 @@ stages:
         reporttypes: 'Cobertura'
         verbosity: 'Verbose'
 
+    - publish: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
+      displayName: 'Publishing Artifact - coverage.cobertura.xml'
+      artifact: CombinedCoverageReport1
+
+    - publish: '$(Agent.TempDirectory)/CombinedCoverageReport'
+      displayName: 'Publishing Artifact - CombinedCoverageReport'
+      artifact: CombinedCoverageReport2
+
     - task: PublishCodeCoverageResults@1
       displayName: 'Publish code coverage report'
       inputs:
