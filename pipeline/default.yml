@@ -72,12 +72,13 @@ stages:
         arguments: '--configuration Release --no-build --filter Category!=IgnoreInDevOps --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude=[ConsoleAsksFor.TestUtils]*'
         nobuild: true
 
-    - task: reportgenerator@4
+    - task: reportgenerator@5
       displayName: 'Merge code coverage report'
       inputs:
         reports: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
         targetdir: '$(Agent.TempDirectory)/CombinedCoverageReport'
         reporttypes: 'Cobertura'
+        verbosity: 'Verbose'
 
     - task: PublishCodeCoverageResults@1
       displayName: 'Publish code coverage report'
