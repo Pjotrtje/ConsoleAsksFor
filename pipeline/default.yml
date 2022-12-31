@@ -6,7 +6,7 @@ pool:
 
 variables:
 - name  : version
-  value : '3.1.0'
+  value : '3.1.1'
 
 stages:
 - stage: Build
@@ -50,6 +50,7 @@ stages:
             }
         
             Get-ChildItem -Path src\*.csproj -Recurse | Foreach-Object { Update-Version $_.FullName }
+            Get-ChildItem -Path tests\*.csproj -Recurse | Foreach-Object { Update-Version $_.FullName }
 
     - task: DotNetCoreCLI@2
       displayName: 'Restore NuGet'
@@ -61,7 +62,7 @@ stages:
       displayName: 'Build'
       inputs:
         command: 'build'
-        arguments: '--configuration Release --no-restore'
+        arguments: '/p:CollectCoverage --configuration Release --no-restore'
         projects: '**/*.sln'
 
     - task: DotNetCoreCLI@2
@@ -69,8 +70,11 @@ stages:
       inputs:
         command: 'test'
         projects: '**/*.sln'
-        arguments: '--configuration Release --no-build --filter Category!=IgnoreInDevOps --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude=[ConsoleAsksFor.TestUtils]*'
-        nobuild: true
+        #arguments: '--configuration Release --no-build --filter Category!=IgnoreInDevOps --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude=[ConsoleAsksFor.TestUtils]*'
+        arguments:  '/p:CollectCoverage=true --configuration Release --collect:"XPlat Code Coverage"'
+        #nobuild: true
+      env:
+        IS_TEST: true
 
     - task: reportgenerator@4
       displayName: 'Merge code coverage report'
@@ -78,7 +82,12 @@ stages:
         reports: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
         targetdir: '$(Agent.TempDirectory)/CombinedCoverageReport'
         reporttypes: 'Cobertura'
+        verbosity: 'Verbose'
 
+    - publish: '$(Agent.TempDirectory)/'
+      displayName: 'Publishing Artifact - TempDirectory'
+      artifact: TempDirectory
+      
     - task: PublishCodeCoverageResults@1
       displayName: 'Publish code coverage report'
       inputs:
@@ -129,9 +138,13 @@ stages:
               changeLogType: 'issueBased'
               isPreRelease: $(isPreRelease)
 
+          - task: NuGetToolInstaller@1
+            displayName: 'Install latest nuget.exe'
+
           - task: NuGetCommand@2
+            displayName: 'Push to nuget.org'
             inputs:
               command: 'push'
-              packagesToPush: '$(Agent.TempDirectory)/NuGet/**/*.nupkg;!$(Agent.TempDirectory)/NuGet/**/*.symbols.nupkg'
+              packagesToPush: '$(Agent.TempDirectory)/NuGet/**/*.nupkg'
               nuGetFeedType: 'external'
               publishFeedCredentials: 'NuGet.org'
