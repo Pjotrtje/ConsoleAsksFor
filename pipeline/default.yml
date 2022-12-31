@@ -72,7 +72,9 @@ stages:
         projects: '**/*.sln'
         #arguments: '--configuration Release --no-build --filter Category!=IgnoreInDevOps --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude=[ConsoleAsksFor.TestUtils]*'
         arguments:  '/p:CollectCoverage=true --configuration Release --no-build --collect:"XPlat Code Coverage"'
-        nobuild: true
+        #nobuild: true
+      env:
+        TF_BUILD: false
 
     - task: reportgenerator@4
       displayName: 'Merge code coverage report'
