@@ -74,7 +74,7 @@ stages:
         arguments:  '/p:CollectCoverage=true --configuration Release --collect:"XPlat Code Coverage"'
         #nobuild: true
       env:
-        TF_BUILD: false
+        IS_TEST: true
 
     - task: reportgenerator@4
       displayName: 'Merge code coverage report'

@@ -12,7 +12,7 @@
     <RootNamespace>$(AssemblyName)</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+  <PropertyGroup Condition="'$(TF_BUILD)' == 'true' AND  '$(IS_TEST)' != 'false'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
 </Project>
