@@ -5,11 +5,11 @@ public class HistoryRepositoryTests
     private readonly Mock<IFileSystem> _fileSystem = new(MockBehavior.Strict);
     private readonly Mock<IConsoleLineWriter> _consoleLineWriter = new(MockBehavior.Strict);
 
-    private static readonly IReadOnlyCollection<HistoryItem> SomeHistoryItems = new[]
-    {
+    private static readonly IReadOnlyCollection<HistoryItem> SomeHistoryItems =
+    [
         new HistoryItem("Q1", "QT1", "A1"),
         new HistoryItem("Q2", "QT2", "A2"),
-    };
+    ];
 
     private const int HistoryMaxSize = 100;
     private const string FilePath = @".console\history.json";

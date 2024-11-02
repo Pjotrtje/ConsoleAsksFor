@@ -2,8 +2,8 @@
 
 internal static class HelpTexts
 {
-    public static readonly IReadOnlyCollection<string> Lines = new[]
-    {
+    public static readonly IReadOnlyCollection<string> Lines =
+    [
         "Shortcuts:",
         "  F1: Help",
         $"  F2: Toggle history type for current question; {HistoryType.ByQuestionTextAndType}/{HistoryType.ByQuestionType}/{HistoryType.NotFiltered}",
@@ -28,5 +28,5 @@ internal static class HelpTexts
         "  Shift+Tab: Try complete answer; Try select 'previous/smaller' relevant answer (respecting your typed characters)",
         "  Ctrl+Shift+Tab: Try complete answer; Try select 'previous/smaller' relevant answer (ignoring your typed characters)",
         "  Ctrl+Space: Try complete answer",
-    };
+    ];
 }

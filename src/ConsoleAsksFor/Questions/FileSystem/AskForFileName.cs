@@ -48,7 +48,7 @@ public static partial class AskForAppender
         var question = new FileNameQuestion(
             questionText,
             fileSystemExistence,
-            new[] { allowedExtension },
+            [allowedExtension],
             defaultValue);
 
         return await console.Ask(question, cancellationToken);

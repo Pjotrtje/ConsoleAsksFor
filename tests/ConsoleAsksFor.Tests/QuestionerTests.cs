@@ -11,7 +11,7 @@ public class QuestionerTests
             _internalConsole,
             new KeyInputHandler(),
             new HistoryRepositoryStub(int.MaxValue),
-            new History(Enumerable.Empty<HistoryItem>(), int.MaxValue),
+            new History([], int.MaxValue),
             question);
 
     [Fact]
@@ -73,12 +73,12 @@ public class QuestionerTests
         var sut = GetQuestioner(question);
         await sut.GetAnswer(CancellationToken.None);
 
-        _internalConsole.Output.Should().Equal(new ConsoleLine[]
-        {
+        _internalConsole.Output.Should().Equal(
+        [
             new(LineTypeId.Question, question.Text),
             new(LineTypeId.Question, question.Text),
             new(LineTypeId.Answer, CorrectAnswer),
-        });
+        ]);
     }
 
     [Fact]
@@ -95,12 +95,12 @@ public class QuestionerTests
         Func<Task> getAnswer = () => sut.GetAnswer(CancellationToken.None);
         await getAnswer.Should().ThrowAsync<TaskCanceledByF12Exception>();
 
-        _internalConsole.Output.Should().Equal(new ConsoleLine[]
-        {
+        _internalConsole.Output.Should().Equal(
+        [
             new(LineTypeId.Question, question.Text),
             new(LineTypeId.InvalidAnswer, "O"),
             new(LineTypeId.Warning, "Answering question interupted by F12!"),
-        });
+        ]);
     }
 
     [Fact]
@@ -111,19 +111,19 @@ public class QuestionerTests
             PrefilledValue = CorrectAnswer,
         };
 
-        _internalConsole.AddKeyInput(new()
-        {
+        _internalConsole.AddKeyInput(
+        [
             Enter,
-        });
+        ]);
 
         var sut = GetQuestioner(question);
         await sut.GetAnswer(CancellationToken.None);
 
-        _internalConsole.Output.Should().Equal(new ConsoleLine[]
-        {
+        _internalConsole.Output.Should().Equal(
+        [
             new(LineTypeId.Question, question.Text),
             new(LineTypeId.Answer, CorrectAnswer),
-        });
+        ]);
     }
 
     [Fact]
@@ -131,7 +131,7 @@ public class QuestionerTests
     {
         var question = new TestQuestion(CorrectAnswer)
         {
-            ParseErrorsWhenIncorrectValue = new[] { "Error1", "Error2" },
+            ParseErrorsWhenIncorrectValue = ["Error1", "Error2"],
         };
 
         _internalConsole.AddKeyInput(new()
@@ -160,7 +160,7 @@ public class QuestionerTests
     {
         var question = new TestQuestion(CorrectAnswer)
         {
-            Hints = new[] { "Hint1", "Hint2" },
+            Hints = ["Hint1", "Hint2"],
         };
 
         _internalConsole.AddKeyInput(new()

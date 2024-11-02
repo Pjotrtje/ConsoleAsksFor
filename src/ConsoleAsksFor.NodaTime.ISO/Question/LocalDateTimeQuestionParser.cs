@@ -35,19 +35,19 @@ internal sealed class LocalDateTimeQuestionParser
         var parseResult = _format.Pattern.Parse(answerAsString.Trim());
         if (!parseResult.Success)
         {
-            errors = Enumerable.Empty<string>();
+            errors = [];
             answer = default;
             return false;
         }
 
         if (_dateTimeZone is not null && _dateTimeZone?.MapLocal(parseResult.Value).Count == 0)
         {
-            errors = new[] { "This DateTime never occurs due to summer/winter time." };
+            errors = ["This DateTime never occurs due to summer/winter time."];
             answer = default;
             return false;
         }
 
-        errors = Enumerable.Empty<string>();
+        errors = [];
         answer = parseResult.Value;
         return parseResult.Success;
     }

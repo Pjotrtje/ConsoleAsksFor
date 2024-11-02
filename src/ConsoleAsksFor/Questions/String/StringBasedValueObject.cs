@@ -41,7 +41,7 @@ internal sealed class StringBasedValueObject<TValueType> : IQuestion<TValueType>
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, [MaybeNullWhen(false)] out TValueType answer)
     {
-        errors = Enumerable.Empty<string>();
+        errors = [];
         return _tryParse(answerAsString, out answer);
     }
 

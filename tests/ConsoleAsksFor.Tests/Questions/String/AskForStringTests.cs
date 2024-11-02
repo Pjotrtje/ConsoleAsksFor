@@ -10,38 +10,38 @@ public class AskForStringTests
     public async Task ValidInputFlow_WithoutRegex()
     {
         const string defaultValue = "some value";
-        _console.AddKeyInput(new()
-        {
+        _console.AddKeyInput(
+        [
             Enter,
-        });
+        ]);
 
         var answer = await _console.AskForString(Question, defaultValue);
 
         answer.Should().Be(defaultValue);
-        _console.Output.Should().Equal(new ConsoleLine[]
-        {
+        _console.Output.Should().Equal(
+        [
             new(LineTypeId.Question, Question),
             new(LineTypeId.Answer, defaultValue),
-        });
+        ]);
     }
 
     [Fact]
     public async Task ValidInputFlow_WithRegex()
     {
         const string defaultValue = "someValue";
-        _console.AddKeyInput(new()
-        {
+        _console.AddKeyInput(
+        [
             Enter,
-        });
+        ]);
 
         var answer = await _console.AskForString(Question, new Regex("[a-z]+"), "SomeHint", defaultValue);
 
         answer.Should().Be(defaultValue);
-        _console.Output.Should().Equal(new ConsoleLine[]
-        {
+        _console.Output.Should().Equal(
+        [
             new(LineTypeId.Question, Question),
             new(LineTypeId.QuestionHint, "SomeHint"),
             new(LineTypeId.Answer, defaultValue),
-        });
+        ]);
     }
 }

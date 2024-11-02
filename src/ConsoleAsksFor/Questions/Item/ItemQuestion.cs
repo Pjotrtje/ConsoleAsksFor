@@ -47,7 +47,7 @@ internal sealed class ItemQuestion : IQuestion<string>
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, [MaybeNullWhen(false)] out string answer)
     {
-        errors = Enumerable.Empty<string>();
+        errors = [];
         return _items.TryParse(answerAsString.Trim(), out answer);
     }
 

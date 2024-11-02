@@ -122,7 +122,7 @@ internal sealed class Questioner<TAnswer>
         }
         catch (Exception e)
         {
-            errors = new[] { e.Message };
+            errors = [e.Message];
             answer = default;
             return false;
         }

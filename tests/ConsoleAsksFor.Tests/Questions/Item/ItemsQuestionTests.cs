@@ -21,17 +21,17 @@ public class ItemsQuestionTests
         Action ctor = () => _ = new ItemsQuestion(QuestionText, items, RangeConstraint.None, null);
 
         ctor.Should().Throw<NotUniqueDisplayNamesException>()
-            .Which.NotUniqueDisplayNames.Should().BeEquivalentTo(new[]
-            {
-                new NotUniqueDisplayNamesException.NotUniqueDisplayName("A", new[] {0, 4, 6}),
-                new NotUniqueDisplayNamesException.NotUniqueDisplayName("C", new[] {2, 5}),
-            });
+            .Which.NotUniqueDisplayNames.Should().BeEquivalentTo(
+            [
+                new NotUniqueDisplayNamesException.NotUniqueDisplayName("A", [0, 4, 6]),
+                new NotUniqueDisplayNamesException.NotUniqueDisplayName("C", [2, 5]),
+            ]);
     }
 
     [Fact]
     public void Ctor_Throws_When_No_Items()
     {
-        Action ctor = () => _ = new ItemsQuestion(QuestionText, Enumerable.Empty<string>(), RangeConstraint.None, null);
+        Action ctor = () => _ = new ItemsQuestion(QuestionText, [], RangeConstraint.None, null);
 
         ctor.Should().Throw<MissingItemsException>();
     }
@@ -86,7 +86,7 @@ public class ItemsQuestionTests
     public void When_Valid_Default_Value_Has_Correct_PrefilledValue()
     {
         var items = new[] { "Item1", "Item2" };
-        var question = new ItemsQuestion(QuestionText, items, RangeConstraint.None, new[] { "Item1" });
+        var question = new ItemsQuestion(QuestionText, items, RangeConstraint.None, ["Item1"]);
         question.PrefilledValue.Should().Be("Item1");
     }
 
@@ -102,7 +102,7 @@ public class ItemsQuestionTests
     public void When_Invalid_Default_Value_Has_No_PrefilledValue()
     {
         var items = new[] { "Item1", "Item2" };
-        var question = new ItemsQuestion(QuestionText, items, RangeConstraint.None, new[] { "Item3" });
+        var question = new ItemsQuestion(QuestionText, items, RangeConstraint.None, ["Item3"]);
         question.PrefilledValue.Should().Be("");
     }
 
@@ -110,13 +110,13 @@ public class ItemsQuestionTests
     {
         return new()
         {
-            { "Item2", new[] { "Item2" }, "SingleItem - Regular" },
-            { "item2", new[] { "Item2" }, "SingleItem - Lower case" },
-            { "ItEm2", new[] { "Item2" }, "SingleItem - Random case" },
-            { "Item2 ", new[] { "Item2" }, "SingleItem - Trailing space" },
-            { " Item2 ", new[] { "Item2" }, "SingleItem - Leading space" },
-            { "Item1|Item2", new[] { "Item1", "Item2" }, "Multiple items - without spaces" },
-            { "Item1 | Item2", new[] { "Item1", "Item2" }, "Multiple items - with spaces" },
+            { "Item2", ["Item2"], "SingleItem - Regular" },
+            { "item2", ["Item2"], "SingleItem - Lower case" },
+            { "ItEm2", ["Item2"], "SingleItem - Random case" },
+            { "Item2 ", ["Item2"], "SingleItem - Trailing space" },
+            { " Item2 ", ["Item2"], "SingleItem - Leading space" },
+            { "Item1|Item2", ["Item1", "Item2"], "Multiple items - without spaces" },
+            { "Item1 | Item2", ["Item1", "Item2"], "Multiple items - with spaces" },
         };
     }
 

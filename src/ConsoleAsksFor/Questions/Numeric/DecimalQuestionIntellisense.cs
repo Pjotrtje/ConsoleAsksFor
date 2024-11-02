@@ -56,7 +56,7 @@ internal sealed class DecimalQuestionIntellisense : IIntellisense
     {
         if (!_parser.TryParseExact(hint, out var answerFromIntellisense))
         {
-            return new[] { _parser.Range };
+            return [_parser.Range];
         }
 
         if (answerFromIntellisense == 0)
@@ -66,7 +66,7 @@ internal sealed class DecimalQuestionIntellisense : IIntellisense
 
         var initialRange = GetInitialIntellisenseRange(answerFromIntellisense);
         return answerFromIntellisense.GetAmountOfDigitsAfterDecimalPoint() > 0
-            ? new[] { initialRange }
+            ? [initialRange]
             : GetIntellisenseRanges(initialRange);
     }
 
@@ -128,10 +128,10 @@ internal sealed class DecimalQuestionIntellisense : IIntellisense
     }
 
     private IEnumerable<Range<decimal>> GetRangesFor0()
-        => new[]
-        {
-            new Range<decimal>(0, 1 - _format.SmallestIncrement),
-        };
+        =>
+        [
+            new(0, 1 - _format.SmallestIncrement),
+        ];
 
     private IReadOnlyCollection<Range<decimal>> GetRangesWithOverlap(IEnumerable<Range<decimal>> ranges)
         => ranges

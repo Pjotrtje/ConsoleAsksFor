@@ -26,18 +26,20 @@ public class FileNameQuestionTests
         question.PrefilledValue.Should().Be(@"C:\Test\Test.txt");
     }
 
-    public static IEnumerable<object[]> CorrectParseUseCases()
-        => new TheoryData<FileSystemExistence, string>
+    private class CorrectParseUseCases : TheoryData<FileSystemExistence, string>
+    {
+        public CorrectParseUseCases()
         {
-            { FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.NotExistingFile.Location },
-            { FileSystemExistence.Existing, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location },
-            { FileSystemExistence.Existing, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location.ToUpperInvariant() },
-            { FileSystemExistence.NewOrExisting, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location },
-            { FileSystemExistence.NewOrExisting, UnitTestFileSystem.ExistingDirectory1.NotExistingFile.Location },
-        };
+            Add(FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.NotExistingFile.Location);
+            Add(FileSystemExistence.Existing, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location);
+            Add(FileSystemExistence.Existing, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location.ToUpperInvariant());
+            Add(FileSystemExistence.NewOrExisting, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location);
+            Add(FileSystemExistence.NewOrExisting, UnitTestFileSystem.ExistingDirectory1.NotExistingFile.Location);
+        }
+    }
 
     [Theory]
-    [MemberData(nameof(CorrectParseUseCases))]
+    [ClassData(typeof(CorrectParseUseCases))]
     internal void Parses_When_Correct_Value(FileSystemExistence fileSystemExistence, string fullName)
     {
         var question = new FileNameQuestion(QuestionText, fileSystemExistence, null, null);
@@ -46,25 +48,27 @@ public class FileNameQuestionTests
         answer!.FullName.Should().Be(fullName);
     }
 
-    public static IEnumerable<object[]> IncorrectParseUseCases()
-        => new TheoryData<FileSystemExistence, string, string>
+    private class IncorrectParseUseCases : TheoryData<FileSystemExistence, string, string>
+    {
+        public IncorrectParseUseCases()
         {
-            { FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location, "File already exists." },
-            { FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location.ToUpperInvariant(), "File already exists." },
-            { FileSystemExistence.Existing, UnitTestFileSystem.ExistingDirectory1.NotExistingFile.Location, "File does not exists." },
-            { FileSystemExistence.NewOrExisting, "", "Not a valid filename." },
-            { FileSystemExistence.NewOrExisting, " ", "Not a valid filename." },
-            { FileSystemExistence.NewOrExisting, @"Z:\Test\Test.txt", "Not a valid filename." },
-            { FileSystemExistence.NewOrExisting, UnitTestFileSystem.NotExistingDirectoryWithInvalidChars.NotExistingFile.Location, "Not a valid filename." },
-            { FileSystemExistence.NewOrExisting, UnitTestFileSystem.ExistingDirectory1.NotExistingFileWithInvalidChars.Location, "Not a valid filename." },
-            { FileSystemExistence.NewOrExisting, UnitTestFileSystem.ExistingDirectory1.Location, "Expected file but found directory." },
-            { FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.Location, "Expected file but found directory." },
-            { FileSystemExistence.Existing, UnitTestFileSystem.ExistingDirectory1.Location, "Expected file but found directory." },
-            { FileSystemExistence.NewOrExisting, UnitTestFileSystem.ExistingDirectory1.NotExistingFileWithoutExtension.Location, "Extension missing." },
-        };
+            Add(FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location, "File already exists.");
+            Add(FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.ExistingFile1a.Location.ToUpperInvariant(), "File already exists.");
+            Add(FileSystemExistence.Existing, UnitTestFileSystem.ExistingDirectory1.NotExistingFile.Location, "File does not exists.");
+            Add(FileSystemExistence.NewOrExisting, "", "Not a valid filename.");
+            Add(FileSystemExistence.NewOrExisting, " ", "Not a valid filename.");
+            Add(FileSystemExistence.NewOrExisting, @"Z:\Test\Test.txt", "Not a valid filename.");
+            Add(FileSystemExistence.NewOrExisting, UnitTestFileSystem.NotExistingDirectoryWithInvalidChars.NotExistingFile.Location, "Not a valid filename.");
+            Add(FileSystemExistence.NewOrExisting, UnitTestFileSystem.ExistingDirectory1.NotExistingFileWithInvalidChars.Location, "Not a valid filename.");
+            Add(FileSystemExistence.NewOrExisting, UnitTestFileSystem.ExistingDirectory1.Location, "Expected file but found directory.");
+            Add(FileSystemExistence.New, UnitTestFileSystem.ExistingDirectory1.Location, "Expected file but found directory.");
+            Add(FileSystemExistence.Existing, UnitTestFileSystem.ExistingDirectory1.Location, "Expected file but found directory.");
+            Add(FileSystemExistence.NewOrExisting, UnitTestFileSystem.ExistingDirectory1.NotExistingFileWithoutExtension.Location, "Extension missing.");
+        }
+    }
 
     [Theory]
-    [MemberData(nameof(IncorrectParseUseCases))]
+    [ClassData(typeof(IncorrectParseUseCases))]
     internal void Does_Not_Parse_When_Incorrect_Value(FileSystemExistence fileSystemExistence, string fullName, string error)
     {
         var question = new FileNameQuestion(QuestionText, fileSystemExistence, null, null);

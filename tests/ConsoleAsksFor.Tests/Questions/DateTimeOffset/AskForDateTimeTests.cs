@@ -9,10 +9,10 @@ public class AskForDateTimeTests
     [Fact]
     public async Task ValidInputFlow()
     {
-        _console.AddKeyInput(new()
-        {
+        _console.AddKeyInput(
+        [
             Enter,
-        });
+        ]);
 
         var defaultValue = 20.September(2021).At(22, 00).AsUtc();
 

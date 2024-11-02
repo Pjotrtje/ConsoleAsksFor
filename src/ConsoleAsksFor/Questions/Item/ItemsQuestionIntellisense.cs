@@ -25,7 +25,7 @@ internal sealed class ItemsQuestionIntellisense : IIntellisense
             .ToList();
 
         var allPotentiallyCompletedSubAnswers = subAnswers.Count == 1
-            ? Array.Empty<string>()
+            ? []
             : subAnswers.SkipLast(1).ToArray();
 
         if (!_items.TryParse(allPotentiallyCompletedSubAnswers, out var allCompletedSubAnswers))

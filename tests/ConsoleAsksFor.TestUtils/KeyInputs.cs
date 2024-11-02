@@ -72,7 +72,9 @@ public static class KeyInputs
 
         if (Enum.TryParse<ConsoleKey>(withoutDiacritics, true, out var consoleKey1))
         {
+#pragma warning disable CA1862
             var modifier = withoutDiacritics.ToLowerInvariant() == withoutDiacritics
+#pragma warning restore CA1862
                 ? KeyModifier.None
                 : KeyModifier.Shift;
 

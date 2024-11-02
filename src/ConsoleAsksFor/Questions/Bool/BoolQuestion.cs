@@ -32,7 +32,7 @@ internal sealed class BoolQuestion : IQuestion<bool>
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out bool answer)
     {
         var trimmedAnswerAsString = answerAsString.Trim();
-        errors = Enumerable.Empty<string>();
+        errors = [];
         if (trimmedAnswerAsString.Equals("y", StringComparison.OrdinalIgnoreCase))
         {
             answer = true;

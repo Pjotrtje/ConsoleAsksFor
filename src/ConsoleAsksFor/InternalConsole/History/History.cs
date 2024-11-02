@@ -15,11 +15,7 @@ internal sealed class History
 
     public void Add(HistoryItem item)
     {
-        if (_items.Contains(item))
-        {
-            _items.Remove(item);
-        }
-
+        _items.Remove(item);
         _items.AddLast(item);
 
         while (_items.Count > _maxSize)
