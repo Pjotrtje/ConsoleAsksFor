@@ -56,6 +56,7 @@ var directory = await console.AskForExistingDirectory("Where to store file?", de
 var name = await console.AskForString("What is your name?");
 var zipcode = await console.AskForString("What is your Dutch zipcode?", new Regex("^[1-9][0-9]{3}[A-Z]{2}$"), "Format: '5555AA' where first digit is not a 0");
 var agb = await console.AskForStringBasedValueObject<Agb>("What is your agb?", Agb.TryParse, x => x.ToString(), "8 numbers");
+var uzovi = await console.AskForStringBasedValueObject<Uzovi>("What is your uzovi?", "4 numbers"); // Uzovi implements IParsable<Uzovi> and IFormattable
 var pw = await console.AskForPassword("What is the secret code?");
 ```
 

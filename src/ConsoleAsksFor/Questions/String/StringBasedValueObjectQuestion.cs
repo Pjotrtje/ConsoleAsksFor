@@ -1,6 +1,6 @@
 ﻿namespace ConsoleAsksFor;
 
-internal sealed class StringBasedValueObject<TValueType> : IQuestion<TValueType> where TValueType : notnull
+internal sealed class StringBasedValueObjectQuestion<TValueType> : IQuestion<TValueType> where TValueType : notnull
 {
     public string SubType => _hint ?? "[No hint]";
 
@@ -17,7 +17,7 @@ internal sealed class StringBasedValueObject<TValueType> : IQuestion<TValueType>
     private readonly string? _defaultValue;
     private readonly string? _hint;
 
-    public StringBasedValueObject(
+    public StringBasedValueObjectQuestion(
         string text,
         TryParse<TValueType> tryParse,
         Func<TValueType, string> toString,
