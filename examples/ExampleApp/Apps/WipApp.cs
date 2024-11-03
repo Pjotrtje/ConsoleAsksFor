@@ -69,6 +69,8 @@ internal sealed class WipApp : IApp
         //await _console.AskForDirectory("Not Exist", defaultValue: new DirectoryInfo("C:\\temp\\b"));
         //await _console.AskForDirectory("Exist", defaultValue: new DirectoryInfo("C:\\temp\\BlazorApp"));
 
+        await _console.AskForItems("test", [1, 2, 3, 100000]);
+
         await _console.AskForStringBasedValueObject<decimal>("Numbers", "Some");
 
         await _console.AskForStringBasedValueObject<Agb>("Agb", Agb.TryParse, x => x.ToString(), "8 numbers");
