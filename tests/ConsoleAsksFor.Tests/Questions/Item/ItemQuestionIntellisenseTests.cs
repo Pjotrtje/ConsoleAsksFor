@@ -2,7 +2,7 @@
 
 public class ItemQuestionIntellisenseTests
 {
-    private readonly ItemQuestionIntellisense _sut = new(QuestionItems.CreateWithEscapedSplitter(new[] { "A1", "Bb1", "Bb3", "bb2", "Cc" }));
+    private readonly ItemQuestionIntellisense _sut = new(QuestionItems.CreateWithEscapedSplitter(["A1", "Bb1", "Bb3", "bb2", "Cc"]));
 
     private static readonly IntellisenseUseCases UseCases = new()
     {

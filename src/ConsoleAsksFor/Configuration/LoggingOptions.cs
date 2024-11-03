@@ -22,7 +22,7 @@ public sealed record LoggingOptions
     /// LineTypes which should be logged when <see cref="HasLog"/>=true. <br/>
     /// Default value: { <see cref="LineTypeId.Question"/>, <see cref="LineTypeId.Answer"/> }.
     /// </summary>
-    public IReadOnlyCollection<LineTypeId> ToLogLineTypes { get; init; } = new[] { LineTypeId.Question, LineTypeId.Answer };
+    public IReadOnlyCollection<LineTypeId> ToLogLineTypes { get; init; } = [LineTypeId.Question, LineTypeId.Answer];
 
     /// <summary>
     /// Default <see cref="LoggingOptions"/>.

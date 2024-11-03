@@ -11,7 +11,7 @@ internal sealed class HistoryRepositoryStub : IHistoryRepository
 
     public Task<History> GetHistory()
     {
-        var history = new History(Enumerable.Empty<HistoryItem>(), _maxSize);
+        var history = new History([], _maxSize);
         return Task.FromResult(history);
     }
 

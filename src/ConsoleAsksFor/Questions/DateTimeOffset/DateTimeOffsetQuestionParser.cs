@@ -22,7 +22,7 @@ internal sealed class DateTimeOffsetQuestionParser
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out DateTimeOffset answer)
     {
-        errors = Enumerable.Empty<string>();
+        errors = [];
         if (!TryParseExact(answerAsString, out var dateTime))
         {
             answer = default;

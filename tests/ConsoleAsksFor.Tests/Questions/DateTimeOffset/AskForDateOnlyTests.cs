@@ -9,10 +9,10 @@ public class AskForDateOnlyTests
     [Fact]
     public async Task ValidInputFlow()
     {
-        _console.AddKeyInput(new()
-        {
+        _console.AddKeyInput(
+        [
             Enter,
-        });
+        ]);
 
         var defaultValue = new DateOnly(2021, 09, 20); ;
 

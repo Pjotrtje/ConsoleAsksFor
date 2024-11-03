@@ -34,6 +34,6 @@ public static partial class AskForAppender
             rangeConstraint.Min?.WithoutMilliseconds() ?? LocalDate.MinIsoValue.At(new LocalTime(00, 00, 00)),
             rangeConstraint.Max?.WithoutMilliseconds() ?? LocalDate.MaxIsoValue.At(new LocalTime(23, 59, 59)));
 
-        return new(new[] { range });
+        return new([range]);
     }
 }

@@ -26,7 +26,7 @@ internal sealed class DirectoryQuestion : IQuestion<DirectoryInfo>
     }
 
     public IEnumerable<string> GetHints()
-        => Enumerable.Empty<string>();
+        => [];
 
     public bool TryParse(
         string answerAsString,
@@ -36,33 +36,33 @@ internal sealed class DirectoryQuestion : IQuestion<DirectoryInfo>
         var path = answerAsString;
         if (!IsValidDirectory(path))
         {
-            errors = new[] { "Not a valid directory." };
+            errors = ["Not a valid directory."];
             answer = default;
             return false;
         }
 
         if (_fileSystemExistence == FileSystemExistence.New && Directory.Exists(path))
         {
-            errors = new[] { "Directory already exists." };
+            errors = ["Directory already exists."];
             answer = default;
             return false;
         }
 
         if (File.Exists(path))
         {
-            errors = new[] { "Expected directory but found file." };
+            errors = ["Expected directory but found file."];
             answer = default;
             return false;
         }
 
         if (_fileSystemExistence == FileSystemExistence.Existing && !Directory.Exists(path))
         {
-            errors = new[] { "Directory does not exists." };
+            errors = ["Directory does not exists."];
             answer = default;
             return false;
         }
 
-        errors = Enumerable.Empty<string>();
+        errors = [];
         answer = new DirectoryInfo(path);
         return true;
     }

@@ -39,7 +39,7 @@ internal sealed class StringQuestion : IQuestion<string>
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out string answer)
     {
-        errors = Enumerable.Empty<string>();
+        errors = [];
         answer = answerAsString;
         return _regex?.IsMatch(answer) ?? true;
     }

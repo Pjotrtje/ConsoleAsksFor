@@ -9,21 +9,21 @@ public class AskForIntTests
     [Fact]
     public async Task ValidInputFlow()
     {
-        _console.AddKeyInput(new()
-        {
+        _console.AddKeyInput(
+        [
             Enter,
-        });
+        ]);
 
         const int defaultValue = 2;
 
         var answer = await _console.AskForInt(Question, RangeConstraint.Between(1, 3), defaultValue);
 
         answer.Should().Be(defaultValue);
-        _console.Output.Should().Equal(new ConsoleLine[]
-        {
+        _console.Output.Should().Equal(
+        [
             new(LineTypeId.Question, Question),
             new(LineTypeId.QuestionHint, "Range: [1 ... 3]"),
             new(LineTypeId.Answer, "2"),
-        });
+        ]);
     }
 }

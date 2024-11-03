@@ -30,7 +30,7 @@ public class ScopedHistoryTests
         private const string Item1 = nameof(Item1);
         private const string Item2 = nameof(Item2);
 
-        private readonly ScopedHistory _sut = new(new[] { Item1, Item2 });
+        private readonly ScopedHistory _sut = new([Item1, Item2]);
 
         [Fact]
         public void Items_Should_Be_Contains_Input_From_Constructor()

@@ -15,14 +15,14 @@ internal sealed class PasswordQuestion : IQuestion<string>
     public PasswordQuestion(string text)
         => Text = text;
 
-    public IEnumerable<string> GetHints() => Enumerable.Empty<string>();
+    public IEnumerable<string> GetHints() => [];
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out string answer)
     {
         var isCorrect = answerAsString.Any();
         errors = isCorrect
-            ? Enumerable.Empty<string>()
-            : new[] { "Password missing." };
+            ? []
+            : ["Password missing."];
 
         answer = answerAsString;
         return isCorrect;

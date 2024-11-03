@@ -60,6 +60,6 @@ public static partial class AskForAppender
     private static ClusteredRange<DateTimeOffset> ToClusteredRange(
         this Range<DateTimeOffset> range)
     {
-        return new(new[] { range });
+        return new([range]);
     }
 }

@@ -21,17 +21,17 @@ public class ItemQuestionTests
         Action ctor = () => _ = new ItemQuestion(QuestionText, items, null);
 
         ctor.Should().Throw<NotUniqueDisplayNamesException>()
-            .Which.NotUniqueDisplayNames.Should().BeEquivalentTo(new[]
-            {
-                new NotUniqueDisplayNamesException.NotUniqueDisplayName("A", new[] {0, 4, 6}),
-                new NotUniqueDisplayNamesException.NotUniqueDisplayName("C", new[] {2, 5}),
-            });
+            .Which.NotUniqueDisplayNames.Should().BeEquivalentTo(
+            [
+                new NotUniqueDisplayNamesException.NotUniqueDisplayName("A", [0, 4, 6]),
+                new NotUniqueDisplayNamesException.NotUniqueDisplayName("C", [2, 5]),
+            ]);
     }
 
     [Fact]
     public void Ctor_Throws_When_No_Items()
     {
-        Action ctor = () => _ = new ItemQuestion(QuestionText, Enumerable.Empty<string>(), null);
+        Action ctor = () => _ = new ItemQuestion(QuestionText, [], null);
 
         ctor.Should().Throw<MissingItemsException>();
     }

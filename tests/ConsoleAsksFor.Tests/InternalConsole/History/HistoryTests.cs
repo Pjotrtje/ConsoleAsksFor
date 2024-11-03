@@ -18,11 +18,11 @@ public class HistoryTests
         _sut.Add(item1);
         _sut.Add(item2);
 
-        _sut.Items.Should().BeEquivalentTo(new[]
-        {
+        _sut.Items.Should().BeEquivalentTo(
+        [
             item1,
             item2,
-        });
+        ]);
     }
 
     [Fact]
@@ -35,11 +35,11 @@ public class HistoryTests
         _sut.Add(item2);
         _sut.Add(item1);
 
-        _sut.Items.Should().BeEquivalentTo(new[]
-        {
+        _sut.Items.Should().BeEquivalentTo(
+        [
             item2,
             item1,
-        });
+        ]);
     }
 
     [Fact]

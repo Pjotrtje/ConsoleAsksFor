@@ -16,8 +16,9 @@ internal sealed class DemoApp : IApp
         var wordOfTheDay = await console.AskForString("What is your word of the day?");
 
         console.WriteInfoLine("Tip: Use tab for intellisense.");
-        var likableWords = await console.AskForItems("Which of these words do you like?", new[] { "Whale", "Yesterday", "Some", "Stereo", "Random" });
+        var likableWords = await console.AskForItems("Which of these words do you like?", ["Whale", "Yesterday", "Some", "Stereo", "Random"]);
 
+        console.WriteSuccessLine($"wordOfTheDay={wordOfTheDay},likableWords={string.Join(",", likableWords)}");
         await Task.Delay(TimeSpan.FromSeconds(1));
     }
 }

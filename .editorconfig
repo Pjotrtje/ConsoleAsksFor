@@ -29,8 +29,14 @@ dotnet_diagnostic.IDE0010.severity = silent #Add missing cases to switch stateme
 dotnet_diagnostic.IDE0046.severity = silent #Use conditional expression for return
 dotnet_diagnostic.IDE0130.severity = silent #Namespace does not match folder structure
 dotnet_diagnostic.IDE0021.severity = silent #Use expression body for constructors
+dotnet_diagnostic.IDE0290.severity = silent #Primary ctor's
 dotnet_diagnostic.CA1822.severity = suggestion #Mark members as static
 dotnet_diagnostic.CA1848.severity = suggestion #Use the LoggerMessage delegates
+dotnet_diagnostic.CA1859.severity = silent #Use concrete types when possible for improved performance
+dotnet_diagnostic.CA1860.severity = silent #Prefer Length/Count over Any
+dotnet_diagnostic.xUnit1044.severity = silent #Avoid using TheoryData type arguments that are not serializable
+dotnet_diagnostic.xUnit1045.severity = silent #Avoid using TheoryData type arguments that might not be serializable
+
 dotnet_analyzer_diagnostic.severity = error
 csharp_style_namespace_declarations=file_scoped:error
 

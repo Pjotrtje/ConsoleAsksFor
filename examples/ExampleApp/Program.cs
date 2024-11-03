@@ -1,6 +1,7 @@
-﻿var serviceProvider = GetServiceProvider();
+﻿var console = ConsoleFactory.Create();
+
+var serviceProvider = GetServiceProvider(console);
 using var scope = serviceProvider.CreateScope();
-var console = scope.ServiceProvider.GetRequiredService<IConsole>();
 
 console.WriteHelpTextLines();
 
@@ -34,9 +35,9 @@ while (true)
     }
 }
 
-static IServiceProvider GetServiceProvider()
+static IServiceProvider GetServiceProvider(IConsole console)
     => new ServiceCollection()
-        .AddConsoleAsksFor()
+        .AddSingleton(console)
         .AddLogging(c => c.AddConsole(o => o.LogToStandardErrorThreshold = LogLevel.Error))
         .AddScoped<MultiThreadedApp>()
         .AddScoped<LoggingApp>()

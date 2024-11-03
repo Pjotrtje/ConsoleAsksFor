@@ -103,8 +103,8 @@ internal sealed class ItemsQuestion : IQuestion<IReadOnlyList<string>>
                 : null;
 
             errors = noItemsAllowed
-                ? Enumerable.Empty<string>()
-                : new[] { $"Select {AmountOfItemsToSelectAsString()} items." };
+                ? []
+                : [$"Select {AmountOfItemsToSelectAsString()} items."];
 
             return noItemsAllowed;
         }
@@ -112,7 +112,7 @@ internal sealed class ItemsQuestion : IQuestion<IReadOnlyList<string>>
         var answerAsStrings = answerAsString.Split(Splitter.Value);
         if (!_items.TryParse(answerAsStrings, out var possibleAnswer))
         {
-            errors = Enumerable.Empty<string>();
+            errors = [];
             answer = null;
             return false;
         }
@@ -123,8 +123,8 @@ internal sealed class ItemsQuestion : IQuestion<IReadOnlyList<string>>
             : null;
 
         errors = itemCountAllowed
-            ? Enumerable.Empty<string>()
-            : new[] { $"Select {AmountOfItemsToSelectAsString()} items." };
+            ? []
+            : [$"Select {AmountOfItemsToSelectAsString()} items."];
 
         return itemCountAllowed;
     }

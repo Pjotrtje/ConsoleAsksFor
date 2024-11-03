@@ -18,7 +18,7 @@ public class WriteLineLoggerTests
     {
         var options = LoggingOptions.Default with
         {
-            ToLogLineTypes = new[] { LineTypeId.Question },
+            ToLogLineTypes = [LineTypeId.Question],
         };
 
         var sut = CreateWriteLineLogger(options);
@@ -32,7 +32,7 @@ public class WriteLineLoggerTests
     {
         var options = LoggingOptions.Default with
         {
-            ToLogLineTypes = new[] { LineTypeId.Question },
+            ToLogLineTypes = [LineTypeId.Question],
         };
 
         _dateTimeProvider
@@ -63,7 +63,7 @@ public class WriteLineLoggerTests
         const string someOtherLogValue = nameof(someOtherLogValue);
         var options = LoggingOptions.Default with
         {
-            ToLogLineTypes = new[] { LineTypeId.Question },
+            ToLogLineTypes = [LineTypeId.Question],
         };
 
         var now = 3.January(2021).At(20, 11, 31);

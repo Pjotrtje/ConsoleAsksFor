@@ -29,7 +29,7 @@ internal static class EnumerableExtensions
 
     public static IEnumerable<T> EmptyWhenNull<T>(this IEnumerable<T>? items)
         where T : class
-        => items ?? Enumerable.Empty<T>();
+        => items ?? [];
 
     public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> items)
         where T : class

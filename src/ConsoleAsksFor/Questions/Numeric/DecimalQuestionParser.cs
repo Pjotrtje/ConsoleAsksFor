@@ -34,7 +34,7 @@ internal sealed class DecimalQuestionParser
 
     public bool TryParse(string answerAsString, out IEnumerable<string> errors, out decimal answer)
     {
-        errors = Enumerable.Empty<string>();
+        errors = [];
         return TryParseExact(answerAsString, out answer) && Range.Contains(answer);
     }
 

@@ -807,7 +807,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:ConsoleAsksFor.AskForAppender.AskForStringBasedValueObject``1(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.TryParse{``0},System.Func{``0,System.String},System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForStringBasedValueObject``1(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.TryParse{``0},System.Func{``0,System.String},System.String,``0,System.Threading.CancellationToken)">
             <summary>
             Ask for string based value object.
             </summary>
@@ -818,6 +818,41 @@
             <param name="defaultValue"></param>
             <param name="cancellationToken"></param>
             <param name="toString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForStringBasedValueObject``1(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.TryParse{``0},System.Func{``0,System.String},System.String,System.Nullable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Ask for string based value object.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="tryParse"></param>
+            <param name="hint"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <param name="toString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForStringBasedValueObject``1(ConsoleAsksFor.IConsole,System.String,System.String,``0,System.Threading.CancellationToken)">
+            <summary>
+            Ask for string based value object.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="hint"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForStringBasedValueObject``1(ConsoleAsksFor.IConsole,System.String,System.String,System.Nullable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Ask for string based value object.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="hint"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:ConsoleAsksFor.AskForAppender.AskForTimeSpan(ConsoleAsksFor.IConsole,System.String,ConsoleAsksFor.TimeSpanUnitType,ConsoleAsksFor.RangeConstraint{System.TimeSpan},System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">

@@ -38,7 +38,7 @@ internal sealed class HistoryRepository : IHistoryRepository
             _mustPersistHistory = false;
             _consoleLineWriter.WriteErrorLine(e.ToActionExceptionMessage(nameof(GetHistory)));
             _consoleLineWriter.WriteWarningLine("History is not fetched. New history will not be persisted.");
-            return new History(Enumerable.Empty<HistoryItem>(), _maxSize);
+            return new History([], _maxSize);
         }
     }
 

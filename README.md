@@ -51,11 +51,12 @@ var age = await console.AskForInt("What is your age?", Between(0, 125));
 var length = await console.AskForDecimal("What is your length (in meters)?", Scale.Two, Between(0m, 2.5m));
 var appointmentStart = await console.AskForDateTimeOffset("How late should we meet?", TimeZoneInfo.Local, AtLeast(DateTimeOffset.Now), defaultValue: DateTimeOffset.Now.AddHours(1));
 var favoriteColor = await console.AskForEnum<ConsoleColor>("What is your favorite color?");
-var preferredName = await console.AskForItem("Which name do you prefer?", new[] { "Jantje", "Pietje" });
+var preferredName = await console.AskForItem("Which name do you prefer?", ["Jantje", "Pietje"]);
 var directory = await console.AskForExistingDirectory("Where to store file?", defaultValue: new DirectoryInfo(@"C:\Temp"));
 var name = await console.AskForString("What is your name?");
 var zipcode = await console.AskForString("What is your Dutch zipcode?", new Regex("^[1-9][0-9]{3}[A-Z]{2}$"), "Format: '5555AA' where first digit is not a 0");
 var agb = await console.AskForStringBasedValueObject<Agb>("What is your agb?", Agb.TryParse, x => x.ToString(), "8 numbers");
+var uzovi = await console.AskForStringBasedValueObject<Uzovi>("What is your uzovi?", "4 numbers"); // Uzovi implements IParsable<Uzovi> and IFormattable
 var pw = await console.AskForPassword("What is the secret code?");
 ```
 
@@ -67,7 +68,7 @@ console.WriteInfoLine("Tip: Use arrows to go through history.");
 var wordOfTheDay = await console.AskForString("What is your word of the day?");
 
 console.WriteInfoLine("Tip: Use tab for intellisense.");
-var likableWords = await console.AskForItems("Which of these words do you like?", new[] { "Whale", "Yesterday", "Some", "Stereo", "Random" });
+var likableWords = await console.AskForItems("Which of these words do you like?", ["Whale", "Yesterday", "Some", "Stereo", "Random"]);
 ```
 ![Demo](https://raw.githubusercontent.com/Pjotrtje/ConsoleAsksFor/main/docs/demo.gif)
 

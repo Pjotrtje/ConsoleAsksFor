@@ -35,7 +35,7 @@ internal sealed class FileSystemQuestionIntellisense : IIntellisense
 
         var files = _includeFiles
             ? Directory.GetFiles(directory).Where(f => _allowedExtensions is null || _allowedExtensions.Contains(Path.GetExtension(f)))
-            : Enumerable.Empty<string>();
+            : [];
 
         var directories = Directory.GetDirectories(directory);
 

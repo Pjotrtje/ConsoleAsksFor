@@ -26,13 +26,13 @@ public static partial class AskForAppender
                 converter(fullRange.Min),
                 converter(rangeConstraint.Max!.Value));
 
-            return new(new[] { range1, range2 });
+            return new([range1, range2]);
         }
 
         var range = new Range<LocalDateTime>(
             converter(rangeConstraint?.Min ?? fullRange.Min),
             converter(rangeConstraint?.Max ?? fullRange.Max));
 
-        return new(new[] { range });
+        return new([range]);
     }
 }
