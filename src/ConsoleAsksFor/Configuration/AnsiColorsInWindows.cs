@@ -15,8 +15,6 @@ internal static partial class AnsiColorsInWindows
         }
     }
 
-#if NET7_0_OR_GREATER
-
     [LibraryImport("kernel32.dll", SetLastError = true)]
     private static partial nint GetStdHandle(int nStdHandle);
 
@@ -27,15 +25,4 @@ internal static partial class AnsiColorsInWindows
     [LibraryImport("kernel32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
     private static partial bool SetConsoleMode(nint hConsoleHandle, uint dwMode);
-
-#else
-    [DllImport("kernel32.dll", SetLastError = true)]
-    private static extern nint GetStdHandle(int nStdHandle);
-
-    [DllImport("kernel32.dll")]
-    private static extern bool GetConsoleMode(nint hConsoleHandle, out uint lpMode);
-
-    [DllImport("kernel32.dll")]
-    private static extern bool SetConsoleMode(nint hConsoleHandle, uint dwMode);
-#endif
 }

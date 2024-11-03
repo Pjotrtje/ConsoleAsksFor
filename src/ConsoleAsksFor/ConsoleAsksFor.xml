@@ -610,6 +610,34 @@
             <exception cref="T:ConsoleAsksFor.MissingItemsException"></exception>
             <returns></returns>
         </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForItem``1(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IEnumerable{``0},``0,System.Threading.CancellationToken)">
+            <summary>
+            Ask for single item from <paramref name="items"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="items"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:ConsoleAsksFor.NotUniqueDisplayNamesException"></exception>
+            <exception cref="T:ConsoleAsksFor.MissingItemsException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForItem``1(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IEnumerable{``0},System.Nullable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Ask for single item from <paramref name="items"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="items"></param>
+            <param name="defaultValue"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:ConsoleAsksFor.NotUniqueDisplayNamesException"></exception>
+            <exception cref="T:ConsoleAsksFor.MissingItemsException"></exception>
+            <returns></returns>
+        </member>
         <member name="M:ConsoleAsksFor.AskForAppender.AskForItem``1(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,``0},System.String,System.Threading.CancellationToken)">
             <summary>
             Ask for single item from <paramref name="namedItems"/>.
@@ -647,6 +675,21 @@
             <param name="questionText"></param>
             <param name="items"></param>
             <param name="itemNameGetter"></param>
+            <param name="amountOfItemsToSelect"></param>
+            <param name="defaultValues"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:ConsoleAsksFor.NotUniqueDisplayNamesException"></exception>
+            <exception cref="T:ConsoleAsksFor.MissingItemsException"></exception>
+            <exception cref="T:ConsoleAsksFor.InvalidRangeException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:ConsoleAsksFor.AskForAppender.AskForItems``1(ConsoleAsksFor.IConsole,System.String,System.Collections.Generic.IEnumerable{``0},ConsoleAsksFor.RangeConstraint{System.Int32},System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Ask for zero or more item from <paramref name="items"/>.
+            </summary>
+            <param name="console"></param>
+            <param name="questionText"></param>
+            <param name="items"></param>
             <param name="amountOfItemsToSelect"></param>
             <param name="defaultValues"></param>
             <param name="cancellationToken"></param>

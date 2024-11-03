@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ConsoleAsksFor.Microsoft.DependencyInjection\ConsoleAsksFor.Microsoft.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\src\ConsoleAsksFor.NodaTime.ISO\ConsoleAsksFor.NodaTime.ISO.csproj" />
     <ProjectReference Include="..\..\src\ConsoleAsksFor\ConsoleAsksFor.csproj" />
   </ItemGroup>
