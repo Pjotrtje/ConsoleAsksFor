@@ -51,6 +51,14 @@ stages:
         
             Get-ChildItem -Path src\*.csproj -Recurse | Foreach-Object { Update-Version $_.FullName }
 
+    - task: UseDotNet@2
+      inputs:
+        version: 8.x
+
+    - task: UseDotNet@2
+      inputs:
+        version: 9.x
+
     - task: DotNetCoreCLI@2
       displayName: 'Restore NuGet'
       inputs:
