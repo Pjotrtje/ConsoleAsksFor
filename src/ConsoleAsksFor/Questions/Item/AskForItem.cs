@@ -109,6 +109,62 @@ public static partial class AskForAppender
     }
 
     /// <summary>
+    /// Ask for single item from <paramref name="items"/>.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="console"></param>
+    /// <param name="questionText"></param>
+    /// <param name="items"></param>
+    /// <param name="defaultValue"></param>
+    /// <param name="cancellationToken"></param>
+    /// <exception cref="NotUniqueDisplayNamesException"></exception>
+    /// <exception cref="MissingItemsException"></exception>
+    /// <returns></returns>
+    public static async Task<T> AskForItem<T>(
+        this IConsole console,
+        string questionText,
+        IEnumerable<T> items,
+        T? defaultValue = null,
+        CancellationToken cancellationToken = default)
+        where T : class, IFormattable
+    {
+        return await console.AskForItem(
+            questionText,
+            items,
+            x => x.ToString(null, null),
+            defaultValue,
+            cancellationToken);
+    }
+
+    /// <summary>
+    /// Ask for single item from <paramref name="items"/>.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="console"></param>
+    /// <param name="questionText"></param>
+    /// <param name="items"></param>
+    /// <param name="defaultValue"></param>
+    /// <param name="cancellationToken"></param>
+    /// <exception cref="NotUniqueDisplayNamesException"></exception>
+    /// <exception cref="MissingItemsException"></exception>
+    /// <returns></returns>
+    public static async Task<T> AskForItem<T>(
+        this IConsole console,
+        string questionText,
+        IEnumerable<T> items,
+        T? defaultValue = null,
+        CancellationToken cancellationToken = default)
+        where T : struct, IFormattable
+    {
+        return await console.AskForItem(
+            questionText,
+            items,
+            x => x.ToString(null, null),
+            defaultValue,
+            cancellationToken);
+    }
+
+    /// <summary>
     /// Ask for single item from <paramref name="namedItems"/>.
     /// </summary>
     /// <typeparam name="T"></typeparam>

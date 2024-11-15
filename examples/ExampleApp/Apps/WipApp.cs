@@ -24,6 +24,9 @@ internal sealed class WipApp : IApp
             agb = null;
             return false;
         }
+
+        public override string ToString()
+            => Value;
     }
 
     private sealed record Uzovi(string Value) : IParsable<Uzovi>, IFormattable
@@ -68,6 +71,8 @@ internal sealed class WipApp : IApp
         //await _console.AskForDirectory("Root", defaultValue: new DirectoryInfo("C:\\"));
         //await _console.AskForDirectory("Not Exist", defaultValue: new DirectoryInfo("C:\\temp\\b"));
         //await _console.AskForDirectory("Exist", defaultValue: new DirectoryInfo("C:\\temp\\BlazorApp"));
+
+        await _console.AskForItems("test", [1, 2, 3, 100000]);
 
         await _console.AskForStringBasedValueObject<decimal>("Numbers", "Some");
 

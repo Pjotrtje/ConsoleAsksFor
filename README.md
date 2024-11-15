@@ -17,28 +17,20 @@ You can download the latest release / pre-release NuGet packages from nuget:
  | Package: |  |  | 
  | :--- | --- | --- |
  | ConsoleAsksFor | [![ConsoleAsksFor on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.svg)](https://www.nuget.org/packages/ConsoleAsksFor) | [![ConsoleAsksFor downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.svg)](https://www.nuget.org/packages/ConsoleAsksFor) |
- | ConsoleAsksFor.Microsoft.DependencyInjection | [![ConsoleAsksFor.Microsoft.DependencyInjection on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection) | [![ConsoleAsksFor.Microsoft.DependencyInjection downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.Microsoft.DependencyInjection.svg)](https://www.nuget.org/packages/ConsoleAsksFor.Microsoft.DependencyInjection) | 
  | ConsoleAsksFor.NodaTime.ISO | [![ConsoleAsksFor.NodaTime.ISO on NuGet](https://img.shields.io/nuget/v/ConsoleAsksFor.NodaTime.ISO.svg)](https://www.nuget.org/packages/ConsoleAsksFor.NodaTime.ISO) | [![ConsoleAsksFor.NodaTime.ISO downloads on NuGet](https://img.shields.io/nuget/dt/ConsoleAsksFor.NodaTime.ISO.svg)](https://www.nuget.org/packages/ConsoleAsksFor.NodaTime.ISO) |
 
 
 ## Setup
-
-Register Console with ConsoleAsksFor.Microsoft.DependencyInjection:
-
-```csharp
-services.AddConsoleAsksFor();
-```
-
-Resolve a service which has dependency on IConsole of resolve service directly:
-
-```csharp
-var console = serviceProvider.GetRequiredService<IConsole>();
-```
-
-Or create with factory:
+Create with console factory (make sure it is first line in console so it can highjack Console.Out and Console.Error):
 
 ```csharp
 ConsoleFactory.Create();
+```
+
+And register in DI
+
+```csharp
+services.AddSingleton(console)
 ```
 
 

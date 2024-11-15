@@ -75,6 +75,37 @@ public static partial class AskForAppender
     }
 
     /// <summary>
+    /// Ask for zero or more item from <paramref name="items"/>.
+    /// </summary>
+    /// <param name="console"></param>
+    /// <param name="questionText"></param>
+    /// <param name="items"></param>
+    /// <param name="amountOfItemsToSelect"></param>
+    /// <param name="defaultValues"></param>
+    /// <param name="cancellationToken"></param>
+    /// <exception cref="NotUniqueDisplayNamesException"></exception>
+    /// <exception cref="MissingItemsException"></exception>
+    /// <exception cref="InvalidRangeException"></exception>
+    /// <returns></returns>
+    public static async Task<IReadOnlyList<T>> AskForItems<T>(
+        this IConsole console,
+        string questionText,
+        IEnumerable<T> items,
+        RangeConstraint<int>? amountOfItemsToSelect = null,
+        IEnumerable<T>? defaultValues = null,
+        CancellationToken cancellationToken = default)
+        where T : IFormattable
+    {
+        return await console.AskForItems(
+            questionText,
+            items,
+            x => x.ToString(null, null),
+            amountOfItemsToSelect,
+            defaultValues,
+            cancellationToken);
+    }
+
+    /// <summary>
     /// Ask for zero or more item from <paramref name="namedItems"/>.
     /// </summary>
     /// <typeparam name="T"></typeparam>
