@@ -21,7 +21,7 @@ You can download the latest release / pre-release NuGet packages from nuget:
 
 
 ## Setup
-Create with factory:
+Create with console factory (make sure it is first line in console so it can highjack Console.Out and Console.Error):
 
 ```csharp
 ConsoleFactory.Create();
