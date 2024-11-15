@@ -24,6 +24,9 @@ internal sealed class WipApp : IApp
             agb = null;
             return false;
         }
+
+        public override string ToString()
+            => Value;
     }
 
     private sealed record Uzovi(string Value) : IParsable<Uzovi>, IFormattable
